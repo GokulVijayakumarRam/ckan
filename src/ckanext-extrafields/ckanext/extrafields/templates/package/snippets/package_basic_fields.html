@@ -13,32 +13,39 @@
        <br><br>
        <label for="field-nameIdField">*Name Identifier</label>
        <input type="text" id="field-nameIdField" placeholder="https://orcid.org/0000-0001-5727-2427" name="nameIdField" classes="control-medium" >
-       <br>
-       <br>
+       <br><br>
+       <label for="field-creatorAffiliationField">*Affiliation</label>
+       <input type="text" id="field-creatorAffiliationField" placeholder="affiliation" name="field-creatorAffiliationField" classes="control-medium" >
+       <br><br>
        <button type="button" onclick="addCreator()">Add Creator</button>
        <button type="button" onclick="clearCreator()">Clear</button>
        <p id ='errorMessage'></p>
        <br>
        {{ form.input('creator', label=_('Full Names of all creators'), id='field-creator', placeholder=_('DoNotEnter'), value=data.creator, error=errors.creator, classes=['control-medium']) }}
        {{ form.input('nameIdentifier', label=_('Name Identifiers of all Creators'), id='field-nameIdentifier', placeholder=_('DoNotEnter'), value=data.nameIdentifier, error=errors.nameIdentifier, classes=['control-medium']) }}
+       {{ form.input('creatorAffiliation', label=_('Affiliation List'), id='field-creatorAffiliation', placeholder=_('DoNotEnter'), value=data.creatorAffiliation, error=errors.creatorAffiliation, classes=['control-medium']) }}
 
          <!-- CREATOR Function-->
        
        <script>
        var nameId = [];
        var creator=[];
+       var affiliations=[];
        var displayElement = document.getElementById('displayCreatorField');
        var fullname = []; 
-       var first_names = [];
-       var last_names = [];
        
        function addCreator(){
          let fn = document.getElementById('field-given_name').value;
          let sn = document.getElementById('field-family_name').value;
          let id = document.getElementById('field-nameIdField').value;
+         let af = document.getElementById('field-creatorAffiliationField').value;
+         console.log(af);
+         console.log(sn);
+         console.log(id);
+         console.log(af);
          //Clear the fields
          try{
-         if( !fn || !sn || !id ){
+         if( !fn || !sn || !id || !af){
            throw new Error ('*Creator Details Cannot Be Empty');
          }}
        catch(err){
@@ -48,13 +55,15 @@
          document.getElementById('field-given_name').value = '';
          document.getElementById('field-family_name').value = '';
          document.getElementById('field-nameIdField').value = '';
+         document.getElementById('field-creatorAffiliationField').value = '';
          document.getElementById('errorMessage').innerHTML= '';
          fullname = fn.concat(' ',sn);
-         
          creator.push(fullname);
          nameId.push(id);
+         affiliations.push(af);
          document.getElementById('field-creator').value = creator;
          document.getElementById('field-nameIdentifier').value = nameId;
+         document.getElementById('field-creatorAffiliation').value = affiliations;
        }
        
        function clearCreator(){
@@ -66,6 +75,8 @@
          document.getElementById('errorMessage').innerHTML= '';
          document.getElementById('field-creator').value = ""
          document.getElementById('field-nameIdentifier').value = ""
+         document.getElementById('field-creatorAffiliation').value = ""
+
        }
        </script>
     <!-- PUBLISHER -->
@@ -170,9 +181,112 @@ function displayCodesField() {
   {{ form.input('funderName', label=_('*Funder Name'), id='field-funderName', placeholder=_(''), value=data.funderName, error=errors.funderName, classes=['control-medium']) }}
   {{ form.input('funderIdentifier', label=_('*Funder Identifier'), id='field-funderIdentifier', placeholder=_(''), value=data.funderIdentifier, error=errors.funderIdentifier, classes=['control-medium']) }}
   
-  <!-- Contributor Details -->
-  <!-- Contributor Fields -->
+<!-- Contributor Details -->
 
+<label><strong> Contributors Details </strong></label><br><br>
+<label for="field-contributorTypeField">*Given Name</label>
+<select id="field-contributorTypeField" name="contributorTypeField" class="control-medium">
+  <option value=""></option>
+  <option value="ContactPerson">ContactPerson</option>
+  <option value="DataCollector">DataCollector</option>
+  <option value="DataCurator">DataCurator</option>
+  <option value="DataManager">DataManager</option>
+  <option value="Distributor">Distributor</option>
+  <option value="Editor">Editor</option>  
+  <option value="HostingInstitution">HostingInstitution</option>
+  <option value="Producer">Producer</option>
+  <option value="ProjectLeader">ProjectLeader</option>
+  <option value="ProjectManager">ProjectManager</option>
+  <option value="ProjectMember">ProjectMember</option>
+  <option value="RegistrationAgency">RegistrationAgency</option>
+  <option value="RegistrationAuthority">RegistrationAuthority</option>
+  <option value="RelatedPerson">RelatedPerson</option>
+  <option value="Researcher">Researcher</option>
+  <option value="ResearchGroup">ResearchGroup</option>  
+  <option value="RightsHolder">RightsHolder</option>
+  <option value="Sponsor">Sponsor</option>
+  <option value="Supervisor">Supervisor</option>
+  <option value="WorkPackageLeader">WorkPackageLeader</option>
+  <option value="Other">Other</option>
+</select><br><br>
+
+<!-- Input Lines -->
+<label for="field-contributorFirstName">*Given Name</label>
+<input type="text" id="field-contributorFirstName" placeholder="John, Ben .." name="contributorFirstName" classes="control-medium">
+<br><br>
+<label for="field-contributorFamilyName">*Family Name</label>
+<input type="text" id="field-contributorFamilyName" placeholder="Smith, Lee" name="contributorFamilyName" classes="control-medium">
+<br><br>
+<label for="field-contributorNameId">*Name Identifier</label>
+<input type="text" id="field-contributorNameId" placeholder="https://orcid.org/0000-0001-5727-2427" name="contributorNameId" classes="control-medium">
+<br>
+<br>
+<label for="field-contributorAffiliationField">*Affiliation</label>
+<input type="text" id="field-contributorAffiliationField" placeholder="affiliation" name="field-contributorAffiliationField" classes="control-medium" >
+<br><br>
+<button type="button" onclick="addContributor()">Add Contributor</button>
+<button type="button" onclick="clearContributor()">Clear</button>
+<p id='errorMessage'></p>
+<br>
+<!-- Metadata Field Lines -->
+  {{ form.input('contributorType', label=_('*Contributor Types'), id='field-contributorType', placeholder=_(''), value=data.contributorType, error=errors.contributorType, classes=['control-medium']) }}
   {{ form.input('contributorDetails', label=_('*Contributors'), id='field-contributorDetails', placeholder=_(''), value=data.contributorDetails, error=errors.contributorDetails, classes=['control-medium']) }}
+  {{ form.input('contributorId', label=_('*Contributors ID'), id='field-contributorId', placeholder=_(''), value=data.contributorId, error=errors.contributorId, classes=['control-medium']) }}
+  {{ form.input('contributorAffiliation', label=_('*Contributors Affiliation'), id='field-contributorAffiliation', placeholder=_(''), value=data.contributorAffiliation, error=errors.contributorAffiliation, classes=['control-medium']) }}
+<!-- Contributor Functions -->
+<script>
+  var contriId = [];
+  var contriName = [];
+  var contriType = [];
+  var contriAffiliation=[];
 
+  function addContributor() {
+    let fn = document.getElementById('field-contributorFirstName').value;
+    let sn = document.getElementById('field-contributorFamilyName').value;
+    let id = document.getElementById('field-contributorNameId').value;
+    let ct = document.getElementById('field-contributorTypeField').value;
+    let af = document.getElementById('field-contributorAffiliationField').value;
+    //Clear the fields
+    try {
+      if (!fn || !sn || !id || !ct || !af) {
+        throw new Error('*Creator Details Cannot Be Empty');
+      }
+    } catch (err) {
+      document.getElementById('errorMessage').innerHTML = err.message;
+      return;
+    }
+    document.getElementById('field-contributorFirstName').value = '';
+    document.getElementById('field-contributorFamilyName').value = '';
+    document.getElementById('field-contributorNameId').value = '';
+    document.getElementById('field-contributorNameId').value = '';
+    document.getElementById('field-contributorTypeField').value = '';
+    document.getElementById('field-contributorAffiliationField').value = '';
+
+    let fullname = fn.concat(' ', sn);
+
+    contriName.push(fullname);
+    contriId.push(id);
+    contriType.push(ct);
+    contriAffiliation.push(af);
+    document.getElementById('field-contributorDetails').value = contriName;
+    document.getElementById('field-contributorId').value = contriId;
+    document.getElementById('field-contributorType').value = contriType;
+    document.getElementById('field-contributorAffiliation').value = contriAffiliation;
+
+  }
+
+  function clearContributor() {
+    creator = [];
+    nameId = [];
+    document.getElementById('field-contributorFirstName').value = '';
+    document.getElementById('field-contributorFamilyName').value = '';
+    document.getElementById('field-contributorNameId').value = '';
+    document.getElementById('errorMessage').innerHTML = '';
+    document.getElementById('field-contributorDetails').value = ""
+    document.getElementById('field-contributorId').value = ""
+    document.getElementById('field-contributorType').value = ""
+
+  }
+
+</script>
   {% endblock %}

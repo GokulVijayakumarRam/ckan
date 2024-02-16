@@ -14,6 +14,12 @@
       <td class="dataset-details">{{ pkg_dict.nameIdentifier }}</td>
     </tr>
   {% endif %}
+  {% if pkg_dict.creatorAffiliation %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Creator Affiliation") }}</th>
+      <td class="dataset-details">{{ pkg_dict.creatorAffiliation }}</td>
+    </tr>
+  {% endif %}
   {% if pkg_dict.publisher %}
     <tr>
       <th scope="row" class="dataset-label">{{ _("Publisher") }}</th>
@@ -86,10 +92,30 @@
       <td class="dataset-details">{{ pkg_dict.funderIdentifier }}</td>
     </tr>
   {% endif %}
+  {% if pkg_dict.contributorType %}
+  <tr>
+    <th scope="row" class="dataset-label">{{ _("Contributor types") }}</th>
+    <td class="dataset-details">{{ pkg_dict.contributorType }}</td>
+  </tr>
+{% endif %}
   {% if pkg_dict.contributorDetails %}
   <tr>
     <th scope="row" class="dataset-label">{{ _("Contributors") }}</th>
     <td class="dataset-details">{{ pkg_dict.contributorDetails }}</td>
   </tr>
 {% endif %}
+
+{% if pkg_dict.contributorId %}
+<tr>
+  <th scope="row" class="dataset-label">{{ _("contributors Id") }}</th>
+  <td class="dataset-details">{{ pkg_dict.contributorId }}</td>
+</tr>
+{% endif %}
+{% if pkg_dict.contributorAffiliation %}
+<tr>
+  <th scope="row" class="dataset-label">{{ _("contributors Affiliations") }}</th>
+  <td class="dataset-details">{{ pkg_dict.contributorAffiliation }}</td>
+</tr>
+{% endif %}
 {% endblock %}
+

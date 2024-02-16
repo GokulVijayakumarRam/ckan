@@ -6,7 +6,6 @@ import ckan.plugins as p
 from ckan.plugins.toolkit import Invalid
 import ckan.plugins.toolkit as tk
 
-
 class ExampleIDatasetFormPlugin(tk.DefaultDatasetForm, p.SingletonPlugin):
     p.implements(p.IDatasetForm)
     p.implements(p.IConfigurer)
@@ -25,6 +24,8 @@ class ExampleIDatasetFormPlugin(tk.DefaultDatasetForm, p.SingletonPlugin):
             'creator': [tk.get_validator('not_empty'),
                             tk.get_converter('convert_to_extras')],
             'nameIdentifier': [tk.get_validator('not_empty'),
+                            tk.get_converter('convert_to_extras')],
+            'creatorAffiliation': [tk.get_validator('not_empty'),
                             tk.get_converter('convert_to_extras')],
             'publisher': [tk.get_validator('not_empty'),
                             tk.get_converter('convert_to_extras')],    
@@ -51,6 +52,12 @@ class ExampleIDatasetFormPlugin(tk.DefaultDatasetForm, p.SingletonPlugin):
             'funderIdentifier': [tk.get_validator('not_empty'),
                                  tk.get_converter('convert_to_extras')],
             'contributorDetails': [tk.get_validator('ignore_missing'),
+                                 tk.get_converter('convert_to_extras')],
+            'contributorId': [tk.get_validator('ignore_missing'),
+                                 tk.get_converter('convert_to_extras')],
+            'contributorType': [tk.get_validator('ignore_missing'),
+                                 tk.get_converter('convert_to_extras')],
+            'contributorAffiliation': [tk.get_validator('ignore_missing'),
                                  tk.get_converter('convert_to_extras')]
                       
         })        
@@ -68,6 +75,8 @@ class ExampleIDatasetFormPlugin(tk.DefaultDatasetForm, p.SingletonPlugin):
             'creator': [tk.get_validator('not_empty'),
                             tk.get_converter('convert_to_extras')],
             'nameIdentifier': [tk.get_validator('not_empty'),
+                            tk.get_converter('convert_to_extras')],
+            'creatorAffiliation': [tk.get_validator('not_empty'),
                             tk.get_converter('convert_to_extras')],
             'publisher': [tk.get_validator('not_empty'),
                             tk.get_converter('convert_to_extras')],                            
@@ -94,7 +103,13 @@ class ExampleIDatasetFormPlugin(tk.DefaultDatasetForm, p.SingletonPlugin):
             'funderIdentifier': [tk.get_validator('not_empty'),
                                  tk.get_converter('convert_to_extras')],   
             'contributorDetails': [tk.get_validator('ignore_missing'),
-                                 tk.get_converter('convert_to_extras')]                          
+                                 tk.get_converter('convert_to_extras')],   
+            'contributorId': [tk.get_validator('ignore_missing'),
+                                 tk.get_converter('convert_to_extras')],   
+            'contributorType': [tk.get_validator('ignore_missing'),
+                                 tk.get_converter('convert_to_extras')],   
+            'contributorAffiliation': [tk.get_validator('ignore_missing'),
+                                 tk.get_converter('convert_to_extras')]                           
         })       
         return schema
     def show_package_schema(self) -> Schema:
@@ -109,6 +124,8 @@ class ExampleIDatasetFormPlugin(tk.DefaultDatasetForm, p.SingletonPlugin):
             'creator': [tk.get_converter('convert_from_extras'),
                             tk.get_validator('ignore_missing')],
             'nameIdentifier': [tk.get_converter('convert_from_extras'),
+                            tk.get_validator('ignore_missing')],
+            'creatorAffiliation': [tk.get_converter('convert_from_extras'),
                             tk.get_validator('ignore_missing')],
             'publisher': [tk.get_converter('convert_from_extras'),
                             tk.get_validator('ignore_missing')],
@@ -135,6 +152,12 @@ class ExampleIDatasetFormPlugin(tk.DefaultDatasetForm, p.SingletonPlugin):
             'funderIdentifier': [tk.get_converter('convert_from_extras'),
                                  tk.get_validator('ignore_missing')],
             'contributorDetails': [tk.get_converter('convert_from_extras'),
+                                 tk.get_validator('ignore_missing')],
+            'contributorId': [tk.get_converter('convert_from_extras'),
+                                 tk.get_validator('ignore_missing')],
+            'contributorType': [tk.get_converter('convert_from_extras'),
+                                 tk.get_validator('ignore_missing')],
+            'contributorAffiliation': [tk.get_converter('convert_from_extras'),
                                  tk.get_validator('ignore_missing')]
         })       
         return schema
@@ -151,6 +174,8 @@ class ExampleIDatasetFormPlugin(tk.DefaultDatasetForm, p.SingletonPlugin):
                             tk.get_validator('ignore_missing')],
             'nameIdentifier': [tk.get_converter('convert_from_extras'),
                             tk.get_validator('ignore_missing')],
+            'creatorAffiliation': [tk.get_converter('convert_from_extras'),
+                            tk.get_validator('ignore_missing')],
             'publisher': [tk.get_converter('convert_from_extras'),
                             tk.get_validator('ignore_missing')],
             'publicationYear': [tk.get_converter('convert_from_extras'),
@@ -176,7 +201,13 @@ class ExampleIDatasetFormPlugin(tk.DefaultDatasetForm, p.SingletonPlugin):
             'funderIdentifier': [tk.get_converter('convert_from_extras'),
                                  tk.get_validator('ignore_missing')],
             'contributorDetails': [tk.get_converter('convert_from_extras'),
-                                 tk.get_validator('ignore_missing')]                       
+                                 tk.get_validator('ignore_missing')],
+            'contributorId': [tk.get_converter('convert_from_extras'),
+                                 tk.get_validator('ignore_missing')],
+            'contributorType': [tk.get_converter('convert_from_extras'),
+                                 tk.get_validator('ignore_missing')],
+            'contributorAffiliation': [tk.get_converter('convert_from_extras'),
+                                 tk.get_validator('ignore_missing')]                        
         })       
         return schema
 
