@@ -1,0 +1,178 @@
+{% ckan_extends %}
+{% block package_basic_fields_custom %}
+
+
+       <!-- Creator Fields -->
+       <label><strong> Creator Details </strong></label><br><br>
+       <!-- First Name -->
+       <label for="field-given_name">*Given Name</label>
+       <input type="text" id="field-given_name" placeholder="John, Ben .." name="given_name" classes="control-medium">
+       <br><br>
+       <label for="field-family_name">*Family Name</label>
+       <input type="text" id="field-family_name" placeholder="Smith, Lee" name="family_name" classes="control-medium">
+       <br><br>
+       <label for="field-nameIdField">*Name Identifier</label>
+       <input type="text" id="field-nameIdField" placeholder="https://orcid.org/0000-0001-5727-2427" name="nameIdField" classes="control-medium" >
+       <br>
+       <br>
+       <button type="button" onclick="addCreator()">Add Creator</button>
+       <button type="button" onclick="clearCreator()">Clear</button>
+       <p id ='errorMessage'></p>
+       <br>
+       {{ form.input('creator', label=_('Full Names of all creators'), id='field-creator', placeholder=_('DoNotEnter'), value=data.creator, error=errors.creator, classes=['control-medium']) }}
+       {{ form.input('nameIdentifier', label=_('Name Identifiers of all Creators'), id='field-nameIdentifier', placeholder=_('DoNotEnter'), value=data.nameIdentifier, error=errors.nameIdentifier, classes=['control-medium']) }}
+
+         <!-- CREATOR Function-->
+       
+       <script>
+       var nameId = [];
+       var creator=[];
+       var displayElement = document.getElementById('displayCreatorField');
+       var fullname = []; 
+       var first_names = [];
+       var last_names = [];
+       
+       function addCreator(){
+         let fn = document.getElementById('field-given_name').value;
+         let sn = document.getElementById('field-family_name').value;
+         let id = document.getElementById('field-nameIdField').value;
+         //Clear the fields
+         try{
+         if( !fn || !sn || !id ){
+           throw new Error ('*Creator Details Cannot Be Empty');
+         }}
+       catch(err){
+         document.getElementById('errorMessage').innerHTML= err.message;
+         return;
+       }
+         document.getElementById('field-given_name').value = '';
+         document.getElementById('field-family_name').value = '';
+         document.getElementById('field-nameIdField').value = '';
+         document.getElementById('errorMessage').innerHTML= '';
+         fullname = fn.concat(' ',sn);
+         
+         creator.push(fullname);
+         nameId.push(id);
+         document.getElementById('field-creator').value = creator;
+         document.getElementById('field-nameIdentifier').value = nameId;
+       }
+       
+       function clearCreator(){
+         creator = [];
+         nameId=[];
+         document.getElementById('field-given_name').value = '';
+         document.getElementById('field-family_name').value = '';
+         document.getElementById('field-nameIdField').value = '';
+         document.getElementById('errorMessage').innerHTML= '';
+         document.getElementById('field-creator').value = ""
+         document.getElementById('field-nameIdentifier').value = ""
+       }
+       </script>
+    <!-- PUBLISHER -->
+ 
+
+  <label for="field-publisher">*Publisher</label>
+  <input type="text" id="field-publisher" name="publisher" value="Rothamsted">
+  <script>
+    // Set the default value for the input field
+    document.getElementById("field-publisher").value = "Rothamsted";
+  </script><br>
+  {{ form.input('publicationYear', label=_('*PublicationYear'), id='field-publicationYear', placeholder=_('YYYY'), value=data.publicationYear, error=errors.publicationYear, classes=['control-medium']) }}
+
+<!-- Abstract Field -->
+  <style>
+    textarea {
+      width: 500px; /* Adjust as needed */
+    }
+  </style>
+  <label for="field-abstract">*Abstract</label><br>
+  <textarea id="field-abstract" name="abstract" placeholder="Enter Abstract" class="control-medium" rows="5">{{ data.abstract }}
+  </textarea><br>
+<!-- Methods Field -->
+  <style>
+    textarea {
+      width: 500px; /* Adjust as needed */
+    }
+  </style>
+  <label for="field-methods">*Methods</label><br>
+  <textarea id="field-methods" name="methods" placeholder="Enter Methods" class="control-medium" rows="5">{{ data.methods }}
+  </textarea><br>
+
+  <!-- TechnicalInfo Field -->
+
+  <style>
+    textarea {
+      width: 500px; /* Adjust as needed */
+    }
+  </style>
+  <label for="field-technicalInfo">Technical Information</label><br>
+  <textarea id="field-technicalInfo" name="technicalInfo" placeholder="Enter TEchnical Information" class="control-medium" rows="5">{{ data.technicalInfo }}
+  </textarea><br>
+
+  <!-- Experiment Code -->
+ 
+  <label for="field-experimentCode">*Select Experiment Code </label><br>
+  <select  id="field-experimentCode"  name="experimentCode" class="control-medium" placeholder="Select" onchange="displayCodesField()">
+    <option value="None"  >None </option> 
+    <option value="NWFP code" >NWFP code</option>
+    <option value="NW experiment code" >NW experiment code</option>
+    <option value="Other">Other Code </option>
+  </select><br>  
+ 
+<div id="codesField" style="display: none;">
+  <label for="field-Codes">Codes</label><br>
+  <input type="text" id="field-Codes" name="Codes" value="N/A">
+</div>
+
+<script>
+function displayCodesField() {
+  var selectField = document.getElementById('field-experimentCode');
+  var codesField = document.getElementById('codesField');
+  if (selectField.value == 'None') {
+    codesField.style.display = 'none';
+  } else {
+    codesField.style.display = 'block';
+  }
+}
+</script>
+
+  <!-- Resource Type  -->
+  <label for="field-resourceTypeGeneral">*General Resource Type</label><br>  
+  <select id="field-resourceTypeGeneral" name="resourceTypeGeneral" class="control-medium" value=data.resourceTypeGeneral>
+    <option value=""> </option>
+    <option value="Audiovisual">Audiovisual</option>
+    <option value="Collection">Collection</option>
+    <option value="ComputationalNotebook">ComputationalNotebook</option>
+    <option value="DataPaper">DataPaper</option>
+    <option value="Dataset">Dataset</option>
+    <option value="Image">Image</option>
+    <option value="Instrument">Instrument</option>
+    <option value="InteractiveResource">InteractiveResource</option>
+    <option value="Model">Model</option>
+    <option value="OutputManagementPlan">OutputManagementPlan</option>
+    <option value="PhysicalObject">PhysicalObject</option>
+    <option value="Software">Software</option>
+    <option value="Service">Service</option>
+    <option value="Sound">Sound</option>
+    <option value="Standard">Standard</option>
+    <option value="Workflow">Workflow</option>
+  </select>
+  {{ form.input('resourceType', label=_('*ResourceType'), id='field-resourceType', placeholder=_('More Info'), value=data.resourceType, error=errors.resourceType, classes=['control-medium']) }}
+<!-- Language -->
+  <label for="field-language">Langugage </label>
+  <input type="text" id="field-language" name="language" value="en">
+  <script>
+    // Set the default value for the input field
+    document.getElementById("field-language").value = "en";
+  </script><br>
+<!-- Funder -->
+  <label><strong> Funder Information </strong></label><br>
+  {{ form.input('funderName', label=_('*Funder Name'), id='field-funderName', placeholder=_(''), value=data.funderName, error=errors.funderName, classes=['control-medium']) }}
+  {{ form.input('funderIdentifier', label=_('*Funder Identifier'), id='field-funderIdentifier', placeholder=_(''), value=data.funderIdentifier, error=errors.funderIdentifier, classes=['control-medium']) }}
+  
+  <!-- Contributor Details -->
+  <!-- Contributor Fields -->
+
+  {{ form.input('contributorDetails', label=_('*Contributors'), id='field-contributorDetails', placeholder=_(''), value=data.contributorDetails, error=errors.contributorDetails, classes=['control-medium']) }}
+
+  {% endblock %}

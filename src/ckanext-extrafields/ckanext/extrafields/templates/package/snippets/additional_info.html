@@ -1,0 +1,95 @@
+{% ckan_extends %}
+
+{% block extras %}
+
+{% if pkg_dict.creator %}
+<tr>
+  <th scope="row" class="dataset-label">{{ _("creator") }}</th>
+  <td class="dataset-details">{{ pkg_dict.creator }}</td>
+</tr>
+{% endif %}
+  {% if pkg_dict.nameIdentifier %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Name Identifier (ORCID)") }}</th>
+      <td class="dataset-details">{{ pkg_dict.nameIdentifier }}</td>
+    </tr>
+  {% endif %}
+  {% if pkg_dict.publisher %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Publisher") }}</th>
+      <td class="dataset-details">{{ pkg_dict.publisher }}</td>
+    </tr>
+  {% endif %} 
+  {% if pkg_dict.publicationYear %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("PublicationYear") }}</th>
+      <td class="dataset-details">{{ pkg_dict.publicationYear }}</td>
+    </tr>
+  {% endif %}
+  {% if pkg_dict.abstract %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Abstract") }}</th>
+      <td class="dataset-details">{{ pkg_dict.abstract }}</td>
+    </tr>
+  {% endif %}
+  {% if pkg_dict.methods %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Methods") }}</th>
+      <td class="dataset-details">{{ pkg_dict.methods }}</td>
+    </tr>
+  {% endif %}
+  {% if pkg_dict.technicalInfo %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Technical Information") }}</th>
+      <td class="dataset-details">{{ pkg_dict.technicalInfo }}</td>
+    </tr>
+  {% endif %}
+  {% if pkg_dict.experimentCode %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("RRES Farms Field Experiment code") }}</th>
+      <td class="dataset-details">{{ pkg_dict.experimentCode }}</td>
+    </tr>
+  {% endif %}
+  {% if pkg_dict.Codes %}
+  <tr>
+    <th scope="row" class="dataset-label">{{ _("Codes") }}</th>
+    <td class="dataset-details">{{ pkg_dict.Codes }}</td>
+  </tr>
+{% endif %}
+{% if pkg_dict.resourceTypeGeneral %}
+<tr>
+  <th scope="row" class="dataset-label">{{ _("ResourceTypeGeneral") }}</th>
+  <td class="dataset-details">{{ pkg_dict.resourceTypeGeneral }}</td>
+</tr>
+{% endif %}
+  {% if pkg_dict.resourceType %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("ResourceType") }}</th>
+      <td class="dataset-details">{{ pkg_dict.resourceType }}</td>
+    </tr>
+  {% endif %}
+  {% if pkg_dict.language %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Language") }}</th>
+      <td class="dataset-details">{{ pkg_dict.language }}</td>
+    </tr>
+  {% endif %}
+  {% if pkg_dict.funderName %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Funder Name") }}</th>
+      <td class="dataset-details">{{ pkg_dict.funderName }}</td>
+    </tr>
+  {% endif %}
+  {% if pkg_dict.funderIdentifier %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Funder Identifier") }}</th>
+      <td class="dataset-details">{{ pkg_dict.funderIdentifier }}</td>
+    </tr>
+  {% endif %}
+  {% if pkg_dict.contributorDetails %}
+  <tr>
+    <th scope="row" class="dataset-label">{{ _("Contributors") }}</th>
+    <td class="dataset-details">{{ pkg_dict.contributorDetails }}</td>
+  </tr>
+{% endif %}
+{% endblock %}
