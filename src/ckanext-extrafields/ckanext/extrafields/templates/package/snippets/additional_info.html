@@ -2,10 +2,10 @@
 
 {% block extras %}
 
-{% if pkg_dict.creator %}
+{% if pkg_dict.author %}
 <tr>
-  <th scope="row" class="dataset-label">{{ _("creator") }}</th>
-  <td class="dataset-details">{{ pkg_dict.creator }}</td>
+  <th scope="row" class="dataset-label">{{ _("Creator") }}</th>
+  <td class="dataset-details">{{ pkg_dict.author }}</td>
 </tr>
 {% endif %}
   {% if pkg_dict.nameIdentifier %}
@@ -80,16 +80,70 @@
       <td class="dataset-details">{{ pkg_dict.language }}</td>
     </tr>
   {% endif %}
+  {% if pkg_dict.collectedDate %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Collected Date") }}</th>
+      <td class="dataset-details">{{ pkg_dict.collectedDate }}</td>
+    </tr>
+  {% endif %}
+  {% if pkg_dict.createdDate %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Created Date") }}</th>
+      <td class="dataset-details">{{ pkg_dict.createdDate }}</td>
+    </tr>
+  {% endif %}
+  {% if pkg_dict.submittedDate %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Submitted Date") }}</th>
+      <td class="dataset-details">{{ pkg_dict.submittedDate }}</td>
+    </tr>
+  {% endif %}
+  {% if pkg_dict.availableDate %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Available Date") }}</th>
+      <td class="dataset-details">{{ pkg_dict.availableDate }}</td>
+    </tr>
+  {% endif %}
+  {% if pkg_dict.withdrawnDate %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Withdrawn Date") }}</th>
+      <td class="dataset-details">{{ pkg_dict.withdrawnDate }}</td>
+    </tr>
+  {% endif %}
   {% if pkg_dict.funderName %}
     <tr>
       <th scope="row" class="dataset-label">{{ _("Funder Name") }}</th>
       <td class="dataset-details">{{ pkg_dict.funderName }}</td>
     </tr>
   {% endif %}
-  {% if pkg_dict.funderIdentifier %}
+  {% if pkg_dict.funderId %}
     <tr>
       <th scope="row" class="dataset-label">{{ _("Funder Identifier") }}</th>
-      <td class="dataset-details">{{ pkg_dict.funderIdentifier }}</td>
+      <td class="dataset-details">{{ pkg_dict.funderId }}</td>
+    </tr>
+  {% endif %}
+  {% if pkg_dict.funderIdType %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Funder Identifier Type") }}</th>
+      <td class="dataset-details">{{ pkg_dict.funderIdType }}</td>
+    </tr>
+  {% endif %}
+  {% if pkg_dict.awardNumber %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Award Number") }}</th>
+      <td class="dataset-details">{{ pkg_dict.awardNumber }}</td>
+    </tr>
+  {% endif %}
+  {% if pkg_dict.awardURI %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Award URI") }}</th>
+      <td class="dataset-details">{{ pkg_dict.awardURI }}</td>
+    </tr>
+  {% endif %}
+  {% if pkg_dict.awardTitle %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Award Title") }}</th>
+      <td class="dataset-details">{{ pkg_dict.awardTitle }}</td>
     </tr>
   {% endif %}
   {% if pkg_dict.contributorType %}
@@ -115,6 +169,30 @@
 <tr>
   <th scope="row" class="dataset-label">{{ _("contributors Affiliations") }}</th>
   <td class="dataset-details">{{ pkg_dict.contributorAffiliation }}</td>
+</tr>
+{% endif %}
+{% if pkg_dict.relatedIdentifierType %}
+<tr>
+  <th scope="row" class="dataset-label">{{ _("Related Resource ID Type") }}</th>
+  <td class="dataset-details">{{ pkg_dict.relatedIdentifierType }}</td>
+</tr>
+{% endif %}
+{% if pkg_dict.relationType %}
+<tr>
+  <th scope="row" class="dataset-label">{{ _("Relation Type") }}</th>
+  <td class="dataset-details">{{ pkg_dict.relationType }}</td>
+</tr>
+{% endif %}
+{% if pkg_dict.relatedResourceType %}
+<tr>
+  <th scope="row" class="dataset-label">{{ _("Related Resource Type") }}</th>
+  <td class="dataset-details">{{ pkg_dict.relatedResourceType }}</td>
+</tr>
+{% endif %}
+{% if pkg_dict.relatedIdentifier %}
+<tr>
+  <th scope="row" class="dataset-label">{{ _("Related Resources IDs") }}</th>
+  <td class="dataset-details">{{ pkg_dict.relatedIdentifier }}</td>
 </tr>
 {% endif %}
 {% endblock %}

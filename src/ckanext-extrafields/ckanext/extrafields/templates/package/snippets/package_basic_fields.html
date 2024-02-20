@@ -5,25 +5,25 @@
        <!-- Creator Fields -->
        <label><strong> Creator Details </strong></label><br><br>
        <!-- First Name -->
-       <label for="field-given_name">*Given Name</label>
+       <label for="field-given_name">*Given Name</label><br>
        <input type="text" id="field-given_name" placeholder="John, Ben .." name="given_name" classes="control-medium">
        <br><br>
-       <label for="field-family_name">*Family Name</label>
+       <label for="field-family_name">*Family Name</label><br>
        <input type="text" id="field-family_name" placeholder="Smith, Lee" name="family_name" classes="control-medium">
        <br><br>
-       <label for="field-nameIdField">*Name Identifier</label>
+       <label for="field-nameIdField">*Name Identifier</label><br>
        <input type="text" id="field-nameIdField" placeholder="https://orcid.org/0000-0001-5727-2427" name="nameIdField" classes="control-medium" >
        <br><br>
-       <label for="field-creatorAffiliationField">*Affiliation</label>
-       <input type="text" id="field-creatorAffiliationField" placeholder="affiliation" name="field-creatorAffiliationField" classes="control-medium" >
+       <label for="field-creatorAffiliationField">*Affiliation</label><br>
+       <input type="text" id="field-creatorAffiliationField" placeholder="Affiliations" name="field-creatorAffiliationField" classes="control-medium" >
        <br><br>
        <button type="button" onclick="addCreator()">Add Creator</button>
        <button type="button" onclick="clearCreator()">Clear</button>
        <p id ='errorMessage'></p>
        <br>
-       {{ form.input('creator', label=_('Full Names of all creators'), id='field-creator', placeholder=_('DoNotEnter'), value=data.creator, error=errors.creator, classes=['control-medium']) }}
-       {{ form.input('nameIdentifier', label=_('Name Identifiers of all Creators'), id='field-nameIdentifier', placeholder=_('DoNotEnter'), value=data.nameIdentifier, error=errors.nameIdentifier, classes=['control-medium']) }}
-       {{ form.input('creatorAffiliation', label=_('Affiliation List'), id='field-creatorAffiliation', placeholder=_('DoNotEnter'), value=data.creatorAffiliation, error=errors.creatorAffiliation, classes=['control-medium']) }}
+       {{ form.input('author', label=_('*List of Creators'), id='field-author', placeholder=_('Do nor Enter'), value=data.author, error=errors.author, classes=['control-medium']) }}
+       {{ form.input('nameIdentifier', label=_('*List of Name IDs'), id='field-nameIdentifier', placeholder=_('Do not enter'), value=data.nameIdentifier, error=errors.nameIdentifier, classes=['control-medium']) }}
+       {{ form.input('creatorAffiliation', label=_('*List of Affiliations'), id='field-creatorAffiliation', placeholder=_('Do not enter'), value=data.creatorAffiliation, error=errors.creatorAffiliation, classes=['control-medium']) }}
 
          <!-- CREATOR Function-->
        
@@ -39,10 +39,7 @@
          let sn = document.getElementById('field-family_name').value;
          let id = document.getElementById('field-nameIdField').value;
          let af = document.getElementById('field-creatorAffiliationField').value;
-         console.log(af);
-         console.log(sn);
-         console.log(id);
-         console.log(af);
+
          //Clear the fields
          try{
          if( !fn || !sn || !id || !af){
@@ -61,7 +58,7 @@
          creator.push(fullname);
          nameId.push(id);
          affiliations.push(af);
-         document.getElementById('field-creator').value = creator;
+         document.getElementById('field-author').value = creator;
          document.getElementById('field-nameIdentifier').value = nameId;
          document.getElementById('field-creatorAffiliation').value = affiliations;
        }
@@ -73,22 +70,24 @@
          document.getElementById('field-family_name').value = '';
          document.getElementById('field-nameIdField').value = '';
          document.getElementById('errorMessage').innerHTML= '';
-         document.getElementById('field-creator').value = ""
+         document.getElementById('field-author').value = ""
          document.getElementById('field-nameIdentifier').value = ""
          document.getElementById('field-creatorAffiliation').value = ""
 
        }
        </script>
-    <!-- PUBLISHER -->
+    <!-- PUBLISHER and Publication Year -->
  
 
-  <label for="field-publisher">*Publisher</label>
+  <label for="field-publisher">*Publisher</label><br>
   <input type="text" id="field-publisher" name="publisher" value="Rothamsted">
   <script>
     // Set the default value for the input field
     document.getElementById("field-publisher").value = "Rothamsted";
   </script><br>
-  {{ form.input('publicationYear', label=_('*PublicationYear'), id='field-publicationYear', placeholder=_('YYYY'), value=data.publicationYear, error=errors.publicationYear, classes=['control-medium']) }}
+  <label for="field-publicationYear">*Publication Year</label><br>
+  <input type="text" id="field-publicationYear" name="publicationYear" placeholder="YYYY"> <br><br>
+ 
 
 <!-- Abstract Field -->
   <style>
@@ -97,7 +96,7 @@
     }
   </style>
   <label for="field-abstract">*Abstract</label><br>
-  <textarea id="field-abstract" name="abstract" placeholder="Enter Abstract" class="control-medium" rows="5">{{ data.abstract }}
+  <textarea id="field-abstract" name="abstract" placeholder="Enter Abstract" error="errors.abstract" class="control-medium" rows="5">{{ data.abstract }}
   </textarea><br>
 <!-- Methods Field -->
   <style>
@@ -106,7 +105,7 @@
     }
   </style>
   <label for="field-methods">*Methods</label><br>
-  <textarea id="field-methods" name="methods" placeholder="Enter Methods" class="control-medium" rows="5">{{ data.methods }}
+  <textarea id="field-methods" name="methods" placeholder="Enter Methods" error="errors.methods" class="control-medium" rows="5">{{ data.methods }}
   </textarea><br>
 
   <!-- TechnicalInfo Field -->
@@ -117,14 +116,14 @@
     }
   </style>
   <label for="field-technicalInfo">Technical Information</label><br>
-  <textarea id="field-technicalInfo" name="technicalInfo" placeholder="Enter TEchnical Information" class="control-medium" rows="5">{{ data.technicalInfo }}
+  <textarea id="field-technicalInfo" name="technicalInfo" error="errors.technicalInfo" placeholder="Enter TEchnical Information" class="control-medium" rows="5">{{ data.technicalInfo }}
   </textarea><br>
 
   <!-- Experiment Code -->
  
   <label for="field-experimentCode">*Select Experiment Code </label><br>
-  <select  id="field-experimentCode"  name="experimentCode" class="control-medium" placeholder="Select" onchange="displayCodesField()">
-    <option value="None"  >None </option> 
+  <select  id="field-experimentCode" error="errors.experimentCode" name="experimentCode" class="control-medium" placeholder="Select" onchange="displayCodesField()">
+    <option value="None"></option> 
     <option value="NWFP code" >NWFP code</option>
     <option value="NW experiment code" >NW experiment code</option>
     <option value="Other">Other Code </option>
@@ -132,7 +131,7 @@
  
 <div id="codesField" style="display: none;">
   <label for="field-Codes">Codes</label><br>
-  <input type="text" id="field-Codes" name="Codes" value="N/A">
+  <input type="text" id="field-Codes" name="Codes" value="N/A" error="errors.Codes">
 </div>
 
 <script>
@@ -146,47 +145,112 @@ function displayCodesField() {
   }
 }
 </script>
+{{ form.input('resourceType', label=_('*ResourceType'), id='field-resourceType', placeholder=_('More Info'), value=data.resourceType, error=errors.resourceType, classes=['control-medium']) }}
 
   <!-- Resource Type  -->
   <label for="field-resourceTypeGeneral">*General Resource Type</label><br>  
   <select id="field-resourceTypeGeneral" name="resourceTypeGeneral" class="control-medium" value=data.resourceTypeGeneral>
-    <option value=""> </option>
+    <option value="None"> </option>
     <option value="Audiovisual">Audiovisual</option>
+    <option value="Book">Book</option>
+    <option value="BookChapter">BookChapter</option>
     <option value="Collection">Collection</option>
     <option value="ComputationalNotebook">ComputationalNotebook</option>
+    <option value="ConferencePaper">ConferencePaper</option>
+    <option value="ConferenceProceeding">ConferenceProceeding</option>
     <option value="DataPaper">DataPaper</option>
     <option value="Dataset">Dataset</option>
+    <option value="Dissertation">Dissertation</option>
+    <option value="Event">Event</option>
     <option value="Image">Image</option>
-    <option value="Instrument">Instrument</option>
     <option value="InteractiveResource">InteractiveResource</option>
+    <option value="Instrument">Instrument</option>
+    <option value="Journal">Journal</option>
+    <option value="JournalArticle">JournalArticle</option>
     <option value="Model">Model</option>
     <option value="OutputManagementPlan">OutputManagementPlan</option>
+    <option value="PeerReview">PeerReview</option>
     <option value="PhysicalObject">PhysicalObject</option>
-    <option value="Software">Software</option>
+    <option value="Preprint">Preprint</option>
+    <option value="Report">Report</option>
     <option value="Service">Service</option>
+    <option value="Software">Software</option>
     <option value="Sound">Sound</option>
     <option value="Standard">Standard</option>
+    <option value="StudyRegistration">StudyRegistration</option>
+    <option value="Text">Text</option>
     <option value="Workflow">Workflow</option>
+    <option value="Other">Other</option>
   </select>
   {{ form.input('resourceType', label=_('*ResourceType'), id='field-resourceType', placeholder=_('More Info'), value=data.resourceType, error=errors.resourceType, classes=['control-medium']) }}
 <!-- Language -->
-  <label for="field-language">Langugage </label>
-  <input type="text" id="field-language" name="language" value="en">
+  <label for="field-language">Langugage </label><br>
+  <input type="text" id="field-language" name="language" value="en" >
   <script>
     // Set the default value for the input field
     document.getElementById("field-language").value = "en";
-  </script><br>
+  </script><br><br>
+
+
+    <!-- Dates Fields  -->
+    <label><strong> Dates </strong></label><br><br>
+
+    <!-- Collected Dates -->
+    <label for="field-collectedDate">Collected Date:</label><br>
+    <input id="field-collectedDate" name="collectedDate" classes="control-medium" placeholder="DD-MM-YYYY"><br><br>
+      <!-- Created Dates -->
+    <label for="field-createdDate">Created Date:</label><br>
+    <input id="field-createdDate" name="createdDate" classes="control-medium" placeholder="DD-MM-YYYY"><br><br>
+      <!-- Submitted Dates -->
+    <label for="field-submittedDate">Submitted Date:</label><br>
+    <input id="field-submittedDate" name="submittedDate" classes="control-medium" placeholder="DD-MM-YYYY"><br><br>
+      <!-- Available Dates -->
+    <label for="field-availableDate">Available Date:</label><br>
+    <input id="field-availableDate" name="availableDate" classes="control-medium" placeholder="DD-MM-YYYY"><br><br>
+      <!-- Withdrawn Dates -->
+    <label for="field-withdrawnDate">Withdrawn Date:</label><br>
+    <input id="field-withdrawnDate" name="withdrawnDate" classes="control-medium" placeholder="DD-MM-YYYY"><br><br>
+
+     
+    <script>
+      // Script to set submitted date to today's date 
+        let today = new Date();
+        let dd = String(today.getDate()).padStart(2, '0');
+        let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        let yyyy = today.getFullYear();
+
+        today = dd + '-' + mm + '-' + yyyy;
+
+        document.getElementById('field-submittedDate').value = today;
+</script>
+
+
 <!-- Funder -->
-  <label><strong> Funder Information </strong></label><br>
-  {{ form.input('funderName', label=_('*Funder Name'), id='field-funderName', placeholder=_(''), value=data.funderName, error=errors.funderName, classes=['control-medium']) }}
-  {{ form.input('funderIdentifier', label=_('*Funder Identifier'), id='field-funderIdentifier', placeholder=_(''), value=data.funderIdentifier, error=errors.funderIdentifier, classes=['control-medium']) }}
-  
+<label><strong> Funder Information </strong></label><br><br>
+<label for="field-funderName">*Funder Name </label><br>
+<input id="field-funderName" placeholder="Funder" name="funderName" classes="control-medium"><br><br>
+<label for="field-funderId">*Funder Identifier</label><br>
+<input id="field-funderId" placeholder="Funder ID" name="funderId" classes="control-medium"><br><br>
+<label for="field-funderIdType">*Funder ID Type</label><br>
+<select id="field-funderIdType" name="funderIdType" classes="control-medium">
+  <option value="Crossref Funder ID">Crossref Funder ID </option>
+  <option value="GRID">GRID </option>
+  <option value="ISNI">ISNI</option>
+  <option value="ROR">ROR</option>
+  <option value="Other">Other</option>
+</select><br><br>
+<label for="field-awardNumber">*Award number</label><br>
+<input id="field-awardNumber" placeholder="Award no." name="awardNumber" classes="control-medium"><br><br>
+<label for="field-awardURI">*Award URI</label><br>
+<input id="field-awardURI" placeholder="URI" name="awardURI" classes="control-medium" error="errors.resourceType"><br><br>
+<label for="field-awardTitle">*Award Title</label><br>
+<input id="field-awardTitle" placeholder="Award Title" name="awardTitle" classes="control-medium"><br><br>  
 <!-- Contributor Details -->
 
 <label><strong> Contributors Details </strong></label><br><br>
-<label for="field-contributorTypeField">*Given Name</label>
+<label for="field-contributorTypeField">*Contributor Type</label><br>
 <select id="field-contributorTypeField" name="contributorTypeField" class="control-medium">
-  <option value=""></option>
+  <option value="None"></option>
   <option value="ContactPerson">ContactPerson</option>
   <option value="DataCollector">DataCollector</option>
   <option value="DataCurator">DataCurator</option>
@@ -211,29 +275,38 @@ function displayCodesField() {
 </select><br><br>
 
 <!-- Input Lines -->
-<label for="field-contributorFirstName">*Given Name</label>
+<label for="field-contributorFirstName">*Given Name</label><br>
 <input type="text" id="field-contributorFirstName" placeholder="John, Ben .." name="contributorFirstName" classes="control-medium">
 <br><br>
-<label for="field-contributorFamilyName">*Family Name</label>
+<label for="field-contributorFamilyName">*Family Name</label><br>
 <input type="text" id="field-contributorFamilyName" placeholder="Smith, Lee" name="contributorFamilyName" classes="control-medium">
 <br><br>
-<label for="field-contributorNameId">*Name Identifier</label>
+<label for="field-contributorNameId">*Name Identifier</label><br>
 <input type="text" id="field-contributorNameId" placeholder="https://orcid.org/0000-0001-5727-2427" name="contributorNameId" classes="control-medium">
 <br>
 <br>
-<label for="field-contributorAffiliationField">*Affiliation</label>
+<label for="field-contributorAffiliationField">*Affiliation</label><br>
 <input type="text" id="field-contributorAffiliationField" placeholder="affiliation" name="field-contributorAffiliationField" classes="control-medium" >
 <br><br>
 <button type="button" onclick="addContributor()">Add Contributor</button>
 <button type="button" onclick="clearContributor()">Clear</button>
 <p id='errorMessage'></p>
 <br>
-<!-- Metadata Field Lines -->
-  {{ form.input('contributorType', label=_('*Contributor Types'), id='field-contributorType', placeholder=_(''), value=data.contributorType, error=errors.contributorType, classes=['control-medium']) }}
-  {{ form.input('contributorDetails', label=_('*Contributors'), id='field-contributorDetails', placeholder=_(''), value=data.contributorDetails, error=errors.contributorDetails, classes=['control-medium']) }}
-  {{ form.input('contributorId', label=_('*Contributors ID'), id='field-contributorId', placeholder=_(''), value=data.contributorId, error=errors.contributorId, classes=['control-medium']) }}
-  {{ form.input('contributorAffiliation', label=_('*Contributors Affiliation'), id='field-contributorAffiliation', placeholder=_(''), value=data.contributorAffiliation, error=errors.contributorAffiliation, classes=['control-medium']) }}
-<!-- Contributor Functions -->
+<!-- Metadata Field Lines for Contributors -->
+<label for="field-contributorType">*Contributor  Types: </label><br>
+<input id="field-contributorType" error="errors.contributorType"  name="contributorType"  classes="control-medium"><br><br>
+
+<label for="field-contributorDetails">*Contributor Names: </label><br>
+<input id="field-contributorDetails" error="errors.contributorDetails"  name="contributorDetails"  classes="control-medium"><br><br>
+
+<label for="field-contributorId">*Contributor ID List: </label><br>
+<input id="field-contributorId" error="errors.contributorId"  name="contributorId"  classes="control-medium"><br><br>
+
+<label for="field-contributorAffiliation">*Contributor Affiliation List: </label><br>
+<input id="field-contributorAffiliation" error="errors.contributorAffiliation" name="contributorAffiliation"  classes="control-medium"><br><br>
+
+  <!-- Contributor Functions -->
+
 <script>
   var contriId = [];
   var contriName = [];
@@ -289,4 +362,150 @@ function displayCodesField() {
   }
 
 </script>
+
+      <!-- Related Resources Fields -->
+      <!--                          -->
+      <!--                          -->
+      <label><strong> Related Resources </strong></label><br><br>
+      <label for="field-relatedIdField"> Select Related ID Type </label><br>
+      <select id="field-relatedIdField"  name="relatedIdField" class="control-medium">
+        <option value="">N/A</option>
+        <option value="ARK">ARK</option>
+        <option value="arXiv">arXiv</option>
+        <option value="bibcode">bibcode</option>
+        <option value="DOI">DOI</option>
+        <option value="EAN13">EAN13</option>
+        <option value="EISSN">EISSN</option>
+        <option value="Handle">Handle</option>
+        <option value="IGSN">IGSN</option>
+        <option value="ISBN">ISBN</option>
+        <option value="ISSN">ISSN</option>
+        <option value="ISTC">ISTC</option>
+        <option value="LISSN">LISSN</option>
+        <option value="LSID">LSID</option>
+        <option value="PMID">PMID</option>
+        <option value="PURL">PURL</option>
+        <option value="UPC">UPC</option>
+        <option value="URL">URL</option>
+        <option value="URN">URN</option>
+        <option value="w3id">w3id</option>
+      </select><br><br>
+      
+      <label for="field-relationTypeField"> Select Relation Type </label><br>
+      <select id="field-relationTypeField"  name="relationTypeField" class="control-medium">
+        <option value="">N/A</option>
+        <option value="IsCitedBy">IsCitedBy</option>
+        <option value="Cites">Cites</option>
+        <option value="IsSupplementTo">IsSupplementTo</option>
+        <option value="IsSupplementedBy">IsSupplementedBy</option>
+        <option value="IsContinuedBy">IsContinuedBy</option>
+        <option value="Continues">Continues</option>
+        <option value="IsDescribedBy">IsDescribedBy</option>
+        <option value="Describes">Describes</option>
+        <option value="HasMetadata">HasMetadata</option>
+        <option value="IsMetadataFor">IsMetadataFor</option>
+        <option value="HasVersion">HasVersion</option>
+        <option value="IsVersionOf">IsVersionOf</option>
+        <option value="IsNewVersionOf">IsNewVersionOf</option>
+        <option value="IsPreviousVersionOf">IsPreviousVersionOf</option>
+        <option value="IsPartOf">IsPartOf</option>
+        <option value="HasPart">HasPart</option>
+        <option value="IsPublishedIn">IsPublishedIn</option>
+        <option value="IsReferencedBy">IsReferencedBy</option>
+        <option value="References">References</option>
+        <option value="IsDocumentedBy">IsDocumentedBy</option>
+        <option value="Documents">Documents</option>
+        <option value="IsCompiledBy">IsCompiledBy</option>
+        <option value="Compiles">Compiles</option>
+        <option value="IsVariantFormOf">IsVariantFormOf</option>
+        <option value="IsOriginalFormOf">IsOriginalFormOf</option>
+        <option value="IsIdenticalTo">IsIdenticalTo</option>
+        <option value="IsReviewedBy">IsReviewedBy</option>
+        <option value="Reviews">Reviews</option>
+        <option value="IsDerivedFrom">IsDerivedFrom</option>
+        <option value="IsSourceOf">IsSourceOf</option>
+        <option value="IsRequiredBy">IsRequiredBy</option>
+        <option value="Requires">Requires</option>
+        <option value="IsObsoletedBy">IsObsoletedBy</option>
+        <option value="Obsoletes">Obsoletes</option>
+        <option value="IsCollectedBy">IsCollectedBy</option>
+        <option value="Collects">Collects</option>
+      </select><br><br>
+      
+      
+      <label for="field-relatedResourceTypeField"> Select Resource Type </label><br>
+      <select id="field-relatedResourceTypeField"  name="relatedResourceTypeField" class="control-medium">
+        <option value="">N/A</option>
+        <option value="Audiovisual">Audiovisual</option>
+        <option value="Book">Book</option>
+        <option value="BookChapter">BookChapter</option>
+        <option value="Collection">Collection</option>
+        <option value="ComputationalNotebook">ComputationalNotebook</option>
+        <option value="ConferencePaper">ConferencePaper</option>
+        <option value="ConferenceProceeding">ConferenceProceeding</option>
+        <option value="DataPaper">DataPaper</option>
+        <option value="Dataset">Dataset</option>
+        <option value="Dissertation">Dissertation</option>
+        <option value="Event">Event</option>
+        <option value="Image">Image</option>
+        <option value="InteractiveResource">InteractiveResource</option>
+        <option value="Instrument">Instrument</option>
+        <option value="Journal">Journal</option>
+        <option value="JournalArticle">JournalArticle</option>
+        <option value="Model">Model</option>
+        <option value="OutputManagementPlan">OutputManagementPlan</option>
+        <option value="PeerReview">PeerReview</option>
+        <option value="PhysicalObject">PhysicalObject</option>
+        <option value="Preprint">Preprint</option>
+        <option value="Report">Report</option>
+        <option value="Service">Service</option>
+        <option value="Software">Software</option>
+        <option value="Sound">Sound</option>
+        <option value="Standard">Standard</option>
+        <option value="StudyRegistration">StudyRegistration</option>
+        <option value="Text">Text</option>
+        <option value="Workflow">Workflow</option>
+        <option value="Other">Other</option>
+      </select><br><br>
+      
+      <label for="field-relatedIdentifierField">Enter the Identifier</label><br>
+      <input id="field-relatedIdentifierField" name="relatedIdentifierField" classes="control-medium"><br>
+      <button type="button" onclick="addRelated()">Add Resources</button>
+          
+      <p id="enterMessage"></p>
+      <!-- Metadata Fields for Related Resources -->
+      <input id="field-relatedIdentifierType" name="relatedIdentifierType" classes="control-medium" style="display:none">
+      <input id="field-relationType" name="relationType" classes="control-medium" style="display:none">
+      <input id="field-relatedResourceType" name="relatedResourceType" classes="control-medium" style="display:none">
+      <input id="field-relatedIdentifier" name="relatedIdentifier" classes="control-medium" style="display:none">
+
+      <script>
+        var relationTypeList = [];
+        var idTypeList = [];
+        var RRTypeList = [];
+        var idList = [];
+        
+        function addRelated(){
+          let idt = document.getElementById('field-relatedIdField').value;
+          let relt = document.getElementById('field-relationTypeField').value;
+          let rest = document.getElementById('field-relatedResourceTypeField').value;
+          let rid = document.getElementById('field-relatedIdentifierField').value;
+          if( !idt || !relt || !rest || !rid){
+                console.log("entered if");
+                document.getElementById('enterMessage').innerHTML= "Fill all the fields"; 
+                return;
+               }
+          relationTypeList.push(relt);
+          idTypeList.push(idt);
+          RRTypeList.push(rest);
+          idList.push(rid);
+          document.getElementById('field-relatedIdentifierType').value = idTypeList;
+          document.getElementById('field-relationType').value = relationTypeList;
+          document.getElementById('field-relatedResourceType').value = RRTypeList
+          document.getElementById('field-relatedIdentifier').value = idList;
+          document.getElementById('enterMessage').innerHTML= "IDs Added: " + idList;
+        }
+      </script>
+      
   {% endblock %}
+  
