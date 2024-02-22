@@ -195,5 +195,48 @@
   <td class="dataset-details">{{ pkg_dict.relatedIdentifier }}</td>
 </tr>
 {% endif %}
+{% if pkg_dict.associatedNote %}
+<tr>
+  <th scope="row" class="dataset-label">{{ _("Assoicated Research NotebookS") }}</th>
+  <td class="dataset-details">{{ pkg_dict.associatedNote }}</td>
+</tr>
+{% endif %}
+{% if pkg_dict.dataLocation %}
+<tr>
+  <th scope="row" class="dataset-label">{{ _("Data Locations") }}</th>
+  <td class="dataset-details">{{ pkg_dict.dataLocation }}</td>
+</tr>
+{% endif %}
+{% if pkg_dict.responsiblePerson %}
+<tr>
+  <th scope="row" class="dataset-label">{{ _("Responsible Person") }}</th>
+  <td class="dataset-details">{{ pkg_dict.responsiblePerson }}</td>
+</tr>
+{% endif %}
+{% if pkg_dict.infraUsed %}
+<tr>
+  <th scope="row" class="dataset-label">{{ _("Research Infrastrucutre Used") }}</th>
+  <td class="dataset-details">{{ pkg_dict.infraUsed }}</td>
+</tr>
+{% endif %}
+{% if pkg_dict.geoLocation %}
+<tr>
+  <th scope="row" class="dataset-label">{{ _("Location") }}</th>
+  <td class="dataset-details">{{ pkg_dict.geoLocation }}</td>
+</tr>
+{% endif %}
+{% if pkg_dict.geoLatitude %}
+<tr>
+  <th scope="row" class="dataset-label">{{ _("Latitude") }}</th>
+  <td class="dataset-details">{{ pkg_dict.geoLatitude }}</td>
+</tr>
+{% endif %}
+{% if pkg_dict.geoLongitude %}
+<tr>
+  <th scope="row" class="dataset-label">{{ _("Longitude") }}</th>
+  <td class="dataset-details">{{ pkg_dict.geoLongitude }}</td>
+</tr>
+{% endif %}
+
 {% endblock %}
 

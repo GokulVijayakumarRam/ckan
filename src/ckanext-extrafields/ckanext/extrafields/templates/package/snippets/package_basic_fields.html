@@ -3,7 +3,7 @@
 
 
        <!-- Creator Fields -->
-       <label><strong> Creator Details </strong></label><br><br>
+       <label><strong> Creator Details (Mandatory)</strong></label><br><br>
        <!-- First Name -->
        <label for="field-given_name">*Given Name</label><br>
        <input type="text" id="field-given_name" placeholder="John, Ben .." name="given_name" classes="control-medium">
@@ -22,9 +22,10 @@
        <p id ='errorMessage'></p>
        <br>
        {{ form.input('author', label=_('*List of Creators'), id='field-author', placeholder=_('Do nor Enter'), value=data.author, error=errors.author, classes=['control-medium']) }}
-       {{ form.input('nameIdentifier', label=_('*List of Name IDs'), id='field-nameIdentifier', placeholder=_('Do not enter'), value=data.nameIdentifier, error=errors.nameIdentifier, classes=['control-medium']) }}
-       {{ form.input('creatorAffiliation', label=_('*List of Affiliations'), id='field-creatorAffiliation', placeholder=_('Do not enter'), value=data.creatorAffiliation, error=errors.creatorAffiliation, classes=['control-medium']) }}
-
+       <!-- {{ form.input('nameIdentifier', label=_('*List of Name IDs'), id='field-nameIdentifier', placeholder=_('Do not enter'), value=data.nameIdentifier, error=errors.nameIdentifier, classes=['control-medium']) }} -->
+       <!-- {{ form.input('creatorAffiliation', label=_('*List of Affiliations'), id='field-creatorAffiliation', placeholder=_('Do not enter'), value=data.creatorAffiliation, error=errors.creatorAffiliation, classes=['control-medium']) }} -->
+       <input type="text" id="field-nameIdentifier" name="nameIdentifier" style="display:none">
+       <input type="text" id="field-creatorAffiliation" name="creatorAffiliation" style="display:none">
          <!-- CREATOR Function-->
        
        <script>
@@ -79,13 +80,13 @@
     <!-- PUBLISHER and Publication Year -->
  
 
-  <label for="field-publisher">*Publisher</label><br>
+  <label for="field-publisher">*Publisher (Mandatory) </label><br>
   <input type="text" id="field-publisher" name="publisher" value="Rothamsted">
   <script>
     // Set the default value for the input field
     document.getElementById("field-publisher").value = "Rothamsted";
   </script><br>
-  <label for="field-publicationYear">*Publication Year</label><br>
+  <label for="field-publicationYear">*Publication Year (Mandatory)</label><br>
   <input type="text" id="field-publicationYear" name="publicationYear" placeholder="YYYY"> <br><br>
  
 
@@ -95,7 +96,7 @@
       width: 500px; /* Adjust as needed */
     }
   </style>
-  <label for="field-abstract">*Abstract</label><br>
+  <label for="field-abstract">*Abstract (Mandatory) </label><br>
   <textarea id="field-abstract" name="abstract" placeholder="Enter Abstract" error="errors.abstract" class="control-medium" rows="5">{{ data.abstract }}
   </textarea><br>
 <!-- Methods Field -->
@@ -104,7 +105,7 @@
       width: 500px; /* Adjust as needed */
     }
   </style>
-  <label for="field-methods">*Methods</label><br>
+  <label for="field-methods">*Methods (Mandatory) </label><br>
   <textarea id="field-methods" name="methods" placeholder="Enter Methods" error="errors.methods" class="control-medium" rows="5">{{ data.methods }}
   </textarea><br>
 
@@ -115,7 +116,7 @@
       width: 500px; /* Adjust as needed */
     }
   </style>
-  <label for="field-technicalInfo">Technical Information</label><br>
+  <label for="field-technicalInfo">Technical Information (Optional) </label><br>
   <textarea id="field-technicalInfo" name="technicalInfo" error="errors.technicalInfo" placeholder="Enter TEchnical Information" class="control-medium" rows="5">{{ data.technicalInfo }}
   </textarea><br>
 
@@ -127,10 +128,10 @@
     <option value="NWFP code" >NWFP code</option>
     <option value="NW experiment code" >NW experiment code</option>
     <option value="Other">Other Code </option>
-  </select><br>  
+  </select><br>  <br>
  
 <div id="codesField" style="display: none;">
-  <label for="field-Codes">Codes</label><br>
+  <label for="field-Codes">Codes (Mandatory) </label><br>
   <input type="text" id="field-Codes" name="Codes" value="N/A" error="errors.Codes">
 </div>
 
@@ -145,10 +146,10 @@ function displayCodesField() {
   }
 }
 </script>
-{{ form.input('resourceType', label=_('*ResourceType'), id='field-resourceType', placeholder=_('More Info'), value=data.resourceType, error=errors.resourceType, classes=['control-medium']) }}
+{{ form.input('resourceType', label=_('*ResourceType (Mandatory) '), id='field-resourceType', placeholder=_('More Info'), value=data.resourceType, error=errors.resourceType, classes=['control-medium']) }}
 
   <!-- Resource Type  -->
-  <label for="field-resourceTypeGeneral">*General Resource Type</label><br>  
+  <label for="field-resourceTypeGeneral">*General Resource Type (Mandatory) </label><br>  
   <select id="field-resourceTypeGeneral" name="resourceTypeGeneral" class="control-medium" value=data.resourceTypeGeneral>
     <option value="None"> </option>
     <option value="Audiovisual">Audiovisual</option>
@@ -181,10 +182,9 @@ function displayCodesField() {
     <option value="Text">Text</option>
     <option value="Workflow">Workflow</option>
     <option value="Other">Other</option>
-  </select>
-  {{ form.input('resourceType', label=_('*ResourceType'), id='field-resourceType', placeholder=_('More Info'), value=data.resourceType, error=errors.resourceType, classes=['control-medium']) }}
+  </select><br><br>
 <!-- Language -->
-  <label for="field-language">Langugage </label><br>
+  <label for="field-language">Langugage (Mandatory)</label><br>
   <input type="text" id="field-language" name="language" value="en" >
   <script>
     // Set the default value for the input field
@@ -196,19 +196,19 @@ function displayCodesField() {
     <label><strong> Dates </strong></label><br><br>
 
     <!-- Collected Dates -->
-    <label for="field-collectedDate">Collected Date:</label><br>
+    <label for="field-collectedDate">Collected Date (Optional)</label><br>
     <input id="field-collectedDate" name="collectedDate" classes="control-medium" placeholder="DD-MM-YYYY"><br><br>
       <!-- Created Dates -->
-    <label for="field-createdDate">Created Date:</label><br>
+    <label for="field-createdDate">Created Date (Optional)</label><br>
     <input id="field-createdDate" name="createdDate" classes="control-medium" placeholder="DD-MM-YYYY"><br><br>
       <!-- Submitted Dates -->
-    <label for="field-submittedDate">Submitted Date:</label><br>
+    <label for="field-submittedDate">Submitted Date (Mandatory)</label><br>
     <input id="field-submittedDate" name="submittedDate" classes="control-medium" placeholder="DD-MM-YYYY"><br><br>
       <!-- Available Dates -->
-    <label for="field-availableDate">Available Date:</label><br>
+    <label for="field-availableDate">Available Date (Optional)</label><br>
     <input id="field-availableDate" name="availableDate" classes="control-medium" placeholder="DD-MM-YYYY"><br><br>
       <!-- Withdrawn Dates -->
-    <label for="field-withdrawnDate">Withdrawn Date:</label><br>
+    <label for="field-withdrawnDate">Withdrawn Date (Optional)</label><br>
     <input id="field-withdrawnDate" name="withdrawnDate" classes="control-medium" placeholder="DD-MM-YYYY"><br><br>
 
      
@@ -226,7 +226,7 @@ function displayCodesField() {
 
 
 <!-- Funder -->
-<label><strong> Funder Information </strong></label><br><br>
+<label><strong> Funder Information (Mandatory)</strong></label><br><br>
 <label for="field-funderName">*Funder Name </label><br>
 <input id="field-funderName" placeholder="Funder" name="funderName" classes="control-medium"><br><br>
 <label for="field-funderId">*Funder Identifier</label><br>
@@ -247,7 +247,7 @@ function displayCodesField() {
 <input id="field-awardTitle" placeholder="Award Title" name="awardTitle" classes="control-medium"><br><br>  
 <!-- Contributor Details -->
 
-<label><strong> Contributors Details </strong></label><br><br>
+<label><strong> Contributors Details (Optional) </strong></label><br><br>
 <label for="field-contributorTypeField">*Contributor Type</label><br>
 <select id="field-contributorTypeField" name="contributorTypeField" class="control-medium">
   <option value="None"></option>
@@ -290,20 +290,17 @@ function displayCodesField() {
 <br><br>
 <button type="button" onclick="addContributor()">Add Contributor</button>
 <button type="button" onclick="clearContributor()">Clear</button>
-<p id='errorMessage'></p>
+<p id='contributorMessage'></p>
 <br>
 <!-- Metadata Field Lines for Contributors -->
-<label for="field-contributorType">*Contributor  Types: </label><br>
-<input id="field-contributorType" error="errors.contributorType"  name="contributorType"  classes="control-medium"><br><br>
+<input id="field-contributorType" error="errors.contributorType"  name="contributorType"  classes="control-medium" style="display:none">
 
-<label for="field-contributorDetails">*Contributor Names: </label><br>
-<input id="field-contributorDetails" error="errors.contributorDetails"  name="contributorDetails"  classes="control-medium"><br><br>
 
-<label for="field-contributorId">*Contributor ID List: </label><br>
-<input id="field-contributorId" error="errors.contributorId"  name="contributorId"  classes="control-medium"><br><br>
+<input id="field-contributorDetails" error="errors.contributorDetails"  name="contributorDetails"  classes="control-medium" style="display:none" >
 
-<label for="field-contributorAffiliation">*Contributor Affiliation List: </label><br>
-<input id="field-contributorAffiliation" error="errors.contributorAffiliation" name="contributorAffiliation"  classes="control-medium"><br><br>
+<input id="field-contributorId" error="errors.contributorId"  name="contributorId"  classes="control-medium" style="display:none">
+
+<input id="field-contributorAffiliation" error="errors.contributorAffiliation" name="contributorAffiliation"  classes="control-medium" style="display:none">
 
   <!-- Contributor Functions -->
 
@@ -325,7 +322,7 @@ function displayCodesField() {
         throw new Error('*Creator Details Cannot Be Empty');
       }
     } catch (err) {
-      document.getElementById('errorMessage').innerHTML = err.message;
+      document.getElementById('contributorMessage').innerHTML = err.message;
       return;
     }
     document.getElementById('field-contributorFirstName').value = '';
@@ -345,6 +342,7 @@ function displayCodesField() {
     document.getElementById('field-contributorId').value = contriId;
     document.getElementById('field-contributorType').value = contriType;
     document.getElementById('field-contributorAffiliation').value = contriAffiliation;
+    document.getElementById('contributorMessage').innerHTML = "Contributors added :" + contriName;
 
   }
 
@@ -354,7 +352,7 @@ function displayCodesField() {
     document.getElementById('field-contributorFirstName').value = '';
     document.getElementById('field-contributorFamilyName').value = '';
     document.getElementById('field-contributorNameId').value = '';
-    document.getElementById('errorMessage').innerHTML = '';
+    document.getElementById('contributorMessage').innerHTML = '';
     document.getElementById('field-contributorDetails').value = ""
     document.getElementById('field-contributorId').value = ""
     document.getElementById('field-contributorType').value = ""
@@ -366,7 +364,7 @@ function displayCodesField() {
       <!-- Related Resources Fields -->
       <!--                          -->
       <!--                          -->
-      <label><strong> Related Resources </strong></label><br><br>
+      <label><strong> Related Resources (Optional) </strong></label><br><br>
       <label for="field-relatedIdField"> Select Related ID Type </label><br>
       <select id="field-relatedIdField"  name="relatedIdField" class="control-medium">
         <option value="">N/A</option>
@@ -472,7 +470,7 @@ function displayCodesField() {
       <input id="field-relatedIdentifierField" name="relatedIdentifierField" classes="control-medium"><br>
       <button type="button" onclick="addRelated()">Add Resources</button>
           
-      <p id="enterMessage"></p>
+      <p id="relatedMessage"></p>
       <!-- Metadata Fields for Related Resources -->
       <input id="field-relatedIdentifierType" name="relatedIdentifierType" classes="control-medium" style="display:none">
       <input id="field-relationType" name="relationType" classes="control-medium" style="display:none">
@@ -492,7 +490,7 @@ function displayCodesField() {
           let rid = document.getElementById('field-relatedIdentifierField').value;
           if( !idt || !relt || !rest || !rid){
                 console.log("entered if");
-                document.getElementById('enterMessage').innerHTML= "Fill all the fields"; 
+                document.getElementById('relatedMessage').innerHTML= "Fill all the fields"; 
                 return;
                }
           relationTypeList.push(relt);
@@ -503,9 +501,148 @@ function displayCodesField() {
           document.getElementById('field-relationType').value = relationTypeList;
           document.getElementById('field-relatedResourceType').value = RRTypeList
           document.getElementById('field-relatedIdentifier').value = idList;
-          document.getElementById('enterMessage').innerHTML= "IDs Added: " + idList;
+          document.getElementById('relatedMessage').innerHTML= "IDs Added: " + idList;
         }
       </script>
       
+
+  <!-- Associated Research Notebooks Field -->
+
+<label for="field-associatedNotesField">Associated Research Notebooks (Optional) </label><br>
+<input type="text" id="field-associatedNoteField" name="associatedNoteField" style="width: 500px;"> <br>
+<button type="button" onclick="addNoteBooks()"> Add </button>
+<p id="notebookAdded"> </p>
+<input type="text" id="field-associatedNote" name="associatedNote" style="display:none;">
+<script>
+  var notes = [];
+
+  function addNoteBooks() {
+    let notebook = document.getElementById("field-associatedNoteField").value;
+    notes.push(notebook);
+    document.getElementById("field-associatedNote").value = notes;
+    document.getElementById('notebookAdded').innerHTML = "Associated Notebooks: " + notes;
+    console.log(notes);
+  }
+
+</script>
+
+
+<!-- Data Location Field -->
+<label for="field-dataLocationField"> Data Locations (Mandatory)</label><br>
+<input type="text" id="field-dataLocationField" name="dataLocationField" style="width: 500px;"><br>
+<button type="button" onclick="addDataLocation()"> Add </button>
+<p id="dataLocationAdded"></p>
+<input type="text" id="field-dataLocation" name="dataLocation" style="display:none;">
+
+<script>
+  var dataLoc = [];
+
+  function addDataLocation() {
+    let loc = document.getElementById('field-dataLocationField').value;
+    dataLoc.push(loc);
+    document.getElementById('field-dataLocation').value = dataLoc;
+    document.getElementById('dataLocationAdded').innerHTML = "Data Locations Added:" + dataLoc
+    console.log(dataLoc);
+  }
+
+</script>
+
+
+<!-- Responsible Person Field -->
+
+<label for="field-responsiblePerson">Responsible Person (Mandatory)</label><br>
+<input id="field-responsiblePerson" name="responsiblePerson" style="width: 500px;"><br><br>
+
+
+<!-- Research Infrastructure Used -->
+<label for="field-infraUsedField"> Research Infrastructure Used (Select All)</label><br>
+<select id="field-infraUsedField" name="infraUsedField" onchange="addInfraUsed()">
+  <option value=""></option>
+  <option value="LTEs">LTEs</option>
+  <option value="LSRE">LSRE</option>
+  <option value="NWFP">NWFP</option>
+  <option value="RIS">RIS</option>
+  <option value="URTO">URTO</option>
+  <option value="Rowden">Rowden</option>
+</select>
+
+<input type="text" id="field-infraUsed" name="infraUsed" style="display:None;">
+
+<p id="infraUsedAdded"></p>
+<button type="button" onclick="clearInfra()">Clear</button>
+<script>
+var infra = [];
+function addInfraUsed(){
+let inf = document.getElementById('field-infraUsedField').value;
+console.log(inf);
+infra.push(inf);
+document.getElementById('infraUsedAdded').innerHTML = "Used Infrastructure Selected: " + infra;
+document.getElementById('field-infraUsed').value = infra;
+}
+
+function clearInfra(){
+infra = [];
+document.getElementById('infraUsedAdded').innerHTML = "Cleared !!!"
+document.getElementById('field-infraUsed').value = infra;
+
+}
+</script>
+<br><br>
+<!-- Geo location fields -->
+<!--                      -->
+<label><strong> Geo Location Fields </strong></label><br><br>
+
+<label for="field-geoLocation"> Enter The Geo Location (Place) </label>
+<input type="text" id="field-geoLocation" name="geoLocation" style="width:auto">
+
+<!--      World Map         -->
+<!-- Load Leaflet -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA==" crossorigin=""></script>
+
+<!-- Create an element where the map will take place -->
+<br><br>
+<label for="'mapid">Select the location to fill Latitude and Longitude Automatically</label><br>
+<div id="mapid"></div>
+<br><br>
+<label for="field-geoLatitude"> Latitude </label><br>
+<input type="text" id="field-geoLatitude" name="geoLatitude"><br><br>
+<label for="field-geoLongitude"> Longitude </label><br>
+<input type="text" id="field-geoLongitude" name="geoLongitude"><br><br>
+<style>
+#mapid { height: 400px; }
+</style>
+
+<script>
+  var latitude;
+  var logitude;
+  // Initialize the map
+  // [50, -0.1] are the latitude and longitude
+  // 4 is the zoom
+  // mapid is the id of the div where the map will appear
+  var mymap = L
+    .map('mapid')
+    .setView([50, -0.1], 4);
+  
+  // Add a tile to the map = a background. Comes from OpenStreetmap
+  L.tileLayer(
+      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
+      maxZoom: 100,
+      }).addTo(mymap);
+  
+  // Add an event listener for click events on the map
+  mymap.on('click', function(e) {
+      // Print the coordinates of the clicked location to the console
+     /*  console.log("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng) */
+      latitude = e.latlng.lat;
+      longitude = e.latlng.lng;
+      document.getElementById('field-geoLatitude').value = latitude.toFixed(2);    
+      document.getElementById('field-geoLongitude').value = longitude.toFixed(2);    
+  
+  });
+  
+  </script>
+
   {% endblock %}
   
