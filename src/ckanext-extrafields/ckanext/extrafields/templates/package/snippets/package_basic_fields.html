@@ -80,6 +80,7 @@
 
   <label for="field-publisher">*Publisher (Mandatory) </label><br>
   <input type="text" id="field-publisher" name="publisher" value="Rothamsted">
+  <!-- Default Publisher value is set to Rothamsted-->
   <script>
     // Set the default value for the input field
     document.getElementById("field-publisher").value = "Rothamsted";
@@ -290,14 +291,10 @@ function displayCodesField() {
 <button type="button" onclick="clearContributor()">Clear</button>
 <p id='contributorMessage'></p>
 <br>
-<!-- Metadata Field Lines for Contributors -->
+<!-- Metadata Field Lines for Contributors. These are not displayed, Used to store the metadatafields-->
 <input id="field-contributorType" error="errors.contributorType"  name="contributorType"  classes="control-medium" style="display:none">
-
-
 <input id="field-contributorDetails" error="errors.contributorDetails"  name="contributorDetails"  classes="control-medium" style="display:none" >
-
 <input id="field-contributorId" error="errors.contributorId"  name="contributorId"  classes="control-medium" style="display:none">
-
 <input id="field-contributorAffiliation" error="errors.contributorAffiliation" name="contributorAffiliation"  classes="control-medium" style="display:none">
 
   <!-- Contributor Functions -->
