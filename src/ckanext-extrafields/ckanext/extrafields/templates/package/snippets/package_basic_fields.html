@@ -22,8 +22,6 @@
        <p id ='errorMessage'></p>
        <br>
        {{ form.input('author', label=_('*List of Creators'), id='field-author', placeholder=_('Do nor Enter'), value=data.author, error=errors.author, classes=['control-medium']) }}
-       <!-- {{ form.input('nameIdentifier', label=_('*List of Name IDs'), id='field-nameIdentifier', placeholder=_('Do not enter'), value=data.nameIdentifier, error=errors.nameIdentifier, classes=['control-medium']) }} -->
-       <!-- {{ form.input('creatorAffiliation', label=_('*List of Affiliations'), id='field-creatorAffiliation', placeholder=_('Do not enter'), value=data.creatorAffiliation, error=errors.creatorAffiliation, classes=['control-medium']) }} -->
        <input type="text" id="field-nameIdentifier" name="nameIdentifier" style="display:none">
        <input type="text" id="field-creatorAffiliation" name="creatorAffiliation" style="display:none">
          <!-- CREATOR Function-->
@@ -85,7 +83,7 @@
   <script>
     // Set the default value for the input field
     document.getElementById("field-publisher").value = "Rothamsted";
-  </script><br>
+  </script><br><br>
   <label for="field-publicationYear">*Publication Year (Mandatory)</label><br>
   <input type="text" id="field-publicationYear" name="publicationYear" placeholder="YYYY"> <br><br>
  
@@ -122,13 +120,13 @@
 
   <!-- Experiment Code -->
  
-  <label for="field-experimentCode">*Select Experiment Code </label><br>
+  <label for="field-experimentCode">*Select Experiment Code (Optional)</label><br>
   <select  id="field-experimentCode" error="errors.experimentCode" name="experimentCode" class="control-medium" placeholder="Select" onchange="displayCodesField()">
     <option value="None"></option> 
     <option value="NWFP code" >NWFP code</option>
     <option value="NW experiment code" >NW experiment code</option>
     <option value="Other">Other Code </option>
-  </select><br>  <br>
+  </select><br><br>
  
 <div id="codesField" style="display: none;">
   <label for="field-Codes">Codes (Mandatory) </label><br>
@@ -145,7 +143,7 @@ function displayCodesField() {
     codesField.style.display = 'block';
   }
 }
-</script>
+</script><br>
 {{ form.input('resourceType', label=_('*ResourceType (Mandatory) '), id='field-resourceType', placeholder=_('More Info'), value=data.resourceType, error=errors.resourceType, classes=['control-medium']) }}
 
   <!-- Resource Type  -->
@@ -505,32 +503,41 @@ function displayCodesField() {
         }
       </script>
       
-
   <!-- Associated Research Notebooks Field -->
 
-<label for="field-associatedNotesField">Associated Research Notebooks (Optional) </label><br>
-<input type="text" id="field-associatedNoteField" name="associatedNoteField" style="width: 500px;"> <br>
-<button type="button" onclick="addNoteBooks()"> Add </button>
-<p id="notebookAdded"> </p>
-<input type="text" id="field-associatedNote" name="associatedNote" style="display:none;">
-<script>
-  var notes = [];
-
-  function addNoteBooks() {
-    let notebook = document.getElementById("field-associatedNoteField").value;
-    notes.push(notebook);
-    document.getElementById("field-associatedNote").value = notes;
-    document.getElementById('notebookAdded').innerHTML = "Associated Notebooks: " + notes;
-    console.log(notes);
-  }
-
-</script>
+  <label for="field-associatedNotesField">Associated Research Notebooks (Optional) </label><br>
+  <input type="text" id="field-associatedNoteField" name="associatedNoteField" style="width: 500px;"> <br>
+  <button type="button" onclick="addNoteBooks()"> Add </button>
+  <button type="button" onclick="clearNoteBooks()">Clear</button>
+  <p id="notebookAdded"> </p>
+  <input type="text" id="field-associatedNote" name="associatedNote" style="display:none;">
+  <script>
+    var notes = [];
+  
+    function addNoteBooks() {
+      let notebook = document.getElementById("field-associatedNoteField").value;
+      notes.push(notebook);
+      document.getElementById("field-associatedNote").value = notes;
+      document.getElementById('notebookAdded').innerHTML = "Associated Notebooks: " + notes;
+      document.getElementById("field-associatedNoteField").value = "";
+    }
+    
+    function clearNoteBooks(){
+    
+      notes = [];
+      document.getElementById("field-associatedNote").value = notes;
+      document.getElementById('notebookAdded').innerHTML = "Cleared !!!";
+      document.getElementById("field-associatedNoteField").value = "";
+    }
+  
+  </script>
 
 
 <!-- Data Location Field -->
 <label for="field-dataLocationField"> Data Locations (Mandatory)</label><br>
 <input type="text" id="field-dataLocationField" name="dataLocationField" style="width: 500px;"><br>
 <button type="button" onclick="addDataLocation()"> Add </button>
+<button type="button" onclick="clearDataLocation()">Clear</button>
 <p id="dataLocationAdded"></p>
 <input type="text" id="field-dataLocation" name="dataLocation" style="display:none;">
 
@@ -542,7 +549,17 @@ function displayCodesField() {
     dataLoc.push(loc);
     document.getElementById('field-dataLocation').value = dataLoc;
     document.getElementById('dataLocationAdded').innerHTML = "Data Locations Added:" + dataLoc
-    console.log(dataLoc);
+		document.getElementById('field-dataLocationField').value = "";
+  }
+  
+  function clearDataLocation() {
+  	
+    dataLoc = [];
+    document.getElementById('field-dataLocation').value = dataLoc;
+		document.getElementById('field-dataLocationField').value = "";
+    document.getElementById('dataLocationAdded').innerHTML = "Cleared !!!";
+
+  	
   }
 
 </script>
@@ -584,6 +601,7 @@ function clearInfra(){
 infra = [];
 document.getElementById('infraUsedAdded').innerHTML = "Cleared !!!"
 document.getElementById('field-infraUsed').value = infra;
+document.getElementById("field-infraUsedField").value = "";
 
 }
 </script>
@@ -592,7 +610,7 @@ document.getElementById('field-infraUsed').value = infra;
 <!--                      -->
 <label><strong> Geo Location Fields </strong></label><br><br>
 
-<label for="field-geoLocation"> Enter The Geo Location (Place) </label>
+<label for="field-geoLocation"> Enter The Geo Location (Name of the place) </label>
 <input type="text" id="field-geoLocation" name="geoLocation" style="width:auto">
 
 <!--      World Map         -->
@@ -602,7 +620,7 @@ document.getElementById('field-infraUsed').value = infra;
 
 <!-- Create an element where the map will take place -->
 <br><br>
-<label for="'mapid">Select the location to fill Latitude and Longitude Automatically</label><br>
+<label for="'mapid">Select the location in the map to fill Latitude and Longitude Automatically</label><br>
 <div id="mapid"></div>
 <br><br>
 <label for="field-geoLatitude"> Latitude </label><br>
