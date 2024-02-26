@@ -86,7 +86,7 @@
     document.getElementById("field-publisher").value = "Rothamsted";
   </script><br><br>
   <label for="field-publicationYear">*Publication Year (Mandatory)</label><br>
-  <input type="text" id="field-publicationYear" name="publicationYear" placeholder="YYYY"> <br><br>
+  <input type="text" id="field-publicationYear" name="publicationYear" placeholder="YYYY" value="{{ data.publicationYear }}"> <br><br>
  
 
 <!-- Abstract Field -->
@@ -149,8 +149,8 @@ function displayCodesField() {
 
   <!-- Resource Type  -->
   <label for="field-resourceTypeGeneral">*General Resource Type (Mandatory) </label><br>  
-  <select id="field-resourceTypeGeneral" name="resourceTypeGeneral" class="control-medium" value=data.resourceTypeGeneral>
-    <option value="None"> </option>
+  <select id="field-resourceTypeGeneral" name="resourceTypeGeneral" class="control-medium" >
+    <option value=""></option>
     <option value="Audiovisual">Audiovisual</option>
     <option value="Book">Book</option>
     <option value="BookChapter">BookChapter</option>
@@ -196,19 +196,19 @@ function displayCodesField() {
 
     <!-- Collected Dates -->
     <label for="field-collectedDate">Collected Date (Optional)</label><br>
-    <input id="field-collectedDate" name="collectedDate" classes="control-medium" placeholder="DD-MM-YYYY"><br><br>
+    <input id="field-collectedDate" name="collectedDate" classes="control-medium" placeholder="DD-MM-YYYY" value="{{ data.collectedDate }}"><br><br>
       <!-- Created Dates -->
     <label for="field-createdDate">Created Date (Optional)</label><br>
-    <input id="field-createdDate" name="createdDate" classes="control-medium" placeholder="DD-MM-YYYY"><br><br>
+    <input id="field-createdDate" name="createdDate" classes="control-medium" placeholder="DD-MM-YYYY" value="{{ data.createdDate }}"><br><br>
       <!-- Submitted Dates -->
     <label for="field-submittedDate">Submitted Date (Mandatory)</label><br>
-    <input id="field-submittedDate" name="submittedDate" classes="control-medium" placeholder="DD-MM-YYYY"><br><br>
+    <input id="field-submittedDate" name="submittedDate" classes="control-medium" placeholder="DD-MM-YYYY" value="{{ data.submittedDate }}"><br><br>
       <!-- Available Dates -->
     <label for="field-availableDate">Available Date (Optional)</label><br>
-    <input id="field-availableDate" name="availableDate" classes="control-medium" placeholder="DD-MM-YYYY"><br><br>
+    <input id="field-availableDate" name="availableDate" classes="control-medium" placeholder="DD-MM-YYYY" value="{{ data.availableDate }}"><br><br>
       <!-- Withdrawn Dates -->
     <label for="field-withdrawnDate">Withdrawn Date (Optional)</label><br>
-    <input id="field-withdrawnDate" name="withdrawnDate" classes="control-medium" placeholder="DD-MM-YYYY"><br><br>
+    <input id="field-withdrawnDate" name="withdrawnDate" classes="control-medium" placeholder="DD-MM-YYYY" value="{{ data.withdrawnDate }}"><br><br>
 
      
     <script>
@@ -226,24 +226,105 @@ function displayCodesField() {
 
 <!-- Funder -->
 <label><strong> Funder Information (Mandatory)</strong></label><br><br>
-<label for="field-funderName">*Funder Name </label><br>
-<input id="field-funderName" placeholder="Funder" name="funderName" classes="control-medium"><br><br>
-<label for="field-funderId">*Funder Identifier</label><br>
-<input id="field-funderId" placeholder="Funder ID" name="funderId" classes="control-medium"><br><br>
-<label for="field-funderIdType">*Funder ID Type</label><br>
-<select id="field-funderIdType" name="funderIdType" classes="control-medium">
+<label for="field-funderNameField">*Funder Name </label><br>
+<input id="field-funderNameField" name="funderNameField" classes="control-medium"><br><br>
+<label for="field-funderIdField">*Funder Identifier</label><br>
+<input id="field-funderIdField" name="funderIdField" classes="control-medium"><br><br>
+<label for="field-funderIdTypeField">*Funder ID Type</label><br>
+<select id="field-funderIdTypeField" name="funderIdTypeField" classes="control-medium">
   <option value="Crossref Funder ID">Crossref Funder ID </option>
   <option value="GRID">GRID </option>
   <option value="ISNI">ISNI</option>
   <option value="ROR">ROR</option>
   <option value="Other">Other</option>
 </select><br><br>
-<label for="field-awardNumber">*Award number</label><br>
-<input id="field-awardNumber" placeholder="Award no." name="awardNumber" classes="control-medium"><br><br>
-<label for="field-awardURI">*Award URI</label><br>
-<input id="field-awardURI" placeholder="URI" name="awardURI" classes="control-medium" error="errors.resourceType"><br><br>
-<label for="field-awardTitle">*Award Title</label><br>
-<input id="field-awardTitle" placeholder="Award Title" name="awardTitle" classes="control-medium"><br><br>  
+<label for="field-awardNumberField">*Award number</label><br>
+<input id="field-awardNumberField" name="awardNumberField" classes="control-medium"><br><br>
+<label for="field-awardURIField">*Award URI</label><br>
+<input id="field-awardURIField" name="awardURIField" classes="control-medium"><br><br>
+<label for="field-awardTitleField">*Award Title</label><br>
+<input id="field-awardTitleField" name="awardTitleField" classes="control-medium"><br><br>
+<button type="button" onclick="addFunders()"> Add </button>
+<button type="button" onclick="clearFunders()"> Clear </button>
+<p id=funderInfo></p>
+
+
+<input id="field-funderName" name="funderName" classes="control-medium" style="display:None;">
+<input id="field-funderId" name="funderId" classes="control-medium" style="display:None;">
+<input id="field-funderIdType" name="funderIdType" classes="control-medium" style="display:None;">
+<input id="field-awardNumber" name="awardNumber" classes="control-medium" style="display:None;">
+<input id="field-awardURI" name="awardURI" classes="control-medium" style="display:None;">
+<input id="field-awardTitle" name="awardTitle" classes="control-medium" style="display:None;">
+
+
+<script>
+  var fname = [];
+  var fid = [];
+  var fidType = [];
+  var faNum = [];
+  var fUri = [];
+  var aTitle = [];
+
+  function addFunders() {
+    let fn = document.getElementById("field-funderNameField").value;
+    let id = document.getElementById("field-funderIdField").value;
+    let idt = document.getElementById("field-funderIdTypeField").value;
+    let an = document.getElementById("field-awardNumberField").value;
+    let uri = document.getElementById("field-awardURIField").value;
+    let at = document.getElementById("field-awardTitleField").value;
+
+    if (!fn || !id || !idt || !an || !uri || !at) {
+      document.getElementById('funderInfo').innerHTML = "Funder Details Should Not Be Empty";
+      return;
+    }
+
+    document.getElementById("field-funderNameField").value = '';
+    document.getElementById("field-funderIdField").value = '';
+    document.getElementById("field-funderIdTypeField").value = '';
+    document.getElementById("field-awardNumberField").value = '';
+    document.getElementById("field-awardURIField").value = '';
+    document.getElementById("field-awardTitleField").value = '';
+
+    fname.push(fn);
+    fid.push(id);
+    fidType.push(idt);
+    faNum.push(an);
+    fUri.push(uri);
+    aTitle.push(at);
+    document.getElementById("field-funderName").value = fname;
+    document.getElementById("field-funderId").value = fid;
+    document.getElementById("field-funderIdType").value = fidType;
+    document.getElementById("field-awardNumber").value = faNum;
+    document.getElementById("field-awardURI").value = fUri;
+    document.getElementById("field-awardTitle").value = aTitle;
+    document.getElementById('funderInfo').innerHTML =  "Funders: " + fname;
+    
+
+  }
+
+  function clearFunders() {
+    fname = [];
+    fid = [];
+    fidType = [];
+    faNum = [];
+    fUri = [];
+    aTitle = [];
+    document.getElementById("field-funderName").value = fname;
+    document.getElementById("field-funderId").value = fid;
+    document.getElementById("field-funderIdType").value = fidType;
+    document.getElementById("field-awardNumber").value = faNum;
+    document.getElementById("field-awardURI").value = fUri;
+    document.getElementById("field-awardTitle").value = aTitle;
+    document.getElementById("field-funderNameField").value = fname;
+    document.getElementById("field-funderIdField").value = fid;
+    document.getElementById("field-funderIdTypeField").value = fidType;
+    document.getElementById("field-awardNumberField").value = faNum;
+    document.getElementById("field-awardURIField").value = fUri;
+    document.getElementById("field-awardTitleField").value = aTitle;
+    document.getElementById('funderInfo').innerHTML = "Cleared"
+  }
+
+</script>
 <!-- Contributor Details -->
 
 <label><strong> Contributors Details (Optional) </strong></label><br><br>
