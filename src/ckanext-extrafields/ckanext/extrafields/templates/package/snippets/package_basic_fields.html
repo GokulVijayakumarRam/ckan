@@ -250,7 +250,8 @@ function displayCodesField() {
 <button type="button" onclick="clearFunders()"> Clear </button>
 <p id=funderInfo></p>
 
-
+<!-- Display None fields are the metadata fields -->
+<!--  -->
 <input id="field-funderName" name="funderName" classes="control-medium" style="display:None;">
 <input id="field-funderId" name="funderId" classes="control-medium" style="display:None;">
 <input id="field-funderIdType" name="funderIdType" classes="control-medium" style="display:None;">
@@ -279,7 +280,7 @@ function displayCodesField() {
       document.getElementById('funderInfo').innerHTML = "Funder Details Should Not Be Empty";
       return;
     }
-
+//  Clear Fields
     document.getElementById("field-funderNameField").value = '';
     document.getElementById("field-funderIdField").value = '';
     document.getElementById("field-funderIdTypeField").value = '';
@@ -287,6 +288,7 @@ function displayCodesField() {
     document.getElementById("field-awardURIField").value = '';
     document.getElementById("field-awardTitleField").value = '';
 
+    // Pushing data to metadata fields
     fname.push(fn);
     fid.push(id);
     fidType.push(idt);
