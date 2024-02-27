@@ -549,6 +549,7 @@ function displayCodesField() {
       <label for="field-relatedIdentifierField">Enter the Identifier</label><br>
       <input id="field-relatedIdentifierField" name="relatedIdentifierField" classes="control-medium"><br>
       <button type="button" onclick="addRelated()">Add Resources</button>
+      <button type="button" onclick="clearRelated()">Clear</button>
           
       <p id="relatedMessage"></p>
       <!-- Metadata Fields for Related Resources -->
@@ -577,11 +578,25 @@ function displayCodesField() {
           idTypeList.push(idt);
           RRTypeList.push(rest);
           idList.push(rid);
+          document.getElementById('field-relatedIdentifierField').value = '';
           document.getElementById('field-relatedIdentifierType').value = idTypeList;
           document.getElementById('field-relationType').value = relationTypeList;
           document.getElementById('field-relatedResourceType').value = RRTypeList
           document.getElementById('field-relatedIdentifier').value = idList;
           document.getElementById('relatedMessage').innerHTML= "IDs Added: " + idList;
+        }
+
+        function clearRelated(){
+          relationTypeList = [];
+          idTypeList = [];
+          RRTypeList = [];
+          idList = [];
+          document.getElementById('field-relatedIdentifierType').value = idTypeList;
+          document.getElementById('field-relationType').value = relationTypeList;
+          document.getElementById('field-relatedResourceType').value = RRTypeList
+          document.getElementById('field-relatedIdentifier').value = idList;
+          document.getElementById('relatedMessage').innerHTML= "Cleared";         
+
         }
       </script>
       
