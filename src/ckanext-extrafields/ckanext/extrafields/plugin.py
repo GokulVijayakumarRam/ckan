@@ -98,6 +98,16 @@ class ExampleIDatasetFormPlugin(tk.DefaultDatasetForm, p.SingletonPlugin):
             'geoLatitude': [tk.get_validator('ignore_missing'),
                                  tk.get_converter('convert_to_extras')],
             'geoLongitude': [tk.get_validator('ignore_missing'),
+                                 tk.get_converter('convert_to_extras')],
+            'subjectScheme': [tk.get_validator('ignore_missing'),
+                                 tk.get_converter('convert_to_extras')],
+            'subjectUri': [tk.get_validator('ignore_missing'),
+                                 tk.get_converter('convert_to_extras')],
+            'valueUri': [tk.get_validator('ignore_missing'),
+                                 tk.get_converter('convert_to_extras')],
+            'classificationCode': [tk.get_validator('ignore_missing'),
+                                 tk.get_converter('convert_to_extras')],
+            'subject': [tk.get_validator('ignore_missing'),
                                  tk.get_converter('convert_to_extras')]
                       
         })        
@@ -189,6 +199,16 @@ class ExampleIDatasetFormPlugin(tk.DefaultDatasetForm, p.SingletonPlugin):
             'geoLatitude': [tk.get_validator('ignore_missing'),
                                  tk.get_converter('convert_to_extras')],   
             'geoLongitude': [tk.get_validator('ignore_missing'),
+                                 tk.get_converter('convert_to_extras')],   
+            'subjectScheme': [tk.get_validator('ignore_missing'),
+                                 tk.get_converter('convert_to_extras')],   
+            'subjectUri': [tk.get_validator('ignore_missing'),
+                                 tk.get_converter('convert_to_extras')],   
+            'valueUri': [tk.get_validator('ignore_missing'),
+                                 tk.get_converter('convert_to_extras')],   
+            'classificationCode': [tk.get_validator('ignore_missing'),
+                                 tk.get_converter('convert_to_extras')],   
+            'subject': [tk.get_validator('ignore_missing'),
                                  tk.get_converter('convert_to_extras')]                           
         })       
         return schema
@@ -278,11 +298,21 @@ class ExampleIDatasetFormPlugin(tk.DefaultDatasetForm, p.SingletonPlugin):
             'geoLatitude': [tk.get_converter('convert_from_extras'),
                                  tk.get_validator('ignore_missing')],
             'geoLongitude': [tk.get_converter('convert_from_extras'),
+                                 tk.get_validator('ignore_missing')],
+            'subjectScheme': [tk.get_converter('convert_from_extras'),
+                                 tk.get_validator('ignore_missing')],
+            'subjectUri': [tk.get_converter('convert_from_extras'),
+                                 tk.get_validator('ignore_missing')],
+            'valueUri': [tk.get_converter('convert_from_extras'),
+                                 tk.get_validator('ignore_missing')],
+            'classificationCode': [tk.get_converter('convert_from_extras'),
+                                 tk.get_validator('ignore_missing')],
+            'subject': [tk.get_converter('convert_from_extras'),
                                  tk.get_validator('ignore_missing')]
             
         })       
         return schema
-
+    
         schema: Schema = super(
             ExampleIDatasetFormPlugin, self).show_package_schema()
         schema.update({
@@ -368,7 +398,17 @@ class ExampleIDatasetFormPlugin(tk.DefaultDatasetForm, p.SingletonPlugin):
             'geoLatitude': [tk.get_converter('convert_from_extras'),
                                  tk.get_validator('ignore_missing')],
             'geoLongitude': [tk.get_converter('convert_from_extras'),
-                                 tk.get_validator('ignore_missing')]                         
+                                 tk.get_validator('ignore_missing')],
+            'subjectScheme': [tk.get_converter('convert_from_extras'),
+                                 tk.get_validator('ignore_missing')] ,
+            'subjectUri': [tk.get_converter('convert_from_extras'),
+                                 tk.get_validator('ignore_missing')] ,
+            'valueUri': [tk.get_converter('convert_from_extras'),
+                                 tk.get_validator('ignore_missing')] ,
+            'classificationCode': [tk.get_converter('convert_from_extras'),
+                                 tk.get_validator('ignore_missing')] ,
+            'subject': [tk.get_converter('convert_from_extras'),
+                                 tk.get_validator('ignore_missing')]                          
         })       
         return schema
 

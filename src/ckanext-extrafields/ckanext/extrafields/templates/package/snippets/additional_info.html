@@ -237,5 +237,35 @@
   <td class="dataset-details">{{ pkg_dict.geoLongitude }}</td>
 </tr>
 {% endif %}
+{% if pkg_dict.subjectScheme %}
+<tr>
+  <th scope="row" class="dataset-label">{{ _("Subject Scheme") }}</th>
+  <td class="dataset-details">{{ pkg_dict.subjectScheme }}</td>
+</tr>
+{% endif %}
+{% if pkg_dict.subjectUri %}
+<tr>
+  <th scope="row" class="dataset-label">{{ _("Subject URI") }}</th>
+  <td class="dataset-details">{{ pkg_dict.subjectUri }}</td>
+</tr>
+{% endif %}
+{% if pkg_dict.valueUri %}
+<tr>
+  <th scope="row" class="dataset-label">{{ _("Value URI") }}</th>
+  <td class="dataset-details">{{ pkg_dict.valueUri }}</td>
+</tr>
+{% endif %}
+{% if pkg_dict.classificationCode %}
+<tr>
+  <th scope="row" class="dataset-label">{{ _("Subject Classification Code") }}</th>
+  <td class="dataset-details">{{ pkg_dict.classificationCode }}</td>
+</tr>
+{% endif %}
+{% if pkg_dict.subject %}
+<tr>
+  <th scope="row" class="dataset-label">{{ _("Subject") }}</th>
+  <td class="dataset-details">{{ pkg_dict.subject }}</td>
+</tr>
+{% endif %}
 
 {% endblock %}

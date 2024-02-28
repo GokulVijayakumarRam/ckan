@@ -25,6 +25,7 @@
 <br>
 {{ form.input('author', label=_('*List of Creators'), id='field-author', placeholder=_('Do nor Enter'),
 value=data.author, error=errors.author, classes=['control-medium']) }}
+<hr style="height:2px;border-width:0;color:black;background-color:gray">
 <input type="text" id="field-nameIdentifier" name="nameIdentifier" style="display:none">
 <input type="text" id="field-creatorAffiliation" name="creatorAffiliation" style="display:none">
 <!-- CREATOR Function-->
@@ -92,7 +93,7 @@ value=data.author, error=errors.author, classes=['control-medium']) }}
 <label for="field-publicationYear">*Publication Year (Mandatory)</label><br>
 <input type="text" id="field-publicationYear" name="publicationYear" placeholder="YYYY"
   value="{{ data.publicationYear }}"> <br><br>
-
+<hr style="height:2px;border-width:0;color:black;background-color:gray">
 
 <!-- Abstract Field -->
 <style>
@@ -129,7 +130,7 @@ value=data.author, error=errors.author, classes=['control-medium']) }}
 <textarea id="field-technicalInfo" name="technicalInfo" error="errors.technicalInfo"
   placeholder="Enter TEchnical Information" class="control-medium" rows="5">{{ data.technicalInfo }}
   </textarea><br>
-
+<hr style="height:2px;border-width:0;color:black;background-color:gray">
 <!-- Experiment Code -->
 
 <label for="field-experimentCode">*Select Experiment Code (Optional)</label><br>
@@ -157,6 +158,8 @@ value=data.author, error=errors.author, classes=['control-medium']) }}
     }
   }
 </script><br>
+<hr style="height:2px;border-width:0;color:black;background-color:gray">
+
 {{ form.input('resourceType', label=_('*ResourceType (Mandatory) '), id='field-resourceType', placeholder=_('More
 Info'), value=data.resourceType, error=errors.resourceType, classes=['control-medium']) }}
 
@@ -196,23 +199,21 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
   <option value="Other">Other</option>
 </select><br><br>
 <!-- Language -->
-<form autocomplete="off" action="/action_page.php">
-  <div class="autocomplete" style="width: 300px;">
-    <label for="field-language">Language (Mandatory)</label>
-    <input id="field-language" type="text" name="language" value="en" list="languageSuggestions">
-    <datalist id="languageSuggestions">
-      <option value="en">English</option>
-      <option value="hi">Hindi</option>
-      <option value="es">Spanish</option>
-      <option value="fr">French</option>
-      <option value="cz">Czech</option>
-      <option value="de">German</option>
-      <option value="el">Greek</option>
-      <option value="fr">French</option>
-    </datalist>
-  </div>
-</form><br><br>
 
+<label for="field-language">Language (Mandatory) </label><br>
+<select id="field-language" name="language" class="control-medium">
+  <option value="en">English</option>
+  <option value="es">Spanish</option>
+  <option value="de">German</option>
+  <option value="fr">French</option>
+  <option value="el">Greek</option>
+  <option value="hi">Hindi</option>
+  <option value="ru">Russian</option>
+  <option value="zh">Chinese</option>
+  <option value="ja">Japanese</option>
+  <option value="Other">Other</option> 
+</select><br><br>
+<hr style="height:2px;border-width:0;color:black;background-color:gray">
 
 <!-- Dates Fields  -->
 <label><strong> Dates </strong></label><br><br>
@@ -250,7 +251,7 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 
   document.getElementById('field-submittedDate').value = today;
 </script>
-
+<hr style="height:2px;border-width:0;color:black;background-color:gray">
 
 <!-- Funder -->
 <!--        -->
@@ -356,7 +357,8 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
     document.getElementById('funderInfo').innerHTML = "Cleared"
   }
 
-</script>
+// </script>
+<hr style="height:2px;border-width:0;color:black;background-color:gray">
 <!-- Contributor Details -->
 
 <label><strong> Contributors Details (Optional) </strong></label><br><br>
@@ -476,7 +478,7 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
   }
 
 </script>
-
+<hr style="height:2px;border-width:0;color:black;background-color:gray">
 <!-- Related Resources Fields -->
 <!--                          -->
 <!--                          -->
@@ -635,7 +637,7 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 
   }
 </script>
-
+<hr style="height:2px;border-width:0;color:black;background-color:gray">
 <!-- Associated Research Notebooks Field -->
 
 <label for="field-associatedNotesField">Associated Research Notebooks (Optional) </label><br>
@@ -739,6 +741,7 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
   }
 </script>
 <br><br>
+<hr style="height:2px;border-width:0;color:black;background-color:gray">
 <!-- Geo location fields -->
 <!--                      -->
 <label><strong> Geo Location Fields </strong></label><br><br>
@@ -799,6 +802,98 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 
   });
 
+</script>
+<hr style="height:2px;border-width:0;color:black;background-color:gray">
+<!-- Subject Fields -->
+<!--                 -->
+<!--                 -->
+<label><strong> Subject Details (Optional)</strong></label><br><br>
+
+
+<label for="field-subjectSchemeField">Subject Scheme</label><br>
+<input type="text" id="field-subjectSchemeField" name="subjectSchemeField"><br><br>
+
+<label for="field-subjectUriField">Subject URI</label><br>
+<input type="text" id="field-subjectUriField" name="subjectUriField"><br><br>
+
+<label for="field-valueUriField">Value URI</label><br>
+<input type="text" id="field-valueUriField" name="valueUriField"><br><br>
+
+<label for="field-classificationCodeField">Classification Code</label><br>
+<input type="text" id="field-classificationCodeField" name="clasificationCodeField"><br><br>
+
+<label for="field-subjectField">Subject</label><br>
+<input type="text" id="field-subjectField" name="subjectField"><br><br>
+
+<button type="button" onclick="addSubject()">Add</button>
+<button type="button" onclick="clearSubject()">Clear</button>
+<p id="subjectMessage"></p>
+<!-- Metadata Fields -->
+<input type="text" id="field-subjectScheme" name="subjectScheme" style="display: none;">
+<input type="text" id="field-subjectUri" name="subjectUri" style="display: none;">
+<input type="text" id="field-valueUri" name="valueUri" style="display: none;">
+<input type="text" id="field-classificationCode" name="clasificationCode" style="display: none;">
+<input type="text" id="field-subject" name="subject" style="display: none;">
+
+<!-- Subject Functions -->
+<script>
+    var subScheme = [];
+    var subUri = [];
+    var valUri = [];
+    var classCode = [];
+    var sub = [];
+
+    function addSubject() {
+        let ss = document.getElementById('field-subjectSchemeField').value;
+        let su = document.getElementById('field-subjectUriField').value;
+        let vu = document.getElementById('field-valueUriField').value;
+        let cc = document.getElementById('field-classificationCodeField').value;
+        let s = document.getElementById('field-subjectField').value;
+        if (!ss || !su || !vu || !cc || !s) {
+            document.getElementById('subjectMessage').innerHTML = "Enter all fields";
+            return;
+        }
+        // Push to Array
+        subScheme.push(ss);
+        subUri.push(su);
+        valUri.push(vu);
+        classCode.push(cc);
+        sub.push(s);
+        // clear Fields
+        document.getElementById('field-subjectSchemeField').value = '';
+        document.getElementById('field-subjectUriField').value = '';
+        document.getElementById('field-valueUriField').value = '';
+        document.getElementById('field-classificationCodeField').value = '';
+        document.getElementById('field-subjectField').value = '';
+        // Push to Metadatafields
+        document.getElementById('field-subjectScheme').value = subScheme;
+        document.getElementById('field-subjectUri').value = subUri;
+        document.getElementById('field-valueUri').value = valUri;
+        document.getElementById('field-classificationCode').value = classCode;
+        document.getElementById('field-subject').value = sub;
+        // Print Message
+        document.getElementById('subjectMessage').innerHTML = "Subjects Added:" + sub;
+    }
+
+    function clearSubject() {
+        subScheme = [];
+        subUri = [];
+        valUri = [];
+        classCode = [];
+        sub = [];
+        document.getElementById('field-subjectScheme').value = subScheme;
+        document.getElementById('field-subjectUri').value = subUri;
+        document.getElementById('field-valueUri').value = valUri;
+        document.getElementById('field-classificationCode').value = classCode;
+        document.getElementById('field-subject').value = sub;
+        document.getElementById('field-subjectSchemeField').value = '';
+        document.getElementById('field-subjectUriField').value = '';
+        document.getElementById('field-valueUriField').value = '';
+        document.getElementById('field-classificationCodeField').value = '';
+        document.getElementById('field-subjectField').value = '';
+        document.getElementById('subjectMessage').innerHTML = "Cleared !!!";
+
+    }
 </script>
 
 {% endblock %}
