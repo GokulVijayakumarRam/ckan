@@ -4,6 +4,7 @@
 
 <!-- Creator Fields -->
 <!--                -->
+<!--                -->
 <label><strong> Creator Details (Mandatory)</strong></label><br><br>
 <!-- First Name -->
 <label for="field-given_name">*Given Name</label><br>
@@ -280,7 +281,7 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <input id="field-awardTitleField" name="awardTitleField" classes="control-medium"><br><br>
 <button type="button" onclick="addFunders()"> Add </button>
 <button type="button" onclick="clearFunders()"> Clear </button>
-<p id=funderInfo></p>
+<p id=funderInfo > Funders:  + {{ data.funderName }}</p>
 
 <!-- Metadata fields are hidden -->
 <!--                            -->
@@ -410,7 +411,7 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <br><br>
 <button type="button" onclick="addContributor()">Add Contributor</button>
 <button type="button" onclick="clearContributor()">Clear</button>
-<p id='contributorMessage'></p>
+<p id='contributorMessage'> Contributors: {{ data.contributorDetails }} </p>
 <br>
 <!-- Metadata Field Lines for Contributors. These are not displayed, Used to store the metadatafields-->
 <input id="field-contributorType" error="errors.contributorType" name="contributorType" classes="control-medium"
@@ -596,7 +597,7 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <button type="button" onclick="addRelated()">Add Resources</button>
 <button type="button" onclick="clearRelated()">Clear</button>
 
-<p id="relatedMessage"></p>
+<p id="relatedMessage"> Related Resources: {{ data.relatedIdentifier }} </p>
 <!-- Metadata Fields for Related Resources -->
 <input id="field-relatedIdentifierType" name="relatedIdentifierType" classes="control-medium" style="display:none">
 <input id="field-relationType" name="relationType" classes="control-medium" style="display:none">
@@ -654,7 +655,7 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <input type="text" id="field-associatedNoteField" name="associatedNoteField" style="width: 500px;"> <br>
 <button type="button" onclick="addNoteBooks()"> Add </button>
 <button type="button" onclick="clearNoteBooks()">Clear</button>
-<p id="notebookAdded"> </p>
+<p id="notebookAdded"> Associated Notes: {{ data.associatedNote }} </p>
 <input type="text" id="field-associatedNote" name="associatedNote" style="display:none;">
 <script>
   var notes = [];
@@ -686,7 +687,7 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <input type="text" id="field-dataLocationField" name="dataLocationField" style="width: 500px;"><br>
 <button type="button" onclick="addDataLocation()"> Add </button>
 <button type="button" onclick="clearDataLocation()">Clear</button>
-<p id="dataLocationAdded"></p>
+<p id="dataLocationAdded"> Data Locations: {{ data.dataLocation }} </p>
 <input type="text" id="field-dataLocation" name="dataLocation" style="display:none;">
 
 <script>
@@ -717,7 +718,7 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <!--                          -->
 <!--                          -->
 <label for="field-responsiblePerson">Responsible Person (Mandatory)</label><br>
-<input id="field-responsiblePerson" name="responsiblePerson" style="width: 500px;"><br><br>
+<input id="field-responsiblePerson" name="responsiblePerson" style="width: 500px;" value="{{ data.responsiblePerson }}" ><br><br>
 
 
 <!-- Research Infrastructure Used -->
@@ -736,7 +737,7 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 
 <input type="text" id="field-infraUsed" name="infraUsed" style="display:None;">
 
-<p id="infraUsedAdded"></p>
+<p id="infraUsedAdded">Research Infra Used: {{ data.infraUsed }}</p>
 <button type="button" onclick="clearInfra()">Clear</button>
 <script>
   var infra = [];
@@ -828,19 +829,19 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 
 
 <label for="field-subjectSchemeField">Subject Scheme</label><br>
-<input type="text" id="field-subjectSchemeField" name="subjectSchemeField"><br><br>
+<input type="text" id="field-subjectSchemeField" name="subjectSchemeField" value="{{ data.subjectScheme }}" ><br><br>
 
 <label for="field-subjectUriField">Subject URI</label><br>
-<input type="text" id="field-subjectUriField" name="subjectUriField"><br><br>
+<input type="text" id="field-subjectUriField" name="subjectUriField" value="{{ data.subjectUri}}" ><br><br>
 
 <label for="field-valueUriField">Value URI</label><br>
-<input type="text" id="field-valueUriField" name="valueUriField"><br><br>
+<input type="text" id="field-valueUriField" name="valueUriField" value="{{ data.valueUri }}" ><br><br>
 
 <label for="field-classificationCodeField">Classification Code</label><br>
-<input type="text" id="field-classificationCodeField" name="clasificationCodeField"><br><br>
+<input type="text" id="field-classificationCodeField" name="clasificationCodeField" value="{{ data.classificationCode }}" ><br><br>
 
 <label for="field-subjectField">Subject</label><br>
-<input type="text" id="field-subjectField" name="subjectField"><br><br>
+<input type="text" id="field-subjectField" name="subjectField" value="{{ data.subjectField }}" ><br><br>
 
 <button type="button" onclick="addSubject()">Add</button>
 <button type="button" onclick="clearSubject()">Clear</button>
