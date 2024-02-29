@@ -3,6 +3,7 @@
 
 
 <!-- Creator Fields -->
+<!--                -->
 <label><strong> Creator Details (Mandatory)</strong></label><br><br>
 <!-- First Name -->
 <label for="field-given_name">*Given Name</label><br>
@@ -23,7 +24,7 @@
 <button type="button" onclick="clearCreator()">Clear</button>
 <p id='errorMessage'></p>
 <br>
-{{ form.input('author', label=_('*List of Creators'), id='field-author', placeholder=_('Do nor Enter'),
+{{ form.input('author', label=_('*List of Creators'), id='field-author', placeholder=_('Do not Enter'),
 value=data.author, error=errors.author, classes=['control-medium']) }}
 <hr style="height:2px;border-width:0;color:black;background-color:gray">
 <input type="text" id="field-nameIdentifier" name="nameIdentifier" style="display:none">
@@ -81,8 +82,8 @@ value=data.author, error=errors.author, classes=['control-medium']) }}
   }
 </script>
 <!-- PUBLISHER and Publication Year -->
-
-
+<!--                                -->
+<!--                                -->
 <label for="field-publisher">*Publisher (Mandatory) </label><br>
 <input type="text" id="field-publisher" name="publisher" value="Rothamsted">
 <!-- Default Publisher value is set to Rothamsted-->
@@ -198,8 +199,10 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
   <option value="Workflow">Workflow</option>
   <option value="Other">Other</option>
 </select><br><br>
-<!-- Language -->
 
+<!-- Language -->
+<!--          -->
+<!--          -->
 <label for="field-language">Language (Mandatory) </label><br>
 <select id="field-language" name="language" class="control-medium">
   <option value="en">English</option>
@@ -211,7 +214,7 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
   <option value="ru">Russian</option>
   <option value="zh">Chinese</option>
   <option value="ja">Japanese</option>
-  <option value="Other">Other</option> 
+  <option value="Other">Other</option>
 </select><br><br>
 <hr style="height:2px;border-width:0;color:black;background-color:gray">
 
@@ -253,9 +256,9 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 </script>
 <hr style="height:2px;border-width:0;color:black;background-color:gray">
 
-<!-- Funder -->
-<!--        -->
-<!--        -->
+<!-- Funder Information -->
+<!--                    -->
+<!--                    -->
 <label><strong> Funder Information (Mandatory)</strong></label><br><br>
 <label for="field-funderNameField">*Funder Name </label><br>
 <input id="field-funderNameField" name="funderNameField" classes="control-medium"><br><br>
@@ -279,8 +282,8 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <button type="button" onclick="clearFunders()"> Clear </button>
 <p id=funderInfo></p>
 
-<!-- Display None fields are the metadata fields -->
-<!--  -->
+<!-- Metadata fields are hidden -->
+<!--                            -->
 <input id="field-funderName" name="funderName" classes="control-medium" style="display:None;">
 <input id="field-funderId" name="funderId" classes="control-medium" style="display:None;">
 <input id="field-funderIdType" name="funderIdType" classes="control-medium" style="display:None;">
@@ -355,10 +358,11 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
     document.getElementById('funderInfo').innerHTML = "Cleared"
   }
 
-// </script>
+  // </script>
 <hr style="height:2px;border-width:0;color:black;background-color:gray">
 <!-- Contributor Details -->
-
+<!--                     -->
+<!--                     -->
 <label><strong> Contributors Details (Optional) </strong></label><br><br>
 <label for="field-contributorTypeField">*Contributor Type</label><br>
 <select id="field-contributorTypeField" name="contributorTypeField" class="control-medium">
@@ -463,12 +467,14 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
   }
 
   function clearContributor() {
-    creator = [];
-    nameId = [];
+    contriId = [];
+    contriName = [];
+    contriType = [];
+    contriAffiliation = [];
     document.getElementById('field-contributorFirstName').value = '';
     document.getElementById('field-contributorFamilyName').value = '';
     document.getElementById('field-contributorNameId').value = '';
-    document.getElementById('contributorMessage').innerHTML = '';
+    document.getElementById('contributorMessage').innerHTML = "Cleared !!!";
     document.getElementById('field-contributorDetails').value = ""
     document.getElementById('field-contributorId').value = ""
     document.getElementById('field-contributorType').value = ""
@@ -477,6 +483,9 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 
 </script>
 <hr style="height:2px;border-width:0;color:black;background-color:gray">
+
+
+
 <!-- Related Resources Fields -->
 <!--                          -->
 <!--                          -->
@@ -636,8 +645,11 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
   }
 </script>
 <hr style="height:2px;border-width:0;color:black;background-color:gray">
-<!-- Associated Research Notebooks Field -->
 
+
+<!-- Associated Research Notebooks Field -->
+<!--                                     -->
+<!--                                     -->
 <label for="field-associatedNotesField">Associated Research Notebooks (Optional) </label><br>
 <input type="text" id="field-associatedNoteField" name="associatedNoteField" style="width: 500px;"> <br>
 <button type="button" onclick="addNoteBooks()"> Add </button>
@@ -667,6 +679,9 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 
 
 <!-- Data Location Field -->
+<!--                     -->
+<!--                     -->
+
 <label for="field-dataLocationField"> Data Locations (Mandatory)</label><br>
 <input type="text" id="field-dataLocationField" name="dataLocationField" style="width: 500px;"><br>
 <button type="button" onclick="addDataLocation()"> Add </button>
@@ -699,12 +714,15 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 
 
 <!-- Responsible Person Field -->
-
+<!--                          -->
+<!--                          -->
 <label for="field-responsiblePerson">Responsible Person (Mandatory)</label><br>
 <input id="field-responsiblePerson" name="responsiblePerson" style="width: 500px;"><br><br>
 
 
 <!-- Research Infrastructure Used -->
+<!--                              -->
+<!--                              -->
 <label for="field-infraUsedField"> Research Infrastructure Used (Select All)</label><br>
 <select id="field-infraUsedField" name="infraUsedField" onchange="addInfraUsed()">
   <option value=""></option>
@@ -741,7 +759,8 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <br><br>
 <hr style="height:2px;border-width:0;color:black;background-color:gray">
 <!-- Geo location fields -->
-<!--                      -->
+<!--                     -->
+<!--                     -->
 <label><strong> Geo Location Fields </strong></label><br><br>
 
 <label for="field-geoLocation"> Enter The Geo Location (Name of the place) </label>
@@ -834,64 +853,67 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <input type="text" id="field-subject" name="subject" style="display: none;">
 
 <!-- Subject Functions -->
+<!--                   -->
+<!--                   -->
+
 <script>
-    var subScheme = [];
-    var subUri = [];
-    var valUri = [];
-    var classCode = [];
-    var sub = [];
+  var subScheme = [];
+  var subUri = [];
+  var valUri = [];
+  var classCode = [];
+  var sub = [];
 
-    function addSubject() {
-        let ss = document.getElementById('field-subjectSchemeField').value;
-        let su = document.getElementById('field-subjectUriField').value;
-        let vu = document.getElementById('field-valueUriField').value;
-        let cc = document.getElementById('field-classificationCodeField').value;
-        let s = document.getElementById('field-subjectField').value;
-        if (!ss || !su || !vu || !cc || !s) {
-            document.getElementById('subjectMessage').innerHTML = "Enter all fields";
-            return;
-        }
-        // Push to Array
-        subScheme.push(ss);
-        subUri.push(su);
-        valUri.push(vu);
-        classCode.push(cc);
-        sub.push(s);
-        // clear Fields
-        document.getElementById('field-subjectSchemeField').value = '';
-        document.getElementById('field-subjectUriField').value = '';
-        document.getElementById('field-valueUriField').value = '';
-        document.getElementById('field-classificationCodeField').value = '';
-        document.getElementById('field-subjectField').value = '';
-        // Push to Metadatafields
-        document.getElementById('field-subjectScheme').value = subScheme;
-        document.getElementById('field-subjectUri').value = subUri;
-        document.getElementById('field-valueUri').value = valUri;
-        document.getElementById('field-classificationCode').value = classCode;
-        document.getElementById('field-subject').value = sub;
-        // Print Message
-        document.getElementById('subjectMessage').innerHTML = "Subjects Added:" + sub;
+  function addSubject() {
+    let ss = document.getElementById('field-subjectSchemeField').value;
+    let su = document.getElementById('field-subjectUriField').value;
+    let vu = document.getElementById('field-valueUriField').value;
+    let cc = document.getElementById('field-classificationCodeField').value;
+    let s = document.getElementById('field-subjectField').value;
+    if (!ss || !su || !vu || !cc || !s) {
+      document.getElementById('subjectMessage').innerHTML = "Enter all fields";
+      return;
     }
+    // Push to Array
+    subScheme.push(ss);
+    subUri.push(su);
+    valUri.push(vu);
+    classCode.push(cc);
+    sub.push(s);
+    // clear Fields
+    document.getElementById('field-subjectSchemeField').value = '';
+    document.getElementById('field-subjectUriField').value = '';
+    document.getElementById('field-valueUriField').value = '';
+    document.getElementById('field-classificationCodeField').value = '';
+    document.getElementById('field-subjectField').value = '';
+    // Push to Metadatafields
+    document.getElementById('field-subjectScheme').value = subScheme;
+    document.getElementById('field-subjectUri').value = subUri;
+    document.getElementById('field-valueUri').value = valUri;
+    document.getElementById('field-classificationCode').value = classCode;
+    document.getElementById('field-subject').value = sub;
+    // Print Message
+    document.getElementById('subjectMessage').innerHTML = "Subjects Added:" + sub;
+  }
 
-    function clearSubject() {
-        subScheme = [];
-        subUri = [];
-        valUri = [];
-        classCode = [];
-        sub = [];
-        document.getElementById('field-subjectScheme').value = subScheme;
-        document.getElementById('field-subjectUri').value = subUri;
-        document.getElementById('field-valueUri').value = valUri;
-        document.getElementById('field-classificationCode').value = classCode;
-        document.getElementById('field-subject').value = sub;
-        document.getElementById('field-subjectSchemeField').value = '';
-        document.getElementById('field-subjectUriField').value = '';
-        document.getElementById('field-valueUriField').value = '';
-        document.getElementById('field-classificationCodeField').value = '';
-        document.getElementById('field-subjectField').value = '';
-        document.getElementById('subjectMessage').innerHTML = "Cleared !!!";
+  function clearSubject() {
+    subScheme = [];
+    subUri = [];
+    valUri = [];
+    classCode = [];
+    sub = [];
+    document.getElementById('field-subjectScheme').value = subScheme;
+    document.getElementById('field-subjectUri').value = subUri;
+    document.getElementById('field-valueUri').value = valUri;
+    document.getElementById('field-classificationCode').value = classCode;
+    document.getElementById('field-subject').value = sub;
+    document.getElementById('field-subjectSchemeField').value = '';
+    document.getElementById('field-subjectUriField').value = '';
+    document.getElementById('field-valueUriField').value = '';
+    document.getElementById('field-classificationCodeField').value = '';
+    document.getElementById('field-subjectField').value = '';
+    document.getElementById('subjectMessage').innerHTML = "Cleared !!!";
 
-    }
+  }
 </script>
 
 {% endblock %}
