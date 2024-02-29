@@ -162,7 +162,7 @@ value=data.author, error=errors.author, classes=['control-medium']) }}
     }
   }
 </script><br>
-<hr style="height:2px;border-width:0;color:black;background-color:gray">
+<hr style="height:2px;border-width:0;color:black;background-color:grey">
 
 {{ form.input('resourceType', label=_('*ResourceType (Mandatory) '), id='field-resourceType', placeholder=_('More
 Info'), value=data.resourceType, error=errors.resourceType, classes=['control-medium']) }}
@@ -488,7 +488,6 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <hr style="height:2px;border-width:0;color:black;background-color:gray">
 
 
-
 <!-- Related Resources Fields -->
 <!--                          -->
 <!--                          -->
@@ -618,7 +617,6 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
     let rest = document.getElementById('field-relatedResourceTypeField').value;
     let rid = document.getElementById('field-relatedIdentifierField').value;
     if (!idt || !relt || !rest || !rid) {
-      console.log("entered if");
       document.getElementById('relatedMessage').innerHTML = "Fill all the fields";
       return;
     }
@@ -745,7 +743,6 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
   var infra = [];
   function addInfraUsed() {
     let inf = document.getElementById('field-infraUsedField').value;
-    console.log(inf);
     infra.push(inf);
     document.getElementById('infraUsedAdded').innerHTML = "Used Infrastructure Selected: " + infra;
     document.getElementById('field-infraUsed').value = infra;
