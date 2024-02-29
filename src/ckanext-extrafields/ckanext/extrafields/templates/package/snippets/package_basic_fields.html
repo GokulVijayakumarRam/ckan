@@ -96,6 +96,9 @@ value=data.author, error=errors.author, classes=['control-medium']) }}
   value="{{ data.publicationYear }}"> <br><br>
 <hr style="height:2px;border-width:0;color:black;background-color:gray">
 
+
+<label><strong> Description </strong></label><br><br>
+
 <!-- Abstract Field -->
 <style>
   textarea {
@@ -280,7 +283,7 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <input id="field-awardTitleField" name="awardTitleField" classes="control-medium"><br><br>
 <button type="button" onclick="addFunders()"> Add </button>
 <button type="button" onclick="clearFunders()"> Clear </button>
-<p id=funderInfo > Funders:  + {{ data.funderName }}</p>
+<p id=funderInfo > Funders:  {{ data.funderName }}</p>
 
 <!-- Metadata fields are hidden -->
 <!--                            -->
