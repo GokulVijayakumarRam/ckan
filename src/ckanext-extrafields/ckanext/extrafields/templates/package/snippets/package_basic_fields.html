@@ -157,6 +157,7 @@ value=data.author, error=errors.author, classes=['control-medium']) }}
     var codesField = document.getElementById('codesField');
     if (selectField.value == 'None') {
       codesField.style.display = 'none';
+      document.getElementById('field-Codes').value = "N/A";
     } else {
       codesField.style.display = 'block';
     }
@@ -916,5 +917,8 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 
   }
 </script>
+
+<label for="field-miningTest">Mining Test</label>
+<input id="field-miningTest" name="miningTest">
 
 {% endblock %}
