@@ -1,7 +1,6 @@
 {% ckan_extends %}
 {% block package_basic_fields_custom %}
 
-
 <!-- Creator Fields -->
 <!--                -->
 <!--                -->
@@ -765,7 +764,7 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <label><strong> Geo Location Fields </strong></label><br><br>
 
 <label for="field-geoLocation"> Enter The Geo Location (Name of the place) </label>
-<input type="text" id="field-geoLocation" name="geoLocation" style="width:auto">
+<input type="text" id="field-geoLocation" name="geoLocation" style="width:auto" value="{{ data.geoLocation }}" >
 
 <!--      World Map         -->
 <!-- Load Leaflet -->
@@ -782,9 +781,9 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <div id="mapid"></div>
 <br><br>
 <label for="field-geoLatitude"> Latitude </label><br>
-<input type="text" id="field-geoLatitude" name="geoLatitude"><br><br>
+<input type="text" id="field-geoLatitude" name="geoLatitude" value="{{ data.geoLatitude }}"><br><br>
 <label for="field-geoLongitude"> Longitude </label><br>
-<input type="text" id="field-geoLongitude" name="geoLongitude"><br><br>
+<input type="text" id="field-geoLongitude" name="geoLongitude" value="{{ data.geoLongitude }}" ><br><br>
 <style>
   #mapid {
     height: 400px;
@@ -846,6 +845,7 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <button type="button" onclick="addSubject()">Add</button>
 <button type="button" onclick="clearSubject()">Clear</button>
 <p id="subjectMessage"></p>
+
 <!-- Metadata Fields -->
 <input type="text" id="field-subjectScheme" name="subjectScheme" style="display: none;">
 <input type="text" id="field-subjectUri" name="subjectUri" style="display: none;">
