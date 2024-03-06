@@ -1,5 +1,7 @@
 {% ckan_extends %}
 {% block package_basic_fields_custom %}
+{% set user = current_user %}
+
 
 <!-- Creator Fields -->
 <!--                -->
@@ -918,7 +920,16 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
   }
 </script>
 
-<label for="field-miningTest">Mining Test</label>
-<input id="field-miningTest" name="miningTest">
 
+<label for="field-miningTest">Mining Test</label>
+<input id="field-miningTest" name="miningTest" type="text" data-module="autocomplete"
+data-module-source="/api/2/util/user/autocomplete?ignore_self=false&q=?"  
+>
+
+
+<!-- <input
+id="promote-username" type="text" name="username" placeholder="Username"
+value="" class="control-medium" data-module="autocomplete"
+data-module-source="/api/2/util/user/autocomplete?ignore_self=true&q=?"
+> -->
 {% endblock %}
