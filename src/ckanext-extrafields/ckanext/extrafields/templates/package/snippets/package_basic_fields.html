@@ -229,23 +229,24 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 
 <!-- Collected Dates -->
 <label for="field-collectedDate">Collected Date (Optional)</label><br>
-<input id="field-collectedDate" name="collectedDate" classes="control-medium" placeholder="DD-MM-YYYY"
+<input type="date" id="field-collectedDate" name="collectedDate" classes="control-medium" placeholder="DD-MM-YYYY"
   value="{{ data.collectedDate }}"><br><br>
 <!-- Created Dates -->
 <label for="field-createdDate">Created Date (Optional)</label><br>
-<input id="field-createdDate" name="createdDate" classes="control-medium" placeholder="DD-MM-YYYY"
+<input type="date" id="field-createdDate" name="createdDate" classes="control-medium" placeholder="DD-MM-YYYY"
   value="{{ data.createdDate }}"><br><br>
 <!-- Submitted Dates -->
-<label for="field-submittedDate">Submitted Date (Mandatory)</label><br>
+<label type="date" for="field-submittedDate">Submitted Date (Mandatory)</label><br>
 <input id="field-submittedDate" name="submittedDate" classes="control-medium" placeholder="DD-MM-YYYY"
   value="{{ data.submittedDate }}"><br><br>
+
 <!-- Available Dates -->
 <label for="field-availableDate">Available Date (Optional)</label><br>
-<input id="field-availableDate" name="availableDate" classes="control-medium" placeholder="DD-MM-YYYY"
+<input type="date" id="field-availableDate" name="availableDate" classes="control-medium" placeholder="DD-MM-YYYY"
   value="{{ data.availableDate }}"><br><br>
 <!-- Withdrawn Dates -->
 <label for="field-withdrawnDate">Withdrawn Date (Optional)</label><br>
-<input id="field-withdrawnDate" name="withdrawnDate" classes="control-medium" placeholder="DD-MM-YYYY"
+<input type="date" id="field-withdrawnDate" name="withdrawnDate" classes="control-medium" placeholder="DD-MM-YYYY"
   value="{{ data.withdrawnDate }}"><br><br>
 
 
@@ -256,7 +257,7 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
   let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
   let yyyy = today.getFullYear();
 
-  today = dd + '-' + mm + '-' + yyyy;
+  today = dd + '/' + mm + '/' + yyyy;
 
   document.getElementById('field-submittedDate').value = today;
 </script>
@@ -920,16 +921,4 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
   }
 </script>
 
-
-<label for="field-miningTest">Mining Test</label>
-<input id="field-miningTest" name="miningTest" type="text" data-module="autocomplete"
-data-module-source="/api/2/util/user/autocomplete?ignore_self=false&q=?"  
->
-
-
-<!-- <input
-id="promote-username" type="text" name="username" placeholder="Username"
-value="" class="control-medium" data-module="autocomplete"
-data-module-source="/api/2/util/user/autocomplete?ignore_self=true&q=?"
-> -->
 {% endblock %}
