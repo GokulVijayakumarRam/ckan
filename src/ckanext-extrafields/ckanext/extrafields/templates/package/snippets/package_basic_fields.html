@@ -26,8 +26,9 @@
 <button type="button" onclick="clearCreator()">Clear</button>
 <p id='errorMessage'></p>
 <br>
-{{ form.input('author', label=_('*List of Creators'), id='field-author', placeholder=_('Do not Enter'),
-value=data.author, error=errors.author, classes=['control-medium']) }}
+<!-- {{ form.input('author', label=_('*List of Creators'), id='field-author', placeholder=_('Do not Enter'),
+value=data.author, error=errors.author, classes=['control-medium']) }} -->
+<input type="text" name="author" id="field-author" value="{{ data.author }}" error="errors.author" style="display:none">
 <hr style="height:2px;border-width:0;color:black;background-color:gray">
 <input type="text" id="field-nameIdentifier" name="nameIdentifier" style="display:none">
 <input type="text" id="field-creatorAffiliation" name="creatorAffiliation" style="display:none">
@@ -39,6 +40,8 @@ value=data.author, error=errors.author, classes=['control-medium']) }}
   var affiliations = [];
   var displayElement = document.getElementById('displayCreatorField');
   var fullname = [];
+  document.getElementById('errorMessage').innerHTML = "Creators: " + "{{ data.author }}";
+
 
   function addCreator() {
     let fn = document.getElementById('field-given_name').value;
@@ -68,6 +71,7 @@ value=data.author, error=errors.author, classes=['control-medium']) }}
     document.getElementById('field-author').value = creator;
     document.getElementById('field-nameIdentifier').value = nameId;
     document.getElementById('field-creatorAffiliation').value = affiliations;
+    document.getElementById('errorMessage').innerHTML = "Creators Addded :" + creator;
   }
 
   function clearCreator() {
