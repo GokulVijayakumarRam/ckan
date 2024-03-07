@@ -167,8 +167,6 @@ value=data.author, error=errors.author, classes=['control-medium']) }}
 </script><br>
 <hr style="height:2px;border-width:0;color:black;background-color:grey">
 
-{{ form.input('resourceType', label=_('*ResourceType (Mandatory) '), id='field-resourceType', placeholder=_('More
-Info'), value=data.resourceType, error=errors.resourceType, classes=['control-medium']) }}
 
 <!-- Resource Type  -->
 <label for="field-resourceTypeGeneral">*General Resource Type (Mandatory) </label><br>
@@ -205,6 +203,10 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
   <option value="Workflow">Workflow</option>
   <option value="Other">Other</option>
 </select><br><br>
+
+{{ form.input('resourceType', label=_('*ResourceType (Mandatory) '), id='field-resourceType', placeholder=_('More
+Info'), value=data.resourceType, error=errors.resourceType, classes=['control-medium']) }}
+
 
 <!-- Language -->
 <!--          -->
