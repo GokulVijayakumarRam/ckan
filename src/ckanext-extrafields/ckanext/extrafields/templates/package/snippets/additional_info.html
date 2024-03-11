@@ -1,6 +1,7 @@
 {% ckan_extends %}
 
 {% block extras %}
+{% set user = current_user %}
 
 {% if pkg_dict.author %}
 <tr>
