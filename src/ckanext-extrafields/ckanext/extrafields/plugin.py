@@ -108,6 +108,10 @@ class ExampleIDatasetFormPlugin(tk.DefaultDatasetForm, p.SingletonPlugin):
             'classificationCode': [tk.get_validator('ignore_missing'),
                                  tk.get_converter('convert_to_extras')],
             'subject': [tk.get_validator('ignore_missing'),
+                                 tk.get_converter('convert_to_extras')],
+            'geoLowLeft': [tk.get_validator('ignore_missing'),
+                                 tk.get_converter('convert_to_extras')],
+            'geoTopRight': [tk.get_validator('ignore_missing'),
                                  tk.get_converter('convert_to_extras')]
                       
         })        
@@ -209,6 +213,10 @@ class ExampleIDatasetFormPlugin(tk.DefaultDatasetForm, p.SingletonPlugin):
             'classificationCode': [tk.get_validator('ignore_missing'),
                                  tk.get_converter('convert_to_extras')],   
             'subject': [tk.get_validator('ignore_missing'),
+                                 tk.get_converter('convert_to_extras')],   
+            'geoLowLeft': [tk.get_validator('ignore_missing'),
+                                 tk.get_converter('convert_to_extras')],   
+            'geoTopRight': [tk.get_validator('ignore_missing'),
                                  tk.get_converter('convert_to_extras')]                           
         })       
         return schema
@@ -308,6 +316,10 @@ class ExampleIDatasetFormPlugin(tk.DefaultDatasetForm, p.SingletonPlugin):
             'classificationCode': [tk.get_converter('convert_from_extras'),
                                  tk.get_validator('ignore_missing')],
             'subject': [tk.get_converter('convert_from_extras'),
+                                 tk.get_validator('ignore_missing')],
+            'geoLowLeft': [tk.get_converter('convert_from_extras'),
+                                 tk.get_validator('ignore_missing')],
+            'geoTopRight': [tk.get_converter('convert_from_extras'),
                                  tk.get_validator('ignore_missing')]
             
         })       
@@ -406,9 +418,13 @@ class ExampleIDatasetFormPlugin(tk.DefaultDatasetForm, p.SingletonPlugin):
             'valueUri': [tk.get_converter('convert_from_extras'),
                                  tk.get_validator('ignore_missing')] ,
             'classificationCode': [tk.get_converter('convert_from_extras'),
-                                 tk.get_validator('ignore_missing')] ,
+                                 tk.get_validator('ignore_missing')],
             'subject': [tk.get_converter('convert_from_extras'),
-                                 tk.get_validator('ignore_missing')]                          
+                                 tk.get_validator('ignore_missing')],
+            'geoLowLeft': [tk.get_converter('convert_from_extras'),
+                                 tk.get_validator('ignore_missing')],
+            'geoTopRight': [tk.get_converter('convert_from_extras'),
+                                 tk.get_validator('ignore_missing')]                            
         })       
         return schema
 

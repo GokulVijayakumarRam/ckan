@@ -268,5 +268,16 @@
   <td class="dataset-details">{{ pkg_dict.subject }}</td>
 </tr>
 {% endif %}
-
+{% if pkg_dict.geoLowLeft %}
+<tr>
+  <th scope="row" class="dataset-label">{{ _("Geo Location Low Left Corner") }}</th>
+  <td class="dataset-details">{{ pkg_dict.geoLowLeft }}</td>
+</tr>
+{% endif %}
+{% if pkg_dict.geoTopRight %}
+<tr>
+  <th scope="row" class="dataset-label">{{ _("Geo Location Top Right Corner") }}</th>
+  <td class="dataset-details">{{ pkg_dict.geoTopRight }}</td>
+</tr>
+{% endif %}
 {% endblock %}

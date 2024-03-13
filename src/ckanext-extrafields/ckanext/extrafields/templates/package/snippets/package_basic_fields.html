@@ -30,8 +30,8 @@
 value=data.author, error=errors.author, classes=['control-medium']) }} -->
 <input type="text" name="author" id="field-author" value="{{ data.author }}" error="errors.author" style="display:none">
 <hr style="height:2px;border-width:0;color:black;background-color:gray">
-<input type="text" id="field-nameIdentifier" name="nameIdentifier" style="display:none">
-<input type="text" id="field-creatorAffiliation" name="creatorAffiliation" style="display:none">
+<input type="text" id="field-nameIdentifier" name="nameIdentifier" style="display:none" value="{{ data.nameIdentifier }}">
+<input type="text" id="field-creatorAffiliation" name="creatorAffiliation" style="display:none" value="{{ data.creatorAffiliation }}">
 <!-- CREATOR Function-->
 
 <script>
@@ -144,8 +144,7 @@ value=data.author, error=errors.author, classes=['control-medium']) }} -->
 <!-- Experiment Code -->
 
 <label for="field-experimentCode">*Select Experiment Code (Optional)</label><br>
-<select id="field-experimentCode" error="errors.experimentCode" name="experimentCode" class="control-medium"
-  placeholder="Select" onchange="displayCodesField()">
+<select id="field-experimentCode" error="errors.experimentCode" name="experimentCode" class="control-medium" onchange="displayCodesField()" >
   <option value="None">N/A</option>
   <option value="NWFP code">NWFP code</option>
   <option value="NW experiment code">NW experiment code</option>
@@ -154,10 +153,22 @@ value=data.author, error=errors.author, classes=['control-medium']) }} -->
 
 <div id="codesField" style="display: none;">
   <label for="field-Codes">Codes (Mandatory) </label><br>
-  <input type="text" id="field-Codes" name="Codes" value="N/A" error="errors.Codes">
+  <input type="text" id="field-Codes" name="Codes" value="{{ data.Codes }}" error="errors.Codes" value="{{ data.Codes }}">
 </div>
 
 <script>
+  function selectElement(id, valueToSelect) {
+    let element = document.getElementById(id);
+    element.value = valueToSelect;
+}
+
+// Initializattion
+selectElement('field-experimentCode', "{{ data.experimentCode }}");
+if("{{data.Codes}}"){
+  displayCodesField();
+}
+
+
   function displayCodesField() {
     var selectField = document.getElementById('field-experimentCode');
     var codesField = document.getElementById('codesField');
@@ -166,16 +177,19 @@ value=data.author, error=errors.author, classes=['control-medium']) }} -->
       document.getElementById('field-Codes').value = "N/A";
     } else {
       codesField.style.display = 'block';
+      document.getElementById("field-Codes").value = "{{ data.Codes }}";
     }
+    console.log(document.getElementById("field-experimentCode").value)
   }
+
 </script><br>
 <hr style="height:2px;border-width:0;color:black;background-color:grey">
 
 
 <!-- Resource Type  -->
 <label for="field-resourceTypeGeneral">*General Resource Type (Mandatory) </label><br>
-<select id="field-resourceTypeGeneral" name="resourceTypeGeneral" class="control-medium">
-  <option value=""></option>
+<select id="field-resourceTypeGeneral" name="resourceTypeGeneral" class="control-medium" value="{{ data.resourceTypeGeneral }}">
+  <option value="N/A"></option>
   <option value="Audiovisual">Audiovisual</option>
   <option value="Book">Book</option>
   <option value="BookChapter">BookChapter</option>
@@ -207,6 +221,9 @@ value=data.author, error=errors.author, classes=['control-medium']) }} -->
   <option value="Workflow">Workflow</option>
   <option value="Other">Other</option>
 </select><br><br>
+<script>
+  selectElement("field-resourceTypeGeneral", "{{ data.resourceTypeGeneral }}")
+</script>
 
 {{ form.input('resourceType', label=_('*ResourceType (Mandatory) '), id='field-resourceType', placeholder=_('More
 Info'), value=data.resourceType, error=errors.resourceType, classes=['control-medium']) }}
@@ -263,7 +280,7 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
   let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
   let yyyy = today.getFullYear();
 
-  today = dd + '/' + mm + '/' + yyyy;
+  today = yyyy + '-' + mm + '-' + dd;
 
   document.getElementById('field-submittedDate').value = today;
 </script>
@@ -297,12 +314,12 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 
 <!-- Metadata fields are hidden -->
 <!--                            -->
-<input id="field-funderName" name="funderName" classes="control-medium" style="display:None;">
-<input id="field-funderId" name="funderId" classes="control-medium" style="display:None;">
-<input id="field-funderIdType" name="funderIdType" classes="control-medium" style="display:None;">
-<input id="field-awardNumber" name="awardNumber" classes="control-medium" style="display:None;">
-<input id="field-awardURI" name="awardURI" classes="control-medium" style="display:None;">
-<input id="field-awardTitle" name="awardTitle" classes="control-medium" style="display:None;">
+<input id="field-funderName" name="funderName" classes="control-medium" style="display:None;" value="{{ data.funderName }}">
+<input id="field-funderId" name="funderId" classes="control-medium" style="display:None;" value="{{ data.funderId }}">
+<input id="field-funderIdType" name="funderIdType" classes="control-medium" style="display:None;" value="{{ data.funderIdType }}">
+<input id="field-awardNumber" name="awardNumber" classes="control-medium" style="display:None;" value="{{ data.awardNumber }}">
+<input id="field-awardURI" name="awardURI" classes="control-medium" style="display:None;" value="{{ data.awardURI }}">
+<input id="field-awardTitle" name="awardTitle" classes="control-medium" style="display:None;" value="{{ data.awardTitle }}">
 
 
 <script>
@@ -427,13 +444,13 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <br>
 <!-- Metadata Field Lines for Contributors. These are not displayed, Used to store the metadatafields-->
 <input id="field-contributorType" error="errors.contributorType" name="contributorType" classes="control-medium"
-  style="display:none">
+  style="display:none" value="{{ data.contributorType }}">
 <input id="field-contributorDetails" error="errors.contributorDetails" name="contributorDetails"
-  classes="control-medium" style="display:none">
+  classes="control-medium" style="display:none" value="{{ data.contributorDetails }}" >
 <input id="field-contributorId" error="errors.contributorId" name="contributorId" classes="control-medium"
-  style="display:none">
+  style="display:none" value="{{ data.contributorId }}">
 <input id="field-contributorAffiliation" error="errors.contributorAffiliation" name="contributorAffiliation"
-  classes="control-medium" style="display:none">
+  classes="control-medium" style="display:none" value="{{ data.contributorAffiliation }}">
 
 <!-- Contributor Functions -->
 
@@ -610,10 +627,10 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 
 <p id="relatedMessage"> Related Resources: {{ data.relatedIdentifier }} </p>
 <!-- Metadata Fields for Related Resources -->
-<input id="field-relatedIdentifierType" name="relatedIdentifierType" classes="control-medium" style="display:none">
-<input id="field-relationType" name="relationType" classes="control-medium" style="display:none">
-<input id="field-relatedResourceType" name="relatedResourceType" classes="control-medium" style="display:none">
-<input id="field-relatedIdentifier" name="relatedIdentifier" classes="control-medium" style="display:none">
+<input id="field-relatedIdentifierType" name="relatedIdentifierType" classes="control-medium" style="display:none" value="{{ data.relatedIdentifierType }}"> 
+<input id="field-relationType" name="relationType" classes="control-medium" style="display:none" value="{{ data.relationType }}">
+<input id="field-relatedResourceType" name="relatedResourceType" classes="control-medium" style="display:none" value="{{ data.relatedResourceType }}">
+<input id="field-relatedIdentifier" name="relatedIdentifier" classes="control-medium" style="display:none" value="{{ data.relatedIdentifier }}">
 
 <script>
   var relationTypeList = [];
@@ -666,7 +683,7 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <button type="button" onclick="addNoteBooks()"> Add </button>
 <button type="button" onclick="clearNoteBooks()">Clear</button>
 <p id="notebookAdded"> Associated Notes: {{ data.associatedNote }} </p>
-<input type="text" id="field-associatedNote" name="associatedNote" style="display:none;">
+<input type="text" id="field-associatedNote" name="associatedNote" style="display:none;" value="{{ data.associatedNote }}">
 <script>
   var notes = [];
 
@@ -698,7 +715,7 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <button type="button" onclick="addDataLocation()"> Add </button>
 <button type="button" onclick="clearDataLocation()">Clear</button>
 <p id="dataLocationAdded"> Data Locations: {{ data.dataLocation }} </p>
-<input type="text" id="field-dataLocation" name="dataLocation" style="display:none;">
+<input type="text" id="field-dataLocation" name="dataLocation" style="display:none;" value="{{ data.dataLocation }}">
 
 <script>
   var dataLoc = [];
@@ -745,7 +762,7 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
   <option value="Rowden">Rowden</option>
 </select>
 
-<input type="text" id="field-infraUsed" name="infraUsed" style="display:None;">
+<input type="text" id="field-infraUsed" name="infraUsed" style="display:None;" value="{{ data.infraUsed }}">
 
 <p id="infraUsedAdded">Research Infra Used: {{ data.infraUsed }}</p>
 <button type="button" onclick="clearInfra()">Clear</button>
@@ -771,7 +788,7 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <!-- Geo location fields -->
 <!--                     -->
 <!--                     -->
-<label><strong> Geo Location Fields </strong></label><br><br>
+<label><strong> Geo Location Point </strong></label><br><br>
 
 <label for="field-geoLocation"> Enter The Geo Location (Name of the place) </label>
 <input type="text" id="field-geoLocation" name="geoLocation" style="width:auto" value="{{ data.geoLocation }}" >
@@ -830,7 +847,18 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
   });
 
 </script>
+
 <hr style="height:2px;border-width:0;color:black;background-color:gray">
+<!-- Geo Location Box -->
+<!--                  -->
+<label><strong> Geo Location Box </strong></label><br><br>
+
+<label for="field-geoLowLeft"> Geo Location lower left corner </label><br>
+<input type="text" id="field-geoLowLeft" name="geoLowLeft" value="{{ data.geoLowLeft }}"><br><br>
+<label for="field-geoTopRight"> Geo Location Top Right Corner </label><br>
+<input type="text" id="field-geoTopRight" name="geoTopRight" value="{{ data.geoTopRight }}" ><br><br>
+
+<hr style="height:2px;border-width:0;color:black;background-color:gray"><br>
 <!-- Subject Fields -->
 <!--                 -->
 <!--                 -->
@@ -838,30 +866,30 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 
 
 <label for="field-subjectSchemeField">Subject Scheme</label><br>
-<input type="text" id="field-subjectSchemeField" name="subjectSchemeField" value="{{ data.subjectScheme }}" ><br><br>
+<input type="text" id="field-subjectSchemeField" name="subjectSchemeField" ><br><br>
 
 <label for="field-subjectUriField">Subject URI</label><br>
-<input type="text" id="field-subjectUriField" name="subjectUriField" value="{{ data.subjectUri}}" ><br><br>
+<input type="text" id="field-subjectUriField" name="subjectUriField"  ><br><br>
 
 <label for="field-valueUriField">Value URI</label><br>
-<input type="text" id="field-valueUriField" name="valueUriField" value="{{ data.valueUri }}" ><br><br>
+<input type="text" id="field-valueUriField" name="valueUriField"  ><br><br>
 
 <label for="field-classificationCodeField">Classification Code</label><br>
-<input type="text" id="field-classificationCodeField" name="clasificationCodeField" value="{{ data.classificationCode }}" ><br><br>
+<input type="text" id="field-classificationCodeField" name="clasificationCodeField"  ><br><br>
 
 <label for="field-subjectField">Subject</label><br>
-<input type="text" id="field-subjectField" name="subjectField" value="{{ data.subjectField }}" ><br><br>
+<input type="text" id="field-subjectField" name="subjectField"  ><br><br>
 
 <button type="button" onclick="addSubject()">Add</button>
 <button type="button" onclick="clearSubject()">Clear</button>
-<p id="subjectMessage"></p>
+<p id="subjectMessage">Subjects:  {{ data.subject }}</p>
 
 <!-- Metadata Fields -->
-<input type="text" id="field-subjectScheme" name="subjectScheme" style="display: none;">
-<input type="text" id="field-subjectUri" name="subjectUri" style="display: none;">
-<input type="text" id="field-valueUri" name="valueUri" style="display: none;">
-<input type="text" id="field-classificationCode" name="clasificationCode" style="display: none;">
-<input type="text" id="field-subject" name="subject" style="display: none;">
+<input type="text" id="field-subjectScheme" name="subjectScheme" style="display: none;" value="{{ data.subjectScheme }}">
+<input type="text" id="field-subjectUri" name="subjectUri" style="display: none;" value="{{ data.subjectUri }}">
+<input type="text" id="field-valueUri" name="valueUri" style="display: none;" value="{{ data.valueUri }}">
+<input type="text" id="field-classificationCode" name="clasificationCode" style="display: none;" value="{{ data.classificationCode }}">
+<input type="text" id="field-subject" name="subject" style="display: none;" value="{{ data.subject }}">
 
 <!-- Subject Functions -->
 <!--                   -->
