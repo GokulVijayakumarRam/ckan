@@ -109,9 +109,13 @@ class ExampleIDatasetFormPlugin(tk.DefaultDatasetForm, p.SingletonPlugin):
                                  tk.get_converter('convert_to_extras')],
             'subject': [tk.get_validator('ignore_missing'),
                                  tk.get_converter('convert_to_extras')],
-            'geoLowLeft': [tk.get_validator('ignore_missing'),
+            'geoLowLeftLatitude': [tk.get_validator('ignore_missing'),
                                  tk.get_converter('convert_to_extras')],
-            'geoTopRight': [tk.get_validator('ignore_missing'),
+            'geoTopRightLatitude': [tk.get_validator('ignore_missing'),
+                                 tk.get_converter('convert_to_extras')],
+            'geoLowLeftLongitude': [tk.get_validator('ignore_missing'),
+                                 tk.get_converter('convert_to_extras')],
+            'geoTopRightLongitude': [tk.get_validator('ignore_missing'),
                                  tk.get_converter('convert_to_extras')]
                       
         })        
@@ -214,9 +218,13 @@ class ExampleIDatasetFormPlugin(tk.DefaultDatasetForm, p.SingletonPlugin):
                                  tk.get_converter('convert_to_extras')],   
             'subject': [tk.get_validator('ignore_missing'),
                                  tk.get_converter('convert_to_extras')],   
-            'geoLowLeft': [tk.get_validator('ignore_missing'),
+            'geoLowLeftLatitude': [tk.get_validator('ignore_missing'),
                                  tk.get_converter('convert_to_extras')],   
-            'geoTopRight': [tk.get_validator('ignore_missing'),
+            'geoTopRightLatitude': [tk.get_validator('ignore_missing'),
+                                 tk.get_converter('convert_to_extras')],   
+            'geoLowLeftLongitude': [tk.get_validator('ignore_missing'),
+                                 tk.get_converter('convert_to_extras')],   
+            'geoTopRightLongitude': [tk.get_validator('ignore_missing'),
                                  tk.get_converter('convert_to_extras')]                           
         })       
         return schema
@@ -317,9 +325,13 @@ class ExampleIDatasetFormPlugin(tk.DefaultDatasetForm, p.SingletonPlugin):
                                  tk.get_validator('ignore_missing')],
             'subject': [tk.get_converter('convert_from_extras'),
                                  tk.get_validator('ignore_missing')],
-            'geoLowLeft': [tk.get_converter('convert_from_extras'),
+            'geoLowLeftLatitude': [tk.get_converter('convert_from_extras'),
                                  tk.get_validator('ignore_missing')],
-            'geoTopRight': [tk.get_converter('convert_from_extras'),
+            'geoTopRightLatitude': [tk.get_converter('convert_from_extras'),
+                                 tk.get_validator('ignore_missing')],
+            'geoLowLeftLongitude': [tk.get_converter('convert_from_extras'),
+                                 tk.get_validator('ignore_missing')],
+            'geoTopRightLongitude': [tk.get_converter('convert_from_extras'),
                                  tk.get_validator('ignore_missing')]
             
         })       
@@ -421,9 +433,13 @@ class ExampleIDatasetFormPlugin(tk.DefaultDatasetForm, p.SingletonPlugin):
                                  tk.get_validator('ignore_missing')],
             'subject': [tk.get_converter('convert_from_extras'),
                                  tk.get_validator('ignore_missing')],
-            'geoLowLeft': [tk.get_converter('convert_from_extras'),
+            'geoLowLeftLatitude': [tk.get_converter('convert_from_extras'),
                                  tk.get_validator('ignore_missing')],
-            'geoTopRight': [tk.get_converter('convert_from_extras'),
+            'geoTopRightLatitude': [tk.get_converter('convert_from_extras'),
+                                 tk.get_validator('ignore_missing')],
+            'geoLowLeftLongitude': [tk.get_converter('convert_from_extras'),
+                                 tk.get_validator('ignore_missing')],
+            'geoTopRightLongitude': [tk.get_converter('convert_from_extras'),
                                  tk.get_validator('ignore_missing')]                            
         })       
         return schema

@@ -801,8 +801,6 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
   integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
   crossorigin=""></script>
-
-<!-- Create an element where the map will take place -->
 <br><br>
 <label for="'mapid">Select the location in the map to fill Latitude and Longitude Automatically</label><br>
 <div id="mapid"></div>
@@ -820,44 +818,68 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <script>
   var latitude;
   var logitude;
-  // Initialize the map
-  // [50, -0.1] are the latitude and longitude
-  // 4 is the zoom
-  // mapid is the id of the div where the map will appear
   var mymap = L
     .map('mapid')
     .setView([50, -0.1], 4);
-
-  // Add a tile to the map = a background. Comes from OpenStreetmap
   L.tileLayer(
     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
     maxZoom: 100,
   }).addTo(mymap);
-
-  // Add an event listener for click events on the map
   mymap.on('click', function (e) {
-    // Print the coordinates of the clicked location to the console
-    /*  console.log("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng) */
     latitude = e.latlng.lat;
     longitude = e.latlng.lng;
     document.getElementById('field-geoLatitude').value = latitude.toFixed(2);
     document.getElementById('field-geoLongitude').value = longitude.toFixed(2);
-
   });
-
 </script>
+
+<!-- Add 2 buttons to this map such that when clicked, the map will zoom to Harpenden UK and North Wyke UK -->
+<script>
+  // Add buttons to zoom to specific locations
+  var harpendenButton = L.control({ position: 'topright' });
+  harpendenButton.onAdd = function (map) {
+    var div = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
+    div.innerHTML = '<button type="button" onclick="zoomToHarpenden()">Zoom to Harpenden</button>';
+    return div;
+  };
+  harpendenButton.addTo(mymap);
+
+  var northWykeButton = L.control({ position: 'topright' });
+  northWykeButton.onAdd = function (map) {
+    var div = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
+    div.innerHTML = '<button type="button" onclick="zoomToNorthWyke()">Zoom to North Wyke</button>';
+    return div;
+  };
+  northWykeButton.addTo(mymap);
+
+  // Functions to zoom to specific locations
+  function zoomToHarpenden() {
+    mymap.setView([51.8142, -0.3589], 14);
+  }
+
+  function zoomToNorthWyke() {
+    mymap.setView([50.7873, -3.9267], 14);
+  }
+</script>
+
 
 <hr style="height:2px;border-width:0;color:black;background-color:gray">
 <!-- Geo Location Box -->
 <!--                  -->
 <label><strong> Geo Location Box </strong></label><br><br>
 
-<label for="field-geoLowLeft"> Geo Location lower left corner </label><br>
-<input type="text" id="field-geoLowLeft" name="geoLowLeft" value="{{ data.geoLowLeft }}"><br><br>
-<label for="field-geoTopRight"> Geo Location Top Right Corner </label><br>
-<input type="text" id="field-geoTopRight" name="geoTopRight" value="{{ data.geoTopRight }}" ><br><br>
+<label for="field-geoLowLeftLatitude"> Geo Latitude lower left corner </label><br>
+<input type="text" id="field-geoLowLeftLatitude" name="geoLowLeftLatitude" value="{{ data.geoLowLeftLatitude }}"><br><br>
 
+<label for="field-geoLowLeftLongitude"> Geo Longitude lower left corner </label><br>
+<input type="text" id="field-geoLowLeftLongitude" name="geoLowLeftLongitude" value="{{ data.geoLowLeftLongitude }}"><br><br>
+
+<label for="field-geoTopRightLatitude"> Geo Latitude Top Right Corner </label><br>
+<input type="text" id="field-geoTopRightLatitude" name="geoTopRightLatitude" value="{{ data.geoTopRightLatitude }}" ><br><br>
+
+<label for="field-geoTopRightLongitude"> Geo Longitude Top Right Corner </label><br>
+<input type="text" id="field-geoTopRightLongitude" name="geoTopRightLongitude" value="{{ data.geoTopRightLongitude }}" ><br><br>
 <hr style="height:2px;border-width:0;color:black;background-color:gray"><br>
 <!-- Subject Fields -->
 <!--                 -->

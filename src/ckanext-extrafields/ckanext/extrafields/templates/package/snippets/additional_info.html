@@ -268,16 +268,28 @@
   <td class="dataset-details">{{ pkg_dict.subject }}</td>
 </tr>
 {% endif %}
-{% if pkg_dict.geoLowLeft %}
+{% if pkg_dict.geoLowLeftLatitude %}
 <tr>
-  <th scope="row" class="dataset-label">{{ _("Geo Location Low Left Corner") }}</th>
-  <td class="dataset-details">{{ pkg_dict.geoLowLeft }}</td>
+  <th scope="row" class="dataset-label">{{ _("Geo Latitude Low Left Corner") }}</th>
+  <td class="dataset-details">{{ pkg_dict.geoLowLeftLatitude }}</td>
 </tr>
 {% endif %}
-{% if pkg_dict.geoTopRight %}
+{% if pkg_dict.geoLowLeftLongitude %}
 <tr>
-  <th scope="row" class="dataset-label">{{ _("Geo Location Top Right Corner") }}</th>
+  <th scope="row" class="dataset-label">{{ _("Geo Longitude Low Left Corner") }}</th>
+  <td class="dataset-details">{{ pkg_dict.geoLowLeftLongitude }}</td>
+</tr>
+{% endif %}
+{% if pkg_dict.geoTopRightLatitude %}
+<tr>
+  <th scope="row" class="dataset-label">{{ _("Geo Latitude Top Right Corner") }}</th>
   <td class="dataset-details">{{ pkg_dict.geoTopRight }}</td>
+</tr>
+{% endif %}
+{% if pkg_dict.geoTopRightLongitude %}
+<tr>
+  <th scope="row" class="dataset-label">{{ _("Geo Longitude Top Right Corner") }}</th>
+  <td class="dataset-details">{{ pkg_dict.geoTopRightLongitude }}</td>
 </tr>
 {% endif %}
 {% endblock %}
