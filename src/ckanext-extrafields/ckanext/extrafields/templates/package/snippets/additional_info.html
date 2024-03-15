@@ -53,7 +53,7 @@
 {% endif %}
 {% if pkg_dict.experimentCode %}
 <tr>
-  <th scope="row" class="dataset-label">{{ _("RRES Farms Field Experiment code") }}</th>
+  <th scope="row" class="dataset-label">{{ _("RRES Farms Field Experiment Code") }}</th>
   <td class="dataset-details">{{ pkg_dict.experimentCode }}</td>
 </tr>
 {% endif %}
@@ -65,13 +65,13 @@
 {% endif %}
 {% if pkg_dict.resourceTypeGeneral %}
 <tr>
-  <th scope="row" class="dataset-label">{{ _("ResourceTypeGeneral") }}</th>
+  <th scope="row" class="dataset-label">{{ _("General Resource Type") }}</th>
   <td class="dataset-details">{{ pkg_dict.resourceTypeGeneral }}</td>
 </tr>
 {% endif %}
 {% if pkg_dict.resourceType %}
 <tr>
-  <th scope="row" class="dataset-label">{{ _("ResourceType") }}</th>
+  <th scope="row" class="dataset-label">{{ _("Resource Type") }}</th>
   <td class="dataset-details">{{ pkg_dict.resourceType }}</td>
 </tr>
 {% endif %}
@@ -81,10 +81,16 @@
   <td class="dataset-details">{{ pkg_dict.language }}</td>
 </tr>
 {% endif %}
-{% if pkg_dict.collectedDate %}
+{% if pkg_dict.collectionStartDate %}
 <tr>
-  <th scope="row" class="dataset-label">{{ _("Collected Date") }}</th>
-  <td class="dataset-details">{{ pkg_dict.collectedDate }}</td>
+  <th scope="row" class="dataset-label">{{ _("Collection Start Date") }}</th>
+  <td class="dataset-details">{{ pkg_dict.collectionStartDate }}</td>
+</tr>
+{% endif %}
+{% if pkg_dict.collectionEndDate %}
+<tr>
+  <th scope="row" class="dataset-label">{{ _("Collection End Date") }}</th>
+  <td class="dataset-details">{{ pkg_dict.collectionEndDate }}</td>
 </tr>
 {% endif %}
 {% if pkg_dict.createdDate %}
@@ -149,7 +155,7 @@
 {% endif %}
 {% if pkg_dict.contributorType %}
 <tr>
-  <th scope="row" class="dataset-label">{{ _("Contributor types") }}</th>
+  <th scope="row" class="dataset-label">{{ _("Contributor Types") }}</th>
   <td class="dataset-details">{{ pkg_dict.contributorType }}</td>
 </tr>
 {% endif %}
@@ -162,13 +168,13 @@
 
 {% if pkg_dict.contributorId %}
 <tr>
-  <th scope="row" class="dataset-label">{{ _("contributors Id") }}</th>
+  <th scope="row" class="dataset-label">{{ _("Contributors ID") }}</th>
   <td class="dataset-details">{{ pkg_dict.contributorId }}</td>
 </tr>
 {% endif %}
 {% if pkg_dict.contributorAffiliation %}
 <tr>
-  <th scope="row" class="dataset-label">{{ _("contributors Affiliations") }}</th>
+  <th scope="row" class="dataset-label">{{ _("Contributors Affiliations") }}</th>
   <td class="dataset-details">{{ pkg_dict.contributorAffiliation }}</td>
 </tr>
 {% endif %}
@@ -216,7 +222,7 @@
 {% endif %}
 {% if pkg_dict.infraUsed %}
 <tr>
-  <th scope="row" class="dataset-label">{{ _("Research Infrastrucutre Used") }}</th>
+  <th scope="row" class="dataset-label">{{ _("Research Infrastructure Used") }}</th>
   <td class="dataset-details">{{ pkg_dict.infraUsed }}</td>
 </tr>
 {% endif %}

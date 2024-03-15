@@ -9,10 +9,12 @@
 <style>
   /* Apply green color to all <p> elements */
   p {
-      color: green;
+    color: green;
   }
 </style>
-<label><strong> Creator Details (Mandatory)</strong></label><br><br>
+<label id="creatorLabel"><strong> Creator Details (Mandatory)</strong></label>
+<p id="creatorInfo" style="display: none;">ADD INFO HERE</p>
+<br><br>
 <!-- First Name -->
 <label for="field-given_name">*Given Name</label><br>
 <input type="text" id="field-given_name" placeholder="John, Ben .." name="given_name" classes="control-medium">
@@ -20,7 +22,7 @@
 <label for="field-family_name">*Family Name</label><br>
 <input type="text" id="field-family_name" placeholder="Smith, Lee" name="family_name" classes="control-medium">
 <br><br>
-<label for="field-nameIdField">*Name Identifier</label><br>
+<label for="field-nameIdField">Name Identifier</label><br>
 <input type="text" id="field-nameIdField" placeholder="https://orcid.org/0000-0001-5727-2427" name="nameIdField"
   classes="control-medium">
 <br><br>
@@ -36,8 +38,10 @@
 value=data.author, error=errors.author, classes=['control-medium']) }} -->
 <input type="text" name="author" id="field-author" value="{{ data.author }}" error="errors.author" style="display:none">
 <hr style="height:2px;border-width:0;color:black;background-color:gray">
-<input type="text" id="field-nameIdentifier" name="nameIdentifier" style="display:none" value="{{ data.nameIdentifier }}">
-<input type="text" id="field-creatorAffiliation" name="creatorAffiliation" style="display:none" value="{{ data.creatorAffiliation }}">
+<input type="text" id="field-nameIdentifier" name="nameIdentifier" style="display:none"
+  value="{{ data.nameIdentifier }}">
+<input type="text" id="field-creatorAffiliation" name="creatorAffiliation" style="display:none"
+  value="{{ data.creatorAffiliation }}">
 <!-- CREATOR Function-->
 
 <script>
@@ -49,7 +53,16 @@ value=data.author, error=errors.author, classes=['control-medium']) }} -->
   document.getElementById('errorMessage').innerHTML = "Creators: " + "{{ data.author }}";
   // console.log("{{ user }}");
 
-
+  document.getElementById("creatorLabel").onmouseover = function () { creaorMouseOver() };
+  document.getElementById("creatorLabel").onmouseout = function () { creatorMouseOut() };
+  function creaorMouseOver() {
+    console.log("on");
+    document.getElementById("creatorInfo").style.display = 'block';
+  }
+  function creatorMouseOut() {
+    console.log("out");
+    document.getElementById("creatorInfo").style.display = 'none';
+  }
   function addCreator() {
     let fn = document.getElementById('field-given_name').value;
     let sn = document.getElementById('field-family_name').value;
@@ -58,7 +71,7 @@ value=data.author, error=errors.author, classes=['control-medium']) }} -->
 
     //Clear the fields
     try {
-      if (!fn || !sn || !id || !af) {
+      if (!fn || !sn || !af) {
         throw new Error('Creator Details Cannot Be Empty');
       }
     }
@@ -73,7 +86,12 @@ value=data.author, error=errors.author, classes=['control-medium']) }} -->
     document.getElementById('errorMessage').innerHTML = '';
     fullname = fn.concat(' ', sn);
     creator.push(fullname);
-    nameId.push(id);
+    if (id) {
+      nameId.push(id);
+    }
+    else {
+      nameId.push("NONE");
+    }
     affiliations.push(af);
     document.getElementById('field-author').value = creator;
     document.getElementById('field-nameIdentifier').value = nameId;
@@ -151,7 +169,8 @@ value=data.author, error=errors.author, classes=['control-medium']) }} -->
 <!-- Experiment Code -->
 
 <label for="field-experimentCode">*Select Experiment Code (Optional)</label><br>
-<select id="field-experimentCode" error="errors.experimentCode" name="experimentCode" class="control-medium" onchange="displayCodesField()" >
+<select id="field-experimentCode" error="errors.experimentCode" name="experimentCode" class="control-medium"
+  onchange="displayCodesField()">
   <option value="None">N/A</option>
   <option value="NWFP code">NWFP code</option>
   <option value="NW experiment code">NW experiment code</option>
@@ -159,21 +178,22 @@ value=data.author, error=errors.author, classes=['control-medium']) }} -->
 </select><br><br>
 
 <div id="codesField" style="display: none;">
-  <label for="field-Codes">Codes (Mandatory) </label><br>
-  <input type="text" id="field-Codes" name="Codes" value="{{ data.Codes }}" error="errors.Codes" value="{{ data.Codes }}">
+  <label for="field-Codes">*Codes (Mandatory) </label><br>
+  <input type="text" id="field-Codes" name="Codes" value="{{ data.Codes }}" error="errors.Codes"
+    value="{{ data.Codes }}">
 </div>
 
 <script>
   function selectElement(id, valueToSelect) {
     let element = document.getElementById(id);
     element.value = valueToSelect;
-}
+  }
 
-// Initializattion
-selectElement('field-experimentCode', "{{ data.experimentCode }}");
-if("{{data.Codes}}"){
-  displayCodesField();
-}
+  // Initializattion
+  selectElement('field-experimentCode', "{{ data.experimentCode }}");
+  if ("{{data.Codes}}") {
+    displayCodesField();
+  }
 
 
   function displayCodesField() {
@@ -195,7 +215,8 @@ if("{{data.Codes}}"){
 
 <!-- Resource Type  -->
 <label for="field-resourceTypeGeneral">*General Resource Type (Mandatory) </label><br>
-<select id="field-resourceTypeGeneral" name="resourceTypeGeneral" class="control-medium" value="{{ data.resourceTypeGeneral }}">
+<select id="field-resourceTypeGeneral" name="resourceTypeGeneral" class="control-medium"
+  value="{{ data.resourceTypeGeneral }}">
   <option value="N/A"></option>
   <option value="Audiovisual">Audiovisual</option>
   <option value="Book">Book</option>
@@ -239,7 +260,7 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <!-- Language -->
 <!--          -->
 <!--          -->
-<label for="field-language">Language (Mandatory) </label><br>
+<label for="field-language">*Language (Mandatory) </label><br>
 <select id="field-language" name="language" class="control-medium">
   <option value="en">English</option>
   <option value="es">Spanish</option>
@@ -258,15 +279,19 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <label><strong> Dates </strong></label><br><br>
 
 <!-- Collected Dates -->
-<label for="field-collectedDate">Collected Date (Optional)</label><br>
-<input type="date" id="field-collectedDate" name="collectedDate" classes="control-medium" placeholder="DD-MM-YYYY"
-  value="{{ data.collectedDate }}"><br><br>
+<label for="field-collectionStartDate">Collection Start Date (Optional)</label><br>
+<input type="date" id="field-collectionStartDate" name="collectionStartDate" classes="control-medium" placeholder="DD-MM-YYYY"
+  value="{{ data.collectionStartDate }}"><br><br>
+
+<label for="field-collectionEndDate">Collection End Date (Optional)</label><br>
+<input type="date" id="field-collectionEndDate" name="collectionEndDate" classes="control-medium" placeholder="DD-MM-YYYY"
+  value="{{ data.collectionEndDate }}"><br><br>
 <!-- Created Dates -->
 <label for="field-createdDate">Created Date (Optional)</label><br>
 <input type="date" id="field-createdDate" name="createdDate" classes="control-medium" placeholder="DD-MM-YYYY"
   value="{{ data.createdDate }}"><br><br>
 <!-- Submitted Dates -->
-<label type="date" for="field-submittedDate">Submitted Date (Mandatory)</label><br>
+<label type="date" for="field-submittedDate">*Submitted Date (Mandatory)</label><br>
 <input id="field-submittedDate" name="submittedDate" classes="control-medium" placeholder="DD-MM-YYYY"
   value="{{ data.submittedDate }}"><br><br>
 
@@ -309,24 +334,28 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
   <option value="ROR">ROR</option>
   <option value="Other">Other</option>
 </select><br><br>
-<label for="field-awardNumberField">*Award number</label><br>
+<label for="field-awardNumberField">Award number</label><br>
 <input id="field-awardNumberField" name="awardNumberField" classes="control-medium"><br><br>
-<label for="field-awardURIField">*Award URI</label><br>
+<label for="field-awardURIField">Award URI</label><br>
 <input id="field-awardURIField" name="awardURIField" classes="control-medium"><br><br>
 <label for="field-awardTitleField">*Award Title</label><br>
 <input id="field-awardTitleField" name="awardTitleField" classes="control-medium"><br><br>
 <button type="button" onclick="addFunders()"> Add </button>
 <button type="button" onclick="clearFunders()"> Clear </button>
-<p id=funderInfo > Funders:  {{ data.funderName }}</p>
+<p id=funderInfo> Funders: {{ data.funderName }}</p>
 
 <!-- Metadata fields are hidden -->
 <!--                            -->
-<input id="field-funderName" name="funderName" classes="control-medium" style="display:None;" value="{{ data.funderName }}">
+<input id="field-funderName" name="funderName" classes="control-medium" style="display:None;"
+  value="{{ data.funderName }}">
 <input id="field-funderId" name="funderId" classes="control-medium" style="display:None;" value="{{ data.funderId }}">
-<input id="field-funderIdType" name="funderIdType" classes="control-medium" style="display:None;" value="{{ data.funderIdType }}">
-<input id="field-awardNumber" name="awardNumber" classes="control-medium" style="display:None;" value="{{ data.awardNumber }}">
+<input id="field-funderIdType" name="funderIdType" classes="control-medium" style="display:None;"
+  value="{{ data.funderIdType }}">
+<input id="field-awardNumber" name="awardNumber" classes="control-medium" style="display:None;"
+  value="{{ data.awardNumber }}">
 <input id="field-awardURI" name="awardURI" classes="control-medium" style="display:None;" value="{{ data.awardURI }}">
-<input id="field-awardTitle" name="awardTitle" classes="control-medium" style="display:None;" value="{{ data.awardTitle }}">
+<input id="field-awardTitle" name="awardTitle" classes="control-medium" style="display:None;"
+  value="{{ data.awardTitle }}">
 
 
 <script>
@@ -345,8 +374,8 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
     let uri = document.getElementById("field-awardURIField").value;
     let at = document.getElementById("field-awardTitleField").value;
 
-    if (!fn || !id || !idt || !an || !uri || !at) {
-      document.getElementById('funderInfo').innerHTML = "Funder Details Should Not Be Empty";
+    if (!fn || !id || !idt || !at) {
+      document.getElementById('funderInfo').innerHTML = "* Fields Should Not Be Empty";
       return;
     }
     //  Clear Fields
@@ -361,8 +390,18 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
     fname.push(fn);
     fid.push(id);
     fidType.push(idt);
-    faNum.push(an);
-    fUri.push(uri);
+    if (an) {
+      faNum.push(an);
+    }
+    else {
+      faNum.push("NONE");
+    }
+    if (uri) {
+      fUri.push(uri);
+    }
+    else {
+      fUri.push("NONE");
+    }
     aTitle.push(at);
     document.getElementById("field-funderName").value = fname;
     document.getElementById("field-funderId").value = fid;
@@ -436,7 +475,7 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <input type="text" id="field-contributorFamilyName" placeholder="Smith, Lee" name="contributorFamilyName"
   classes="control-medium">
 <br><br>
-<label for="field-contributorNameId">*Name Identifier</label><br>
+<label for="field-contributorNameId">Name Identifier</label><br>
 <input type="text" id="field-contributorNameId" placeholder="https://orcid.org/0000-0001-5727-2427"
   name="contributorNameId" classes="control-medium">
 <br>
@@ -453,7 +492,7 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <input id="field-contributorType" error="errors.contributorType" name="contributorType" classes="control-medium"
   style="display:none" value="{{ data.contributorType }}">
 <input id="field-contributorDetails" error="errors.contributorDetails" name="contributorDetails"
-  classes="control-medium" style="display:none" value="{{ data.contributorDetails }}" >
+  classes="control-medium" style="display:none" value="{{ data.contributorDetails }}">
 <input id="field-contributorId" error="errors.contributorId" name="contributorId" classes="control-medium"
   style="display:none" value="{{ data.contributorId }}">
 <input id="field-contributorAffiliation" error="errors.contributorAffiliation" name="contributorAffiliation"
@@ -475,8 +514,8 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
     let af = document.getElementById('field-contributorAffiliationField').value;
     //Clear the fields
     try {
-      if (!fn || !sn || !id || !ct || !af) {
-        throw new Error('*Creator Details Cannot Be Empty');
+      if (!fn || !sn || !ct || !af) {
+        throw new Error('* Fields Cannot Be Empty');
       }
     } catch (err) {
       document.getElementById('contributorMessage').innerHTML = err.message;
@@ -492,7 +531,13 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
     let fullname = fn.concat(' ', sn);
 
     contriName.push(fullname);
-    contriId.push(id);
+
+    if (id) {
+      contriId.push(id);
+    }
+    else {
+      contriId.push("NONE");
+    }
     contriType.push(ct);
     contriAffiliation.push(af);
     document.getElementById('field-contributorDetails').value = contriName;
@@ -525,7 +570,7 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <!-- Related Resources Fields -->
 <!--                          -->
 <!--                          -->
-<label><strong> Related Resources (Optional) </strong></label><br><br>
+<label><strong>* Related Resources (Optional) </strong></label><br><br>
 <label for="field-relatedIdField"> Select Related ID Type </label><br>
 <select id="field-relatedIdField" name="relatedIdField" class="control-medium">
   <option value="">N/A</option>
@@ -550,7 +595,7 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
   <option value="w3id">w3id</option>
 </select><br><br>
 
-<label for="field-relationTypeField"> Select Relation Type </label><br>
+<label for="field-relationTypeField">* Select Relation Type </label><br>
 <select id="field-relationTypeField" name="relationTypeField" class="control-medium">
   <option value="">N/A</option>
   <option value="IsCitedBy">IsCitedBy</option>
@@ -592,7 +637,7 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 </select><br><br>
 
 
-<label for="field-relatedResourceTypeField"> Select Resource Type </label><br>
+<label for="field-relatedResourceTypeField">* Select Resource Type </label><br>
 <select id="field-relatedResourceTypeField" name="relatedResourceTypeField" class="control-medium">
   <option value="">N/A</option>
   <option value="Audiovisual">Audiovisual</option>
@@ -627,17 +672,21 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
   <option value="Other">Other</option>
 </select><br><br>
 
-<label for="field-relatedIdentifierField">Enter the Identifier</label><br>
+<label for="field-relatedIdentifierField">*Enter the Identifier</label><br>
 <input id="field-relatedIdentifierField" name="relatedIdentifierField" classes="control-medium"><br>
 <button type="button" onclick="addRelated()">Add Resources</button>
 <button type="button" onclick="clearRelated()">Clear</button>
 
 <p id="relatedMessage"> Related Resources: {{ data.relatedIdentifier }} </p>
 <!-- Metadata Fields for Related Resources -->
-<input id="field-relatedIdentifierType" name="relatedIdentifierType" classes="control-medium" style="display:none" value="{{ data.relatedIdentifierType }}"> 
-<input id="field-relationType" name="relationType" classes="control-medium" style="display:none" value="{{ data.relationType }}">
-<input id="field-relatedResourceType" name="relatedResourceType" classes="control-medium" style="display:none" value="{{ data.relatedResourceType }}">
-<input id="field-relatedIdentifier" name="relatedIdentifier" classes="control-medium" style="display:none" value="{{ data.relatedIdentifier }}">
+<input id="field-relatedIdentifierType" name="relatedIdentifierType" classes="control-medium" style="display:none"
+  value="{{ data.relatedIdentifierType }}">
+<input id="field-relationType" name="relationType" classes="control-medium" style="display:none"
+  value="{{ data.relationType }}">
+<input id="field-relatedResourceType" name="relatedResourceType" classes="control-medium" style="display:none"
+  value="{{ data.relatedResourceType }}">
+<input id="field-relatedIdentifier" name="relatedIdentifier" classes="control-medium" style="display:none"
+  value="{{ data.relatedIdentifier }}">
 
 <script>
   var relationTypeList = [];
@@ -690,7 +739,8 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <button type="button" onclick="addNoteBooks()"> Add </button>
 <button type="button" onclick="clearNoteBooks()">Clear</button>
 <p id="notebookAdded"> Associated Notes: {{ data.associatedNote }} </p>
-<input type="text" id="field-associatedNote" name="associatedNote" style="display:none;" value="{{ data.associatedNote }}">
+<input type="text" id="field-associatedNote" name="associatedNote" style="display:none;"
+  value="{{ data.associatedNote }}">
 <script>
   var notes = [];
 
@@ -717,7 +767,7 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <!--                     -->
 <!--                     -->
 
-<label for="field-dataLocationField"> Data Locations (Mandatory)</label><br>
+<label for="field-dataLocationField"> *Data Locations (Mandatory)</label><br>
 <input type="text" id="field-dataLocationField" name="dataLocationField" style="width: 500px;"><br>
 <button type="button" onclick="addDataLocation()"> Add </button>
 <button type="button" onclick="clearDataLocation()">Clear</button>
@@ -751,8 +801,9 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <!-- Responsible Person Field -->
 <!--                          -->
 <!--                          -->
-<label for="field-responsiblePerson">Responsible Person (Mandatory)</label><br>
-<input id="field-responsiblePerson" name="responsiblePerson" style="width: 500px;" value="{{ data.responsiblePerson }}" ><br><br>
+<label for="field-responsiblePerson">*Responsible Person (Mandatory)</label><br>
+<input id="field-responsiblePerson" name="responsiblePerson" style="width: 500px;"
+  value="{{ data.responsiblePerson }}"><br><br>
 
 
 <!-- Research Infrastructure Used -->
@@ -795,10 +846,10 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <!-- Geo location fields -->
 <!--                     -->
 <!--                     -->
-<label><strong> Geo Location Point </strong></label><br><br>
+<label><strong> Geolocation Point (Optional)</strong></label><br><br>
 
-<label for="field-geoLocation"> Enter The Geo Location (Name of the place) </label>
-<input type="text" id="field-geoLocation" name="geoLocation" style="width:auto" value="{{ data.geoLocation }}" >
+<label for="field-geoLocation"> Enter The Geolocation (Name of the place) </label>
+<input type="text" id="field-geoLocation" name="geoLocation" style="width:auto" value="{{ data.geoLocation }}">
 
 <!--      World Map         -->
 <!-- Load Leaflet -->
@@ -815,7 +866,7 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <label for="field-geoLatitude"> Latitude </label><br>
 <input type="text" id="field-geoLatitude" name="geoLatitude" value="{{ data.geoLatitude }}"><br><br>
 <label for="field-geoLongitude"> Longitude </label><br>
-<input type="text" id="field-geoLongitude" name="geoLongitude" value="{{ data.geoLongitude }}" ><br><br>
+<input type="text" id="field-geoLongitude" name="geoLongitude" value="{{ data.geoLongitude }}"><br><br>
 <style>
   #mapid {
     height: 400px;
@@ -874,19 +925,23 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <hr style="height:2px;border-width:0;color:black;background-color:gray">
 <!-- Geo Location Box -->
 <!--                  -->
-<label><strong> Geo Location Box </strong></label><br><br>
+<label><strong> Geolocation Box (Optional)</strong></label><br><br>
 
 <label for="field-geoLowLeftLatitude"> Geo Latitude Lower Left Corner </label><br>
-<input type="text" id="field-geoLowLeftLatitude" name="geoLowLeftLatitude" value="{{ data.geoLowLeftLatitude }}"><br><br>
+<input type="text" id="field-geoLowLeftLatitude" name="geoLowLeftLatitude"
+  value="{{ data.geoLowLeftLatitude }}"><br><br>
 
 <label for="field-geoLowLeftLongitude"> Geo Longitude Lower Left Corner </label><br>
-<input type="text" id="field-geoLowLeftLongitude" name="geoLowLeftLongitude" value="{{ data.geoLowLeftLongitude }}"><br><br>
+<input type="text" id="field-geoLowLeftLongitude" name="geoLowLeftLongitude"
+  value="{{ data.geoLowLeftLongitude }}"><br><br>
 
 <label for="field-geoTopRightLatitude"> Geo Latitude Top Right Corner </label><br>
-<input type="text" id="field-geoTopRightLatitude" name="geoTopRightLatitude" value="{{ data.geoTopRightLatitude }}" ><br><br>
+<input type="text" id="field-geoTopRightLatitude" name="geoTopRightLatitude"
+  value="{{ data.geoTopRightLatitude }}"><br><br>
 
 <label for="field-geoTopRightLongitude"> Geo Longitude Top Right Corner </label><br>
-<input type="text" id="field-geoTopRightLongitude" name="geoTopRightLongitude" value="{{ data.geoTopRightLongitude }}" ><br><br>
+<input type="text" id="field-geoTopRightLongitude" name="geoTopRightLongitude"
+  value="{{ data.geoTopRightLongitude }}"><br><br>
 <hr style="height:2px;border-width:0;color:black;background-color:gray"><br>
 <!-- Subject Fields -->
 <!--                 -->
@@ -894,30 +949,32 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <label><strong> Subject Details (Optional)</strong></label><br><br>
 
 
-<label for="field-subjectSchemeField">Subject Scheme</label><br>
-<input type="text" id="field-subjectSchemeField" name="subjectSchemeField" ><br><br>
+<label for="field-subjectSchemeField">*Subject Scheme</label><br>
+<input type="text" id="field-subjectSchemeField" name="subjectSchemeField"><br><br>
 
-<label for="field-subjectUriField">Subject URI</label><br>
-<input type="text" id="field-subjectUriField" name="subjectUriField"  ><br><br>
+<label for="field-subjectUriField">*Subject URI</label><br>
+<input type="text" id="field-subjectUriField" name="subjectUriField"><br><br>
 
-<label for="field-valueUriField">Value URI</label><br>
-<input type="text" id="field-valueUriField" name="valueUriField"  ><br><br>
+<label for="field-valueUriField">*Value URI</label><br>
+<input type="text" id="field-valueUriField" name="valueUriField"><br><br>
 
-<label for="field-classificationCodeField">Classification Code</label><br>
-<input type="text" id="field-classificationCodeField" name="clasificationCodeField"  ><br><br>
+<label for="field-classificationCodeField">*Classification Code</label><br>
+<input type="text" id="field-classificationCodeField" name="clasificationCodeField"><br><br>
 
-<label for="field-subjectField">Subject</label><br>
-<input type="text" id="field-subjectField" name="subjectField"  ><br><br>
+<label for="field-subjectField">*Subject</label><br>
+<input type="text" id="field-subjectField" name="subjectField"><br><br>
 
 <button type="button" onclick="addSubject()">Add</button>
 <button type="button" onclick="clearSubject()">Clear</button>
-<p id="subjectMessage">Subjects:  {{ data.subject }}</p>
+<p id="subjectMessage">Subjects: {{ data.subject }}</p>
 
 <!-- Metadata Fields -->
-<input type="text" id="field-subjectScheme" name="subjectScheme" style="display: none;" value="{{ data.subjectScheme }}">
+<input type="text" id="field-subjectScheme" name="subjectScheme" style="display: none;"
+  value="{{ data.subjectScheme }}">
 <input type="text" id="field-subjectUri" name="subjectUri" style="display: none;" value="{{ data.subjectUri }}">
 <input type="text" id="field-valueUri" name="valueUri" style="display: none;" value="{{ data.valueUri }}">
-<input type="text" id="field-classificationCode" name="clasificationCode" style="display: none;" value="{{ data.classificationCode }}">
+<input type="text" id="field-classificationCode" name="clasificationCode" style="display: none;"
+  value="{{ data.classificationCode }}">
 <input type="text" id="field-subject" name="subject" style="display: none;" value="{{ data.subject }}">
 
 <!-- Subject Functions -->
@@ -938,7 +995,7 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
     let cc = document.getElementById('field-classificationCodeField').value;
     let s = document.getElementById('field-subjectField').value;
     if (!ss || !su || !vu || !cc || !s) {
-      document.getElementById('subjectMessage').innerHTML = "Enter all fields";
+      document.getElementById('subjectMessage').innerHTML = "* fields should now be emoty";
       return;
     }
     // Push to Array
