@@ -1,6 +1,8 @@
 {% ckan_extends %}
 {% block package_basic_fields_custom %}
 {% set user = current_user %}
+{% set goku = date  %}
+
 
 
 <!-- Creator Fields -->
@@ -50,7 +52,7 @@
   var displayElement = document.getElementById('displayCreatorField');
   var fullname = [];
   document.getElementById('errorMessage').innerHTML = "Creators: " + "{{ data.author }}";
-  console.log("{{ user }}");
+  console.log("{{user.sysadmin}}");
 
   function addCreator() {
     let fn = document.getElementById('field-given_name').value;
@@ -1056,6 +1058,7 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
     document.getElementById('subjectMessage').innerHTML = "Cleared !!!";
 
   }
+  console.log("aaaa" + "{{ goku }}") 
 </script>
 
 <!-- <input type="text" id="field-test" name="test">
