@@ -3,12 +3,12 @@
 {% block extras %}
 {% set user = current_user %}
 
-{% if pkg_dict.author %}
+<!-- {% if pkg_dict.author %}
 <tr>
   <th scope="row" class="dataset-label">{{ _("Creator") }}</th>
   <td class="dataset-details">{{ pkg_dict.author }}</td>
 </tr>
-{% endif %}
+{% endif %} -->
 {% if pkg_dict.nameIdentifier %}
 <tr>
   <th scope="row" class="dataset-label">{{ _("Name Identifier (ORCID)") }}</th>

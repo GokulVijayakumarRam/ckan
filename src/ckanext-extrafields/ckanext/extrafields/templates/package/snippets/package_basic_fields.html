@@ -13,7 +13,7 @@
   }
 </style>
 <label id="creatorLabel"><strong> Creator Details (Mandatory)</strong></label>
-<p id="creatorInfo" style="display: none;">ADD INFO HERE</p>
+<i class="fas fa-info-circle" title="add info here"></i>
 <br><br>
 <!-- First Name -->
 <label for="field-given_name">*Given Name</label><br>
@@ -34,8 +34,7 @@
 <button type="button" onclick="clearCreator()">Clear</button>
 <p id='errorMessage'></p>
 <br>
-<!-- {{ form.input('author', label=_('*List of Creators'), id='field-author', placeholder=_('Do not Enter'),
-value=data.author, error=errors.author, classes=['control-medium']) }} -->
+
 <input type="text" name="author" id="field-author" value="{{ data.author }}" error="errors.author" style="display:none">
 <hr style="height:2px;border-width:0;color:black;background-color:gray">
 <input type="text" id="field-nameIdentifier" name="nameIdentifier" style="display:none"
@@ -51,18 +50,8 @@ value=data.author, error=errors.author, classes=['control-medium']) }} -->
   var displayElement = document.getElementById('displayCreatorField');
   var fullname = [];
   document.getElementById('errorMessage').innerHTML = "Creators: " + "{{ data.author }}";
-  // console.log("{{ user }}");
+  console.log("{{ user }}");
 
-  document.getElementById("creatorLabel").onmouseover = function () { creaorMouseOver() };
-  document.getElementById("creatorLabel").onmouseout = function () { creatorMouseOut() };
-  function creaorMouseOver() {
-    console.log("on");
-    document.getElementById("creatorInfo").style.display = 'block';
-  }
-  function creatorMouseOut() {
-    console.log("out");
-    document.getElementById("creatorInfo").style.display = 'none';
-  }
   function addCreator() {
     let fn = document.getElementById('field-given_name').value;
     let sn = document.getElementById('field-family_name').value;
@@ -72,7 +61,7 @@ value=data.author, error=errors.author, classes=['control-medium']) }} -->
     //Clear the fields
     try {
       if (!fn || !sn || !af) {
-        throw new Error('Creator Details Cannot Be Empty');
+        throw new Error('* Fields Should Not Be Empty');
       }
     }
     catch (err) {
@@ -115,7 +104,9 @@ value=data.author, error=errors.author, classes=['control-medium']) }} -->
 <!-- PUBLISHER and Publication Year -->
 <!--                                -->
 <!--                                -->
-<label for="field-publisher">*Publisher (Mandatory) </label><br>
+<label for="field-publisher">*Publisher (Mandatory) </label>
+<i class="fas fa-info-circle" title="add info here"></i>
+<br>
 <input type="text" id="field-publisher" name="publisher" value="Rothamsted">
 <!-- Default Publisher value is set to Rothamsted-->
 <script>
@@ -128,7 +119,9 @@ value=data.author, error=errors.author, classes=['control-medium']) }} -->
 <hr style="height:2px;border-width:0;color:black;background-color:gray">
 
 
-<label><strong> Description </strong></label><br><br>
+<label><strong> Description </strong></label>
+<i class="fas fa-info-circle" title="add info here"></i>
+<br><br>
 
 <!-- Abstract Field -->
 <style>
@@ -168,7 +161,9 @@ value=data.author, error=errors.author, classes=['control-medium']) }} -->
 <hr style="height:2px;border-width:0;color:black;background-color:gray">
 <!-- Experiment Code -->
 
-<label for="field-experimentCode">*Select Experiment Code (Optional)</label><br>
+<label for="field-experimentCode">*Select Experiment Code (Optional)</label>
+<i class="fas fa-info-circle" title="add info here"></i>
+<br>
 <select id="field-experimentCode" error="errors.experimentCode" name="experimentCode" class="control-medium"
   onchange="displayCodesField()">
   <option value="None">N/A</option>
@@ -214,7 +209,9 @@ value=data.author, error=errors.author, classes=['control-medium']) }} -->
 
 
 <!-- Resource Type  -->
-<label for="field-resourceTypeGeneral">*General Resource Type (Mandatory) </label><br>
+<label for="field-resourceTypeGeneral">*General Resource Type (Mandatory) </label>
+<i class="fas fa-info-circle" title="add info here"></i>
+<br>
 <select id="field-resourceTypeGeneral" name="resourceTypeGeneral" class="control-medium"
   value="{{ data.resourceTypeGeneral }}">
   <option value="N/A"></option>
@@ -276,7 +273,9 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <hr style="height:2px;border-width:0;color:black;background-color:gray">
 
 <!-- Dates Fields  -->
-<label><strong> Dates </strong></label><br><br>
+<label><strong> Dates </strong></label>
+<i class="fas fa-info-circle" title="add info here"></i>
+<br><br>
 
 <!-- Collected Dates -->
 <label for="field-collectionStartDate">Collection Start Date (Optional)</label><br>
@@ -321,7 +320,9 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <!-- Funder Information -->
 <!--                    -->
 <!--                    -->
-<label><strong> Funder Information (Mandatory)</strong></label><br><br>
+<label><strong> Funder Information (Mandatory)</strong></label>
+<i class="fas fa-info-circle" title="add info here"></i>
+<br><br>
 <label for="field-funderNameField">*Funder Name </label><br>
 <input id="field-funderNameField" name="funderNameField" classes="control-medium"><br><br>
 <label for="field-funderIdField">*Funder Identifier</label><br>
@@ -439,7 +440,9 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <!-- Contributor Details -->
 <!--                     -->
 <!--                     -->
-<label><strong> Contributors Details (Optional) </strong></label><br><br>
+<label><strong> Contributors Details (Optional) </strong></label>
+<i class="fas fa-info-circle" title="add info here"></i>
+<br><br>
 <label for="field-contributorTypeField">*Contributor Type</label><br>
 <select id="field-contributorTypeField" name="contributorTypeField" class="control-medium">
   <option value="None"></option>
@@ -570,7 +573,9 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <!-- Related Resources Fields -->
 <!--                          -->
 <!--                          -->
-<label><strong>* Related Resources (Optional) </strong></label><br><br>
+<label><strong>* Related Resources (Optional) </strong></label>
+<i class="fas fa-info-circle" title="add info here"></i>
+<br><br>
 <label for="field-relatedIdField"> Select Related ID Type </label><br>
 <select id="field-relatedIdField" name="relatedIdField" class="control-medium">
   <option value="">N/A</option>
@@ -734,7 +739,9 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <!-- Associated Research Notebooks Field -->
 <!--                                     -->
 <!--                                     -->
-<label for="field-associatedNotesField">Associated Research Notebooks (Optional) </label><br>
+<label for="field-associatedNotesField">Associated Research Notebooks (Optional) </label>
+<i class="fas fa-info-circle" title="add info here"></i>
+<br>
 <input type="text" id="field-associatedNoteField" name="associatedNoteField" style="width: 500px;"> <br>
 <button type="button" onclick="addNoteBooks()"> Add </button>
 <button type="button" onclick="clearNoteBooks()">Clear</button>
@@ -767,7 +774,9 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <!--                     -->
 <!--                     -->
 
-<label for="field-dataLocationField"> *Data Locations (Mandatory)</label><br>
+<label for="field-dataLocationField"> *Data Locations (Mandatory)</label>
+<i class="fas fa-info-circle" title="add info here"></i>
+<br>
 <input type="text" id="field-dataLocationField" name="dataLocationField" style="width: 500px;"><br>
 <button type="button" onclick="addDataLocation()"> Add </button>
 <button type="button" onclick="clearDataLocation()">Clear</button>
@@ -801,7 +810,9 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <!-- Responsible Person Field -->
 <!--                          -->
 <!--                          -->
-<label for="field-responsiblePerson">*Responsible Person (Mandatory)</label><br>
+<label for="field-responsiblePerson">*Responsible Person (Mandatory)</label>
+<i class="fas fa-info-circle" title="add info here"></i>
+<br>
 <input id="field-responsiblePerson" name="responsiblePerson" style="width: 500px;"
   value="{{ data.responsiblePerson }}"><br><br>
 
@@ -846,7 +857,9 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <!-- Geo location fields -->
 <!--                     -->
 <!--                     -->
-<label><strong> Geolocation Point (Optional)</strong></label><br><br>
+<label><strong> Geolocation Point (Optional)</strong></label>
+<i class="fas fa-info-circle" title="add info here"></i>
+<br><br>
 
 <label for="field-geoLocation"> Enter The Geolocation (Name of the place) </label>
 <input type="text" id="field-geoLocation" name="geoLocation" style="width:auto" value="{{ data.geoLocation }}">
@@ -925,7 +938,9 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <hr style="height:2px;border-width:0;color:black;background-color:gray">
 <!-- Geo Location Box -->
 <!--                  -->
-<label><strong> Geolocation Box (Optional)</strong></label><br><br>
+<label><strong> Geolocation Box (Optional)</strong></label>
+<i class="fas fa-info-circle" title="add info here"></i>
+<br><br>
 
 <label for="field-geoLowLeftLatitude"> Geo Latitude Lower Left Corner </label><br>
 <input type="text" id="field-geoLowLeftLatitude" name="geoLowLeftLatitude"
@@ -946,7 +961,9 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <!-- Subject Fields -->
 <!--                 -->
 <!--                 -->
-<label><strong> Subject Details (Optional)</strong></label><br><br>
+<label><strong> Subject Details (Optional)</strong></label>
+<i class="fas fa-info-circle" title="add info here"></i>
+<br><br>
 
 
 <label for="field-subjectSchemeField">*Subject Scheme</label><br>
@@ -995,7 +1012,7 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
     let cc = document.getElementById('field-classificationCodeField').value;
     let s = document.getElementById('field-subjectField').value;
     if (!ss || !su || !vu || !cc || !s) {
-      document.getElementById('subjectMessage').innerHTML = "* fields should now be emoty";
+      document.getElementById('subjectMessage').innerHTML = "* fields should now be empty";
       return;
     }
     // Push to Array
