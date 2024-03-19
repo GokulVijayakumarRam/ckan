@@ -1,8 +1,6 @@
 {% ckan_extends %}
 {% block package_basic_fields_custom %}
 {% set user = current_user %}
-{% set goku = date  %}
-
 
 
 <!-- Creator Fields -->
@@ -1058,7 +1056,6 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
     document.getElementById('subjectMessage').innerHTML = "Cleared !!!";
 
   }
-  console.log("aaaa" + "{{ goku }}") 
 </script>
 
 <!-- <input type="text" id="field-test" name="test">
