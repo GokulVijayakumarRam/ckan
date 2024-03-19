@@ -119,6 +119,8 @@ class ExampleIDatasetFormPlugin(tk.DefaultDatasetForm, p.SingletonPlugin):
             'geoLowLeftLongitude': [tk.get_validator('ignore_missing'),
                                  tk.get_converter('convert_to_extras')],
             'geoTopRightLongitude': [tk.get_validator('ignore_missing'),
+                                 tk.get_converter('convert_to_extras')],
+            'license': [tk.get_validator('ignore_missing'),
                                  tk.get_converter('convert_to_extras')]
                       
         })        
@@ -230,7 +232,9 @@ class ExampleIDatasetFormPlugin(tk.DefaultDatasetForm, p.SingletonPlugin):
             'geoLowLeftLongitude': [tk.get_validator('ignore_missing'),
                                  tk.get_converter('convert_to_extras')],   
             'geoTopRightLongitude': [tk.get_validator('ignore_missing'),
-                                 tk.get_converter('convert_to_extras')]                           
+                                 tk.get_converter('convert_to_extras')],   
+            'license': [tk.get_validator('ignore_missing'),
+                                 tk.get_converter('convert_to_extras')]                            
         })       
         return schema
     def show_package_schema(self) -> Schema:
@@ -339,6 +343,8 @@ class ExampleIDatasetFormPlugin(tk.DefaultDatasetForm, p.SingletonPlugin):
             'geoLowLeftLongitude': [tk.get_converter('convert_from_extras'),
                                  tk.get_validator('ignore_missing')],
             'geoTopRightLongitude': [tk.get_converter('convert_from_extras'),
+                                 tk.get_validator('ignore_missing')],
+            'license': [tk.get_converter('convert_from_extras'),
                                  tk.get_validator('ignore_missing')]
             
         })       
@@ -449,6 +455,8 @@ class ExampleIDatasetFormPlugin(tk.DefaultDatasetForm, p.SingletonPlugin):
             'geoLowLeftLongitude': [tk.get_converter('convert_from_extras'),
                                  tk.get_validator('ignore_missing')],
             'geoTopRightLongitude': [tk.get_converter('convert_from_extras'),
+                                 tk.get_validator('ignore_missing')],
+            'license': [tk.get_converter('convert_from_extras'),
                                  tk.get_validator('ignore_missing')]                            
         })       
         return schema
