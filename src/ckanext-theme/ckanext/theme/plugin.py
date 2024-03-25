@@ -14,7 +14,7 @@ class ThemePlugin(plugins.SingletonPlugin):
         '''An example theme plugin.
 
             '''
-        plugins.implements(plugins.IConfigurer)
+        plugins.implements(plugins.IConfigurer, inherit=True)
     # plugins.implements(plugins.IAuthFunctions)
     # plugins.implements(plugins.IActions)
     # plugins.implements(plugins.IBlueprint)
