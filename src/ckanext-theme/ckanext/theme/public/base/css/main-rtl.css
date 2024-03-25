@@ -13169,6 +13169,7 @@ td.diff_header {
     -moz-box-ordinal-group: 2;
     -webkit-order: 2;
     order: 2;
+    align-items:end;
   }
 
   .js .main .secondary .filters {
