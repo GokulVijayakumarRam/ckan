@@ -183,7 +183,7 @@
   <script src="https://d3js.org/d3.v6.js"></script>
   
   <script>
-    d3.csv("", function(emp)
+    d3.csv("https://raw.githubusercontent.com/GokulVijayakumarRam/ckan/master/src/ckanext-theme/ckanext/theme/templates/package/employee.csv", function(emp)
     {
       for(let i =0; i<emp.length;i++){
         console.log(emp[i].firstname + emp[i].lastname + emp[i].orcid + emp[i].affiliation);
