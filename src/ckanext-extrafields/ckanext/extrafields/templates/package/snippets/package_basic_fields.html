@@ -227,7 +227,6 @@
       codesField.style.display = 'block';
       document.getElementById("field-Codes").value = "{{ data.Codes }}";
     }
-    console.log(document.getElementById("field-experimentCode").value)
   }
 
 </script><br>
@@ -238,19 +237,72 @@
 <label for="field-resourceTypeGeneral">*General Resource Type (Mandatory) </label>
 <i class="fas fa-info-circle" title="add info here"></i>
 <br>
-<select id="field-resourceTypeGeneral" name="resourceTypeGeneral" class="control-medium"
-  value="{{ data.resourceTypeGeneral }}">
-  <option value="N/A"></option>
-  <option value="Dataset">Dataset</option>
-  <option value="Instrument">Instrument</option>
-  <option value="Model">Model</option>
-  <option value="Software">Software</option>
-  <option value="Image">Image</option>
-  <option value="AudioVisual">AudioVisual</option>
-  <option value="ComputationalNotebook">ComputationalNotebook</option>
-</select><br><br>
+<input id="field-resourceTypeGeneral" name="resourceTypeGeneral" class="control-medium" value="{{ data.resourceTypeGeneral }}" style="display: none;">
+
+<div id = "resourceTypeSelect">
+  <input type="radio" id="rt1" name="resourceSelect" value="Dataset">Dataset
+  <input type="radio" id="rt2" name="resourceSelect" value="Instrument">Instrument
+  <input type="radio" id="rt3" name="resourceSelect" value="Model">Instrument
+  <input type="radio" id="rt4" name="resourceSelect" value="Software">Software
+  <input type="radio" id="rt5" name="resourceSelect" value="Image">Image
+  <input type="radio" id="rt6" name="resourceSelect" value="AudioVisual">Audio Visual
+  <input type="radio" id="rt7" name="resourceSelect" value="ComputationalNotebook">Computational Notebook
+</div>
+<br>
 <script>
-  selectElement("field-resourceTypeGeneral", "{{ data.resourceTypeGeneral }}")
+	let resourceTypeContainer = document.getElementById("resourceTypeSelect");
+  let selectedResource;
+  resourceTypeContainer.addEventListener('change', function(){
+    if(document.getElementById("rt1").checked){
+      selectedResource = document.getElementById("rt1").value;
+    }
+    else if(document.getElementById("rt2").checked){
+      selectedResource = document.getElementById("rt2").value;
+    }
+    else if(document.getElementById("rt3").checked){
+      selectedResource = document.getElementById("rt3").value;
+    }
+    else if(document.getElementById("rt4").checked){
+      selectedResource = document.getElementById("rt4").value;
+    }
+    else if(document.getElementById("rt5").checked){
+      selectedResource = document.getElementById("rt5").value;
+    }
+    else if(document.getElementById("rt6").checked){
+      selectedResource = document.getElementById("rt6").value;
+    }
+    else if(document.getElementById("rt7").checked){
+      selectedResource = document.getElementById("rt7").value;
+    }
+    document.getElementById("field-resourceTypeGeneral").value = selectedResource;
+  });
+  //retain value
+  let resid = "N/A";
+  if("{{data.resourceTypeGeneral}}"=="Dataset"){
+    resid = "rt1"
+  }
+  else if("{{data.resourceTypeGeneral}}"=="Instrument"){
+    resid = "rt2"
+  }
+  else if("{{data.resourceTypeGeneral}}"=="Instrument"){
+    resid = "rt3"
+  }
+  else if("{{data.resourceTypeGeneral}}"=="Software"){
+    resid = "rt4"
+  }
+  else if("{{data.resourceTypeGeneral}}"=="Image"){
+    resid = "rt5"
+  }
+  else if("{{data.resourceTypeGeneral}}"=="AudioVisual"){
+    resid = "rt6"
+  }
+  else if("{{data.resourceTypeGeneral}}"=="ComputationalNotebook"){
+    resid = "rt7"
+  }
+
+  document.getElementById("rt1").checked = true
+
+
 </script>
 
 {{ form.input('resourceType', label=_('*ResourceType (Mandatory) '), id='field-resourceType', placeholder=_('More
@@ -353,7 +405,9 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 
 
 <button type="button" onclick="addFunders()"> Add </button>
-<button type="button" onclick="clearFunders()"> Clear </button>
+<button type="button" onclick="clearFunders()"> Clear All</button>
+<button type="button" onclick="popFunders()"> Clear Last Entry</button>
+
 <pre id=funderInfo> Funders: {{ data.funderName }}</pre>
 
 <!-- Metadata fields are hidden -->
@@ -422,6 +476,7 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
     document.getElementById("field-awardURI").value = fUri;
     document.getElementById("field-awardTitle").value = aTitle;
     document.getElementById('funderInfo').innerHTML = "Funders: " + fname;
+    displayFunders();
   }
 
   function clearFunders() {
@@ -445,9 +500,30 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
     document.getElementById("field-awardTitleField").value = aTitle;
     document.getElementById('funderInfo').innerHTML = "Cleared"
   }
+  function displayFunders(){
+  let p = document.getElementById("funderInfo");
+  p.innerHTML = "Funders:";
+  for(let i = 0; i < fname.length; i++){
+    let c = document.createTextNode(`Award Number: ${faNum[i]}, Award Title: ${aTitle[i]}, Award URI: ${fUri[i]}, Funder: ${fname[i]}, ID: ${fid[i]}, ID Type: ${fidType[i]}`);
+    p.append("\n");
+    p.append(c);
+    
 
+  }
+  }
+  function popFunders(){
+    fname.pop();
+    fid.pop();
+    fUri.pop();
+    faNum.pop();
+    aTitle.pop();
+    fidType.pop();
+    displayFunders();
+
+  }
   // </script>
 <hr style="height:2px;border-width:0;color:black;background-color:gray">
+
 <!-- Contributor Details -->
 <!--                     -->
 <!--                     -->
@@ -713,7 +789,8 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <label for="field-relatedIdentifierField">*Enter the Identifier</label><br>
 <input id="field-relatedIdentifierField" name="relatedIdentifierField" classes="control-medium"><br>
 <button type="button" onclick="addRelated()">Add Resources</button>
-<button type="button" onclick="clearRelated()">Clear</button>
+<button type="button" onclick="clearRelated()">Clear All</button>
+<button type="button" onclick="popRelated()">Clear Last Entry</button>
 
 <pre id="relatedMessage"> Related Resources: {{ data.relatedIdentifier }} </pre>
 <!-- Metadata Fields for Related Resources -->
@@ -750,7 +827,25 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
     document.getElementById('field-relationType').value = relationTypeList;
     document.getElementById('field-relatedResourceType').value = RRTypeList
     document.getElementById('field-relatedIdentifier').value = idList;
-    document.getElementById('relatedMessage').innerHTML = "IDs Added: " + idList;
+    displayRelatedResources();
+  }
+  function displayRelatedResources(){
+    let p = document.getElementById("relatedMessage");
+    p.innerHTML="Related Resources: "
+    for(let i = 0; i < idList.length; i++){
+      c = document.createTextNode(`Resource ${i+1}:: ID Type: ${idTypeList[i]}, Relation Type: ${relationTypeList[i]}, Resource Type: ${RRTypeList[i]}, ID: ${idList[i]}`);
+      p.append("\n");
+      p.append(c);
+      
+      }
+  
+  function popRelated(){
+    idTypeList.pop();
+    relationTypeList.pop();
+    RRTypeList.pop();
+    idList.pop();
+    displayRelatedResources();
+  }    
   }
 
   function clearRelated() {
@@ -1015,7 +1110,9 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 <input type="text" id="field-subjectField" name="subjectField"><br><br>
 
 <button type="button" onclick="addSubject()">Add</button>
-<button type="button" onclick="clearSubject()">Clear</button>
+<button type="button" onclick="clearSubject()">Clear All</button>
+<button type="button" onclick="popSubject()">Clear Last Entry</button>
+
 <pre id="subjectMessage">Subjects: {{ data.subject }}</pre>
 
 <!-- Metadata Fields -->
@@ -1067,9 +1164,25 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
     document.getElementById('field-classificationCode').value = classCode;
     document.getElementById('field-subject').value = sub;
     // Print Message
-    document.getElementById('subjectMessage').innerHTML = "Subjects Added:" + sub;
+    displaySubject();
   }
-
+  function displaySubject(){
+    let p = document.getElementById("subjectMessage");
+    p.innerHTML = "Subjects:"
+    for(let i=0; i<sub.length; i++){
+      c=document.createTextNode(`${i+1}:: Subject Scheme:${subScheme[i]}, Subject URI:${subUri[i]}, Value URI:${valUri}, Classification Code:${classCode[i]}, Subject:${sub[i]}`);
+      p.append("\n");
+      p.append(c);
+    }
+  }
+  function popSubject(){
+    subScheme.pop();
+    subUri.pop();
+    valUri.pop();
+    classCode.pop();
+    sub.pop();
+    displaySubject();
+  }
   function clearSubject() {
     subScheme = [];
     subUri = [];
@@ -1093,18 +1206,34 @@ Info'), value=data.resourceType, error=errors.resourceType, classes=['control-me
 
 <label for="field-license">Select the License (optional)</label>
 <i class="fas fa-info-circle" title="add info here"></i><br>
-
-<select id="field-license" name="license" classes="control-medium">
-  <option value="N/A"></option>
-  <option value="Creative Commons Attribution Licence (CC BY 4.0)">Creative Commons Attribution Licence (CC BY 4.0)
-  </option>
-  <option value="Creative Commons Attribution Non-Commercial (CC BY-NC 4.0)">Creative Commons Attribution Non-Commercial
-    (CC BY-NC 4.0)</option>
-  <option value="Open Government Licence (OGL)">Open Government Licence (OGL)</option>
-</select><br><br>
-
+<input id="field-license" name="license" class="control-medium" style="display: none;">
+<div id="licenseButtons">
+  <input type="radio" id="lr1" name="licenseSelect" value="Creative Commons Attribution Licence (CC BY 4.0)">Creative Commons Attribution Licence (CC BY 4.0)
+  <br>
+  <input type="radio" id="lr2" name="licenseSelect" value="Creative Commons Attribution Non-Commercial (CC BY-NC 4.0)">Creative Commons Attribution Non-Commercial (CC BY-NC 4.0)
+  <br>
+  <input type="radio" id="lr3" name="licenseSelect" value="Open Government Licence (OGL)">Open Government Licence (OGL)
+</div><br>
 <script>
-  selectElement("field-license", "{{ data.license }}")
+  // When New Radio Button is selected
+  let licenseContainer = document.getElementById("licenseButtons");
+  let selectedLicense;
+  licenseContainer.addEventListener('change', function(){
+    if (document.getElementById('lr1').checked) {
+      selectedLicense = document.getElementById('lr1').value;
+    } else if (document.getElementById('lr2').checked) {
+      selectedLicense = document.getElementById('lr2').value;
+    } else if (document.getElementById('lr3').checked) {
+      selectedLicense = document.getElementById('lr3').value;
+    }
+    document.getElementById("field-license").value = selectedLicense;
+  });
+  
+  console.log("{{data.license }}");
+  //Retain Value
+  var licenseVal = document.querySelector('input[value="{{ data.license }}"]');
+  licenseVal.checked = true;
+  
 </script>
 
 {% endblock %}
