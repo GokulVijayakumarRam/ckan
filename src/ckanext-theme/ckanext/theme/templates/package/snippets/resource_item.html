@@ -15,9 +15,7 @@ Example:
 {% set url_action = pkg.type ~ ('_resource.edit' if url_is_edit and can_edit else '_resource.read') %}
 {% set url = url or h.url_for(url_action, id=pkg.name, resource_id=res.id) %}
 
-<script>
-  console.log("{{ flag }}");
-</script>
+
 <li class="resource-item" data-id="{{ res.id }}">
   {% block resource_item_title %}
   <a class="heading" href="{{ url }}" title="{{ res.name or res.description }}">
@@ -62,7 +60,7 @@ Example:
       <li>
         <a class="dropdown-item resource-url-analytics" href="{{ res.url }}" target="_blank" rel="noreferrer">
 
-          <script>console.log("entered:" + "{{ flag }}"); </script>
+          
           {% if res.has_views or res.url_type == 'upload' %}
           <i class="fa fa-arrow-circle-o-down"></i>
           {{ _('Download') }}
@@ -71,12 +69,10 @@ Example:
           {{ _('Go to resource') }}
           {% endif %}
 
-          <!-- <script>console.log("baba" + flag);</script> -->
         </a>
       </li>
       {% endif %}
 
-      <!-- <script>console.log("out again");</script> -->
       {% if can_edit %}
       <li>
         <a class="dropdown-item" href="{{ h.url_for(pkg.type ~ '_resource.edit', id=pkg.name, resource_id=res.id) }}">
