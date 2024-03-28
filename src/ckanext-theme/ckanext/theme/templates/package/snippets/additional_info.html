@@ -13,7 +13,7 @@
 
     for (let i = 0; i < auths.length; i++) {
       let p = document.getElementById("author-field");
-      val = document.createTextNode(`${auths[i]}; ${ids[i]}; ${affils[i]}`);
+      val = document.createTextNode(`${auths[i]}     ID:${ids[i]}    Affiliation:${affils[i]}`);
       p.append(val);
       p.append("\n");
     }
@@ -184,9 +184,9 @@
     else{
       console.log("hide secrets");
     }
-    let notebooks = "{{ pkg_dict.associatedNote }}".split(",");
+    var notebooks = "{{ pkg_dict.associatedNote }}".split(",");
     for(let i=0;i<notebooks.length; i++){
-      let link = document.createElement('a');
+      var link = document.createElement('a');
       link.href = notebooks[i];
       link.textContent = notebooks[i];
       document.getElementById("notebookField").append(link);
