@@ -24,6 +24,9 @@
     {% snippet 'package/snippets/info.html', pkg=pkg %}
   {% endblock %}
   <hr style="height:2px;border-width:0;color:black;background-color:gray">
+  <div style="text-align: center;"><strong>DOI</strong></div>
+  <pre style="text-align: center; background-color: #f3f1f1;" >https://doi.org/{{ pkg_dict['doi'] }}</pre>
+  <hr style="height:2px;border-width:0;color:black;background-color:gray">
 
   <div style="text-align: center;"><strong>Version</strong></div>
   <pre style="text-align: center; background-color: #f3f1f1;" >{{ pkg_dict.version }}</pre>
