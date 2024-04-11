@@ -39,12 +39,48 @@
   <!-- Spatial Information -->
   <div><strong> Spatial Information </strong></div>
   <pre style="background-color: #f3f1f1;">
- Geolocation Point (Latitude, Longitude) : ( {{ pkg_dict.geoLatitude }}, {{ pkg_dict.geoLongitude }} ) 
- Geolocation Box:
-    Lower Left Corner (Latitude,Longitude): ( {{ pkg_dict.geoLowLeftLatitude }}, {{ pkg_dict.geoLowLeftLongitude }} ) 
-    Top Right Corner (Latitude,Longitude): ( {{ pkg_dict.geoTopRightLatitude }}, {{ pkg_dict.geoTopRightLongitude }} ) 
+  <strong>Geolocation Point</strong> 
+    (Latitude, Longitude) : ( {{ pkg_dict.geoLatitude }}, {{ pkg_dict.geoLongitude }} ) 
   </pre>
+  <pre id="geoBox" style="display: none; background-color: #f3f1f1;"> 
+  <strong>Geolocation Box:</strong>
+     Lower Left Corner (Latitude,Longitude): ( {{ pkg_dict.geoLowLeftLatitude }}, {{ pkg_dict.geoLowLeftLongitude }} ) 
+     Top Right Corner (Latitude,Longitude): ( {{ pkg_dict.geoTopRightLatitude }}, {{ pkg_dict.geoTopRightLongitude }} ) 
+  </pre>
+  <head>
+    <title>Simple Leaflet Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <style>
+        #mapid {
+            height: 300px;
+            width:auto;
+        }
+    </style>
+</head>
+<div id="mapid"></div>
+
+    <script>
+        let x = parseFloat("{{ pkg_dict.geoLatitude }}");
+        let y = parseFloat("{{ pkg_dict.geoLongitude }}")
+        var mymap = L.map('mapid').setView([x, y], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+        }).addTo(mymap);
+        L.marker([x, y]).addTo(mymap);
+        if("{{ pkg_dict.geoLowLeftLatitude }}"){
+        document.getElementById("geoBox").style.display = "block";
+        let llx = parseFloat("{{ pkg_dict.geoLowLeftLatitude }}");
+        let lly = parseFloat("{{ pkg_dict.geoLowLeftLongitude }}");
+        let trx = parseFloat("{{ pkg_dict.geoTopRightLatitude }}");
+        let trY = parseFloat("{{ pkg_dict.geoTopRightLongitude }}");
+        var bounds = [[llx, lly], [trx, trY]];
+        L.rectangle(bounds, {color: "#ff7800", weight: 1}).addTo(mymap);
+
+  }
+    </script>
   <hr style="height:2px;border-width:0;color:black;background-color:gray">
+
 
   <!-- Collection Dates -->
   <div><strong> Collection Date </strong></div>
