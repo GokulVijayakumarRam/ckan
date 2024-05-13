@@ -389,7 +389,7 @@
     else if ("{{data.resourceTypeGeneral}}" == "Instrument") {
       resid = "rt2"
     }
-    else if ("{{data.resourceTypeGeneral}}" == "Instrument") {
+    else if ("{{data.resourceTypeGeneral}}" == "Model") {
       resid = "rt3"
     }
     else if ("{{data.resourceTypeGeneral}}" == "Software") {
@@ -404,9 +404,13 @@
     else if ("{{data.resourceTypeGeneral}}" == "ComputationalNotebook") {
       resid = "rt7"
     }
-
-    document.getElementById("rt1").checked = true
-
+    // initialize
+    if(!"{{data.resourceTypeGeneral}}"){
+    document.getElementById("rt1").checked = true;
+    }
+    else{
+      document.getElementById(resid).checked = true
+    }
 
   </script>
 
