@@ -240,15 +240,11 @@
   </style>
   <label for="field-abstract">*Abstract (Mandatory) </label><br>
   <textarea id="field-abstract" name="abstract" placeholder="Enter Abstract" error="errors.abstract"
-    class="control-medium" rows="5">{{ data.abstract }}
+    class="control-medium" rows="5" >{{ data.abstract }}
   </textarea><br>
+
   <!-- Methods Field -->
-  <style>
-    textarea {
-      width: 500px;
-      /* Adjust as needed */
-    }
-  </style>
+
   <label for="field-methods">*Methods (Mandatory) </label><br>
   <textarea id="field-methods" name="methods" placeholder="Enter Methods" error="errors.methods" class="control-medium"
     rows="5">{{ data.methods }}
@@ -256,12 +252,7 @@
 
   <!-- TechnicalInfo Field -->
 
-  <style>
-    textarea {
-      width: 500px;
-      /* Adjust as needed */
-    }
-  </style>
+
   <label for="field-technicalInfo">Technical Information (Optional) </label><br>
   <textarea id="field-technicalInfo" name="technicalInfo" error="errors.technicalInfo"
     placeholder="Enter TEchnical Information" class="control-medium" rows="5">{{ data.technicalInfo }}
