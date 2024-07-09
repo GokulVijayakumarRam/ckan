@@ -26,8 +26,13 @@
 
 {% block package_basic_fields_tags %}
   {% set tag_attrs = {'data-module': 'autocomplete', 'data-module-tags': '', 'data-module-source': '/api/2/util/tag/autocomplete?incomplete=?'} %}
-  {{ form.input('tag_string', id='field-tags', label=_('Tags'), placeholder=_('eg. economy, mental health, government'), value=data.tag_string, error=errors.tags, classes=['control-full'], attrs=tag_attrs) }}
+  {{ form.input( id='field-tags', label=_('Tags'), placeholder=_('eg. economy, mental health, government'), value=data.tag_string, error=errors.tags, classes=['control-full'], attrs=tag_attrs) }}
 {% endblock %}
+<!-- <script>
+      let tagsField = document.getElementById("field-tags");
+      tagsField.style.display = "none";
+    //  document.getElementsByName("tag_string").style.display = "none";
+</script> -->
 
 <!-- {% block package_basic_fields_license %}
   <div class="form-group control-full">
