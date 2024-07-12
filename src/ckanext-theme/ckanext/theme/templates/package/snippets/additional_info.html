@@ -295,7 +295,10 @@
       let author_org = "{{ pkg_dict.creatorAffiliation }}".split(",");
       let author_id = "{{ pkg_dict.nameIdentifier }}".split(",");
       let subs = "{{pkg_dict.subject}}".split(",");
-      let abss = document.getElementById("p-abstract").innerHTML;
+      let abss = document.getElementById("p-abstract").innerHTML.trim();
+      console.log(abss);
+      abss = abss.trim();
+      console.log(abss);
       let licenseText = "{{ pkg_dict.license }}";
       let licenseLink = "";
       if (licenseText == "Creative Commons Attribution Non-Commercial (CC BY-NC 4.0)") {
@@ -329,8 +332,9 @@
         "subjects": subs,
         "version": "{{pkg_dict.version}}",
         "license": licenseLink,
+        "description": abss,
         "datePublished": "{{pkg_dict.submittedDate}}",
-        "description": abss.trim()
+        
       }
       // Convert the JSON-LD structure to a string
       const jsonldScript = JSON.stringify(jsonld, null, 2);
