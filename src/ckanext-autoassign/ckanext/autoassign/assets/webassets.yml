@@ -1,0 +1,14 @@
+# autoassign-js:
+#   filter: rjsmin
+#   output: ckanext-autoassign/%(version)s-autoassign.js
+#   contents:
+#     - js/autoassign.js
+#   extra:
+#     preload:
+#       - base/main
+
+# autoassign-css:
+#   filter: cssrewrite
+#   output: ckanext-autoassign/%(version)s-autoassign.css
+#   contents:
+#     - css/autoassign.css

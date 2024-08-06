@@ -45,6 +45,7 @@
   <!-- <hr style="height:2px;border-width:0;color:black;background-color:gray"> -->
 
   <script>
+    console.log("{{pkg_dict}}");
     let name = "{{pkg_dict.author}}".split(",");
     let orcid = "{{ pkg_dict.nameIdentifier }}".split(",");
     let affils = "{{ pkg_dict.creatorAffiliation }}".split(",");
