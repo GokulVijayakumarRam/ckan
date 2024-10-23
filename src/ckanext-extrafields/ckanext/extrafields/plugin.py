@@ -1,16 +1,26 @@
 # encoding: utf-8
 from __future__ import annotations
 import datetime
-
+import logging
 from ckan.types import Schema
 import ckan.plugins as p
 from ckan.plugins.toolkit import Invalid
 import ckan.plugins.toolkit as tk
+from flask import Blueprint, jsonify, request
+from ckanext.extrafields import helpers
+import mysql.connector
 
 class ExampleIDatasetFormPlugin(tk.DefaultDatasetForm, p.SingletonPlugin):
     p.implements(p.IDatasetForm)
     p.implements(p.IConfigurer)
-
+    p.implements(p.ITemplateHelpers)
+#    p.implements(p.IRoutes, inherit=True)
+    def get_helpers(self):
+        return {
+            "extrafields_hello": helpers.extrafields_hello,
+            "staff_list_fetch": helpers.staff_list_fetch
+         }
+    
     def create_package_schema(self) -> Schema:
         # let's grab the default schema in our plugin
         schema: Schema = super(
@@ -482,3 +492,4 @@ class ExampleIDatasetFormPlugin(tk.DefaultDatasetForm, p.SingletonPlugin):
         # Add this plugin's templates dir to CKAN's extra_template_paths, so
         # that CKAN will use this plugin's custom templates.
         tk.add_template_directory(config, 'templates')        
+    
