@@ -4,12 +4,7 @@ from flask import Response, request
 import mysql.connector
 import logging
 
-# import ckanext.customapi.cli as cli
-# import ckanext.customapi.helpers as helpers
-# import ckanext.customapi.views as views
-# from ckanext.customapi.logic import (
-#     action, auth, validators
-# )
+
 
 def hello_world(context, data_dict):
     # This function returns a simple 'Hello World' message
@@ -158,33 +153,5 @@ class CustomapiPlugin(plugins.SingletonPlugin):
         toolkit.add_resource("assets", "customapi")
 
     
-    # IAuthFunctions
 
-    # def get_auth_functions(self):
-    #     return auth.get_auth_functions()
-
-    # IActions
-
-    # def get_actions(self):
-    #     return action.get_actions()
-
-    # IBlueprint
-
-    # def get_blueprint(self):
-    #     return views.get_blueprints()
-
-    # IClick
-
-    # def get_commands(self):
-    #     return cli.get_commands()
-
-    # ITemplateHelpers
-
-    # def get_helpers(self):
-    #     return helpers.get_helpers()
-
-    # IValidators
-
-    # def get_validators(self):
-    #     return validators.get_validators()
     
