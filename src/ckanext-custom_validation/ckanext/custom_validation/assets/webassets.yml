@@ -1,0 +1,14 @@
+# custom_validation-js:
+#   filter: rjsmin
+#   output: ckanext-custom_validation/%(version)s-custom_validation.js
+#   contents:
+#     - js/custom_validation.js
+#   extra:
+#     preload:
+#       - base/main
+
+# custom_validation-css:
+#   filter: cssrewrite
+#   output: ckanext-custom_validation/%(version)s-custom_validation.css
+#   contents:
+#     - css/custom_validation.css
